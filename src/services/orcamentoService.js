@@ -1,20 +1,48 @@
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 
-exports.createPDF = (name, email, message) => {
+exports.createPDF = (
+    nomeCliente,
+    telefoneContato,
+    pacoteViagem,
+    localSaida,
+    dataSaida,
+    horaSaida,
+    dataRetorno,
+    horaRetorno,
+    valor,
+    modeloVan
+) => {
     return new Promise((resolve, reject) => {
         const doc = new PDFDocument();
-        const filename = `generated-${Date.now()}.pdf`;
+        const filename = `orcamento-${Date.now()}.pdf`;
         const stream = fs.createWriteStream(filename);
 
         doc.pipe(stream);
-        doc.fontSize(20).text("Contrato Gerado", { align: "center" });
+        
+        // Título do PDF
+        doc.fontSize(20).text("Orçamento de Viagem", { align: "center" });
         doc.moveDown();
-        doc.fontSize(14).text(`Nome: ${name}`);
-        doc.text(`Email: ${email}`);
-        doc.text(`Mensagem: ${message}`);
+
+        // Informações do Cliente
+        doc.fontSize(14).text(`Nome do Cliente: ${nomeCliente}`);
+        doc.text(`Telefone: ${telefoneContato}`);
+        doc.moveDown();
+
+        // Informações da Viagem
+        doc.text(`Pacote de Viagem: ${pacoteViagem}`);
+        doc.text(`Local de Saída: ${localSaida}`);
+        doc.text(`Data de Saída: ${dataSaida} às ${horaSaida}`);
+        doc.text(`Data de Retorno: ${dataRetorno} às ${horaRetorno}`);
+        doc.moveDown();
+
+        // 💰 Valores e Modelo do Transporte
+        doc.text(`Valor: R$ ${valor}`);
+        doc.text(`Modelo da Van: ${modeloVan}`);
+        
         doc.end();
 
+        // Resolver a Promise quando o arquivo for gerado
         stream.on("finish", () => resolve(filename));
         stream.on("error", reject);
     });

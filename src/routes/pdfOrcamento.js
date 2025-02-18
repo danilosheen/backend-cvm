@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const pdfController = require("../controllers/orcamentoController");
+const pdfOrcamentoController = require("../controllers/orcamentoController");
 
-router.post("/orcamento", pdfController.generatePDF);
+router.post("/orcamento", pdfOrcamentoController.generatePDF);
 
 module.exports = router;
