@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const pdfRoutes = require("./routes/pdfRoutes");
+const pdfRoutes = require("./routes/pdfOrcamento");
 
 const app = express();
 app.use(cors());
