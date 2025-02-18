@@ -1,12 +1,13 @@
-exports.generatePDF = async (req, res) => {
-  try {
-      const { name, email, message } = req.body;
-      const pdfBuffer = await pdfService.createPDF(name, email, message);
+const pdfService = require("../services/orcamentoService");
 
-      res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", "attachment; filename=contract.pdf");
-      res.send(pdfBuffer);
-  } catch (error) {
-      res.status(500).json({ error: "Erro ao gerar o PDF" });
-  }
+exports.generatePDF = async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+        const pdfPath = await pdfService.createPDF(name, email, message);
+        res.download(pdfPath, () => {
+            pdfService.cleanupFile(pdfPath);
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao gerar o PDF" });
+    }
 };
