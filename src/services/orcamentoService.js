@@ -1,55 +1,60 @@
-const PDFDocument = require("pdfkit");
+const puppeteer = require("puppeteer");
 const fs = require("fs");
+const path = require("path");
+const ejs = require("ejs");
 
-exports.createPDF = (
-    nomeCliente,
-    telefoneContato,
-    pacoteViagem,
-    localSaida,
-    dataSaida,
-    horaSaida,
-    dataRetorno,
-    horaRetorno,
-    valor,
-    modeloVan
+exports.createPDF = async (
+  nomeCliente,
+  telefoneContato,
+  pacoteViagem,
+  localSaida,
+  dataSaida,
+  horaSaida,
+  dataRetorno,
+  horaRetorno,
+  valor,
+  modeloVan
 ) => {
-    return new Promise((resolve, reject) => {
-        const doc = new PDFDocument();
-        const filename = `orcamento-${Date.now()}.pdf`;
-        const stream = fs.createWriteStream(filename);
+  try {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
-        doc.pipe(stream);
-        
-        // Título do PDF
-        doc.fontSize(20).text("Orçamento de Viagem", { align: "center" });
-        doc.moveDown();
+    // Caminho do template EJS
+    const templatePath = path.join(__dirname, "../templates/orcamento.ejs");
 
-        // Informações do Cliente
-        doc.fontSize(14).text(`Nome do Cliente: ${nomeCliente}`);
-        doc.text(`Telefone: ${telefoneContato}`);
-        doc.moveDown();
-
-        // Informações da Viagem
-        doc.text(`Pacote de Viagem: ${pacoteViagem}`);
-        doc.text(`Local de Saída: ${localSaida}`);
-        doc.text(`Data de Saída: ${dataSaida} às ${horaSaida}`);
-        doc.text(`Data de Retorno: ${dataRetorno} às ${horaRetorno}`);
-        doc.moveDown();
-
-        // 💰 Valores e Modelo do Transporte
-        doc.text(`Valor: R$ ${valor}`);
-        doc.text(`Modelo da Van: ${modeloVan}`);
-        
-        doc.end();
-
-        // Resolver a Promise quando o arquivo for gerado
-        stream.on("finish", () => resolve(filename));
-        stream.on("error", reject);
+    // Renderiza o HTML usando o template EJS
+    const htmlContent = await ejs.renderFile(templatePath, {
+      nomeCliente,
+      telefoneContato,
+      pacoteViagem,
+      localSaida,
+      dataSaida,
+      horaSaida,
+      dataRetorno,
+      horaRetorno,
+      valor,
+      modeloVan,
     });
+
+    await page.setContent(htmlContent, { waitUntil: "load" });
+
+    const filename = `orcamento-${Date.now()}.pdf`;
+    const filePath = path.join(__dirname, filename);
+
+    await page.pdf({ path: filePath, format: "A4" });
+
+    await browser.close();
+
+    return filePath;
+  } catch (error) {
+    console.error("Erro ao gerar PDF:", error);
+    throw error;
+  }
 };
 
+// Função para deletar o arquivo após o uso
 exports.cleanupFile = (filePath) => {
-    fs.unlink(filePath, (err) => {
-        if (err) console.error("Erro ao deletar arquivo:", err);
-    });
+  fs.unlink(filePath, (err) => {
+    if (err) console.error("Erro ao deletar arquivo:", err);
+  });
 };

@@ -1,41 +1,84 @@
 "use strict";
 
-var PDFDocument = require("pdfkit");
+var puppeteer = require("puppeteer");
 
 var fs = require("fs");
 
-exports.createPDF = function (nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan) {
-  return new Promise(function (resolve, reject) {
-    var doc = new PDFDocument();
-    var filename = "orcamento-".concat(Date.now(), ".pdf");
-    var stream = fs.createWriteStream(filename);
-    doc.pipe(stream); // Título do PDF
+var path = require("path");
 
-    doc.fontSize(20).text("Orçamento de Viagem", {
-      align: "center"
-    });
-    doc.moveDown(); // Informações do Cliente
+var ejs = require("ejs");
 
-    doc.fontSize(14).text("Nome do Cliente: ".concat(nomeCliente));
-    doc.text("Telefone: ".concat(telefoneContato));
-    doc.moveDown(); // Informações da Viagem
+exports.createPDF = function _callee(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan) {
+  var browser, page, templatePath, htmlContent, filename, filePath;
+  return regeneratorRuntime.async(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(puppeteer.launch());
 
-    doc.text("Pacote de Viagem: ".concat(pacoteViagem));
-    doc.text("Local de Sa\xEDda: ".concat(localSaida));
-    doc.text("Data de Sa\xEDda: ".concat(dataSaida, " \xE0s ").concat(horaSaida));
-    doc.text("Data de Retorno: ".concat(dataRetorno, " \xE0s ").concat(horaRetorno));
-    doc.moveDown(); // 💰 Valores e Modelo do Transporte
+        case 3:
+          browser = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(browser.newPage());
 
-    doc.text("Valor: R$ ".concat(valor));
-    doc.text("Modelo da Van: ".concat(modeloVan));
-    doc.end(); // Resolver a Promise quando o arquivo for gerado
+        case 6:
+          page = _context.sent;
+          // Caminho do template EJS
+          templatePath = path.join(__dirname, "../templates/orcamento.ejs"); // Renderiza o HTML usando o template EJS
 
-    stream.on("finish", function () {
-      return resolve(filename);
-    });
-    stream.on("error", reject);
-  });
-};
+          _context.next = 10;
+          return regeneratorRuntime.awrap(ejs.renderFile(templatePath, {
+            nomeCliente: nomeCliente,
+            telefoneContato: telefoneContato,
+            pacoteViagem: pacoteViagem,
+            localSaida: localSaida,
+            dataSaida: dataSaida,
+            horaSaida: horaSaida,
+            dataRetorno: dataRetorno,
+            horaRetorno: horaRetorno,
+            valor: valor,
+            modeloVan: modeloVan
+          }));
+
+        case 10:
+          htmlContent = _context.sent;
+          _context.next = 13;
+          return regeneratorRuntime.awrap(page.setContent(htmlContent, {
+            waitUntil: "load"
+          }));
+
+        case 13:
+          filename = "orcamento-".concat(Date.now(), ".pdf");
+          filePath = path.join(__dirname, filename);
+          _context.next = 17;
+          return regeneratorRuntime.awrap(page.pdf({
+            path: filePath,
+            format: "A4"
+          }));
+
+        case 17:
+          _context.next = 19;
+          return regeneratorRuntime.awrap(browser.close());
+
+        case 19:
+          return _context.abrupt("return", filePath);
+
+        case 22:
+          _context.prev = 22;
+          _context.t0 = _context["catch"](0);
+          console.error("Erro ao gerar PDF:", _context.t0);
+          throw _context.t0;
+
+        case 26:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 22]]);
+}; // Função para deletar o arquivo após o uso
+
 
 exports.cleanupFile = function (filePath) {
   fs.unlink(filePath, function (err) {
