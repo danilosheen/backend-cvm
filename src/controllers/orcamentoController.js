@@ -30,9 +30,14 @@ exports.generatePDF = async (req, res) => {
         );
 
         // Enviar o arquivo gerado para download
-        res.download(pdfPath, () => {
-            pdfOrcamentoService.cleanupFile(pdfPath); // Remove o arquivo após o download
-        });
+        // res.download(pdfPath, () => {
+        //     pdfOrcamentoService.cleanupFile(pdfPath); // Remove o arquivo após o download
+        // });
+        const pdfBuffer = fs.readFileSync(pdfPath);
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
+        res.send(pdfBuffer);
+
 
     } catch (error) {
         console.error("Erro ao gerar o PDF:", error);

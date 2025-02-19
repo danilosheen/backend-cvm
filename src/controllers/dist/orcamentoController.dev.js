@@ -3,7 +3,7 @@
 var pdfOrcamentoService = require("../services/orcamentoService");
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan, pdfPath;
+  var _req$body, nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan, pdfPath, pdfBuffer;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -18,24 +18,28 @@ exports.generatePDF = function _callee(req, res) {
         case 4:
           pdfPath = _context.sent;
           // Enviar o arquivo gerado para download
-          res.download(pdfPath, function () {
-            pdfOrcamentoService.cleanupFile(pdfPath); // Remove o arquivo após o download
-          });
-          _context.next = 12;
+          // res.download(pdfPath, () => {
+          //     pdfOrcamentoService.cleanupFile(pdfPath); // Remove o arquivo após o download
+          // });
+          pdfBuffer = fs.readFileSync(pdfPath);
+          res.setHeader("Content-Type", "application/pdf");
+          res.setHeader("Content-Disposition", "attachment; filename=".concat(filename));
+          res.send(pdfBuffer);
+          _context.next = 15;
           break;
 
-        case 8:
-          _context.prev = 8;
+        case 11:
+          _context.prev = 11;
           _context.t0 = _context["catch"](0);
           console.error("Erro ao gerar o PDF:", _context.t0);
           res.status(500).json({
             error: "Erro ao gerar o PDF"
           });
 
-        case 12:
+        case 15:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 8]]);
+  }, null, null, [[0, 11]]);
 };

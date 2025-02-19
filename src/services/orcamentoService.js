@@ -1,7 +1,7 @@
-const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
+const chromium = require("chrome-aws-lambda");
 
 exports.createPDF = async (
   nomeCliente,
@@ -16,7 +16,16 @@ exports.createPDF = async (
   modeloVan
 ) => {
   try {
-    const browser = await puppeteer.launch();
+
+
+
+    const browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath || null,
+      headless: true,
+    });
+
+
     const page = await browser.newPage();
 
     // Caminho do template EJS
@@ -39,7 +48,7 @@ exports.createPDF = async (
     await page.setContent(htmlContent, { waitUntil: "load" });
 
     const filename = `orcamento-${Date.now()}.pdf`;
-    const filePath = path.join(__dirname, filename);
+    const filePath = path.join("/tmp", filename);
 
     await page.pdf({ path: filePath, format: "A4" });
 
