@@ -1,46 +1,43 @@
 const pdfOrcamentoService = require("../services/orcamentoService");
 
 exports.generatePDF = async (req, res) => {
-    try {
-        const {
-            nomeCliente,
-            telefoneContato,
-            pacoteViagem,
-            localSaida,
-            dataSaida,
-            horaSaida,
-            dataRetorno,
-            horaRetorno,
-            valor,
-            modeloVan
-        } = req.body;
+  try {
+    const {
+      nomeCliente,
+      telefoneContato,
+      pacoteViagem,
+      localSaida,
+      dataSaida,
+      horaSaida,
+      dataRetorno,
+      horaRetorno,
+      valor,
+      modeloVan,
+      valorAcrescimoKm
+    } = req.body;
 
-        // Chamar o serviço que gera o PDF, passando os novos parâmetros
-        const pdfPath = await pdfOrcamentoService.createPDF(
-            nomeCliente,
-            telefoneContato,
-            pacoteViagem,
-            localSaida,
-            dataSaida,
-            horaSaida,
-            dataRetorno,
-            horaRetorno,
-            valor,
-            modeloVan
-        );
+    const pdfBuffer = await pdfOrcamentoService.createPDF(
+      nomeCliente,
+      telefoneContato,
+      pacoteViagem,
+      localSaida,
+      dataSaida,
+      horaSaida,
+      dataRetorno,
+      horaRetorno,
+      valor,
+      modeloVan,
+      valorAcrescimoKm
+    );
 
-        // Enviar o arquivo gerado para download
-        // res.download(pdfPath, () => {
-        //     pdfOrcamentoService.cleanupFile(pdfPath); // Remove o arquivo após o download
-        // });
-        const pdfBuffer = fs.readFileSync(pdfPath);
-        res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
-        res.send(pdfBuffer);
+    // Configura os headers para o navegador reconhecer o arquivo como PDF
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="orcamento.pdf"`);
 
-
-    } catch (error) {
-        console.error("Erro ao gerar o PDF:", error);
-        res.status(500).json({ error: "Erro ao gerar o PDF" });
-    }
+    // Envia o PDF para o cliente (frontend)
+    res.end(pdfBuffer);
+  } catch (error) {
+    console.error("Erro ao gerar PDF:", error);
+    res.status(500).json({ error: "Erro ao gerar PDF" });
+  }
 };

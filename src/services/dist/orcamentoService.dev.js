@@ -4,56 +4,18 @@ var fs = require("fs");
 
 var path = require("path");
 
-var ejs = require("ejs");
+var puppeteer = require("puppeteer");
 
-var chromium = require("chrome-aws-lambda");
+var handlebars = require("handlebars");
 
-exports.createPDF = function _callee(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan) {
-  var browser, page, templatePath, htmlContent, filename, filePath;
-  return regeneratorRuntime.async(function _callee$(_context) {
+function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan, valorAcrescimoKm) {
+  var data, templateHtml, template, html, browser, page, pdfBuffer;
+  return regeneratorRuntime.async(function createPDF$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _context.t0 = regeneratorRuntime;
-          _context.t1 = chromium.puppeteer;
-          _context.t2 = chromium.args;
-          _context.next = 6;
-          return regeneratorRuntime.awrap(chromium.executablePath);
-
-        case 6:
-          _context.t3 = _context.sent;
-
-          if (_context.t3) {
-            _context.next = 9;
-            break;
-          }
-
-          _context.t3 = null;
-
-        case 9:
-          _context.t4 = _context.t3;
-          _context.t5 = {
-            args: _context.t2,
-            executablePath: _context.t4,
-            headless: true
-          };
-          _context.t6 = _context.t1.launch.call(_context.t1, _context.t5);
-          _context.next = 14;
-          return _context.t0.awrap.call(_context.t0, _context.t6);
-
-        case 14:
-          browser = _context.sent;
-          _context.next = 17;
-          return regeneratorRuntime.awrap(browser.newPage());
-
-        case 17:
-          page = _context.sent;
-          // Caminho do template EJS
-          templatePath = path.join(__dirname, "../templates/orcamento.ejs"); // Renderiza o HTML usando o template EJS
-
-          _context.next = 21;
-          return regeneratorRuntime.awrap(ejs.renderFile(templatePath, {
+          data = {
             nomeCliente: nomeCliente,
             telefoneContato: telefoneContato,
             pacoteViagem: pacoteViagem,
@@ -63,49 +25,63 @@ exports.createPDF = function _callee(nomeCliente, telefoneContato, pacoteViagem,
             dataRetorno: dataRetorno,
             horaRetorno: horaRetorno,
             valor: valor,
-            modeloVan: modeloVan
+            modeloVan: modeloVan,
+            valorAcrescimoKm: valorAcrescimoKm
+          };
+          data.modeloVan == "" ? data.modeloVan = "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som" : data.modeloVan;
+          data.valorAcrescimoKm == "" ? data.valorAcrescimoKm = "4,25" : data.valorAcrescimoKm; // Ler o template corretamente
+
+          templateHtml = fs.readFileSync(path.join(__dirname, "../templates/orcamento.html"), "utf8");
+          template = handlebars.compile(templateHtml);
+          html = template(data);
+          _context.next = 9;
+          return regeneratorRuntime.awrap(puppeteer.launch({
+            args: ["--no-sandbox"],
+            headless: true
           }));
 
-        case 21:
-          htmlContent = _context.sent;
-          _context.next = 24;
-          return regeneratorRuntime.awrap(page.setContent(htmlContent, {
-            waitUntil: "load"
+        case 9:
+          browser = _context.sent;
+          _context.next = 12;
+          return regeneratorRuntime.awrap(browser.newPage());
+
+        case 12:
+          page = _context.sent;
+          _context.next = 15;
+          return regeneratorRuntime.awrap(page.setContent(html, {
+            waitUntil: "networkidle0"
           }));
 
-        case 24:
-          filename = "orcamento-".concat(Date.now(), ".pdf");
-          filePath = path.join("/tmp", filename);
-          _context.next = 28;
+        case 15:
+          _context.next = 17;
           return regeneratorRuntime.awrap(page.pdf({
-            path: filePath,
-            format: "A4"
+            format: "A4",
+            printBackground: true
           }));
 
-        case 28:
-          _context.next = 30;
+        case 17:
+          pdfBuffer = _context.sent;
+          _context.next = 20;
           return regeneratorRuntime.awrap(browser.close());
 
-        case 30:
-          return _context.abrupt("return", filePath);
+        case 20:
+          return _context.abrupt("return", pdfBuffer);
 
-        case 33:
-          _context.prev = 33;
-          _context.t7 = _context["catch"](0);
-          console.error("Erro ao gerar PDF:", _context.t7);
-          throw _context.t7;
+        case 23:
+          _context.prev = 23;
+          _context.t0 = _context["catch"](0);
+          console.error("Erro ao gerar PDF:", _context.t0);
+          throw _context.t0;
 
-        case 37:
+        case 27:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 33]]);
-}; // Função para deletar o arquivo após o uso
+  }, null, null, [[0, 23]]);
+} // ⚠️ Certifique-se de exportar corretamente a função
 
 
-exports.cleanupFile = function (filePath) {
-  fs.unlink(filePath, function (err) {
-    if (err) console.error("Erro ao deletar arquivo:", err);
-  });
+module.exports = {
+  createPDF: createPDF
 };

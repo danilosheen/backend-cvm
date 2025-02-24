@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento de Viagem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 11pt;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 25px;
+    }
+
+    h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      margin-left: 30px;
+    }
+
+    .container {
+      padding: 20px 40px 20px 40px;
+    }
+
+    .logo-topo {
+      width: 100%;
+    }
+
+    .qr-code {
+      width: 140px;
+      position: absolute;
+      right: 30px;
+      top: 150px;
+    }
+
+    .info {
+      margin-bottom: 8px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon {
+      width: 18px;
+      margin-right: 10px;
+
+    }
+
+    .line-topo {
+      display: flex;
+      justify-content: space-between;
+      margin-right: 200px;
+    }
+
+    .container-infos {
+      margin-left: 20px;
+    }
+
+    .info-bank {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="logo-topo"
+    src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo-word.png" alt="img-info">
+  <img class="qr-code"
+    src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/qr-code-2.png" alt="qr-code">
+  <div class="container">
+    <strong>
+      <h1>ORÇAMENTO</h1>
+    </strong>
+    <div class="line-topo">
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/person.png"
+          alt="person">
+        Nome do Cliente: <strong class="spacing">{{nomeCliente}}</strong>
+      </p>
+      <p class="info">
+        Valor:<strong> R$ {{valor}}</strong>
+      </p>
+    </div>
+    <p class="info">
+      <img class="icon" src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/phone.png"
+        alt="phone">
+      Telefone: <strong>{{telefoneContato}}</strong>
+    </p>
+    <p class="info">
+      <img class="icon" src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/book.png"
+        alt="book">
+      Pacote: <strong>{{pacoteViagem}}</strong>
+    </p>
+    <br>
+    <p class="info">
+      <img class="icon"
+        src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/locale.png" alt="locale">
+      Local de Saída: <strong> {{localSaida}}</strong>
+    <p class="info">
+      <img class="icon"
+        src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/calendar.png"
+        alt="calendar">
+      Data de saída: <strong> {{dataSaida}}</strong>
+    </p>
+    <p class="info">
+      <img class="icon" src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/clock.png"
+        alt="clock">
+      Hora de saída: <strong> {{horaSaida}}</strong>
+    </p>
+    <p class="info">
+      <img class="icon"
+        src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/calendar.png"
+        alt="calendar">
+      Data de retorno:<strong> {{dataRetorno}}</strong>
+    </p>
+    <p class="info">
+      <img class="icon" src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/clock.png"
+        alt="clock">
+      Hora de retorno:<strong> {{horaRetorno}}</strong>
+    </p>
+    <br>
+    <div class="container-infos">
+      <strong>
+        <p>Alguns pontos são importantes observar:</p>
+      </strong>
+      <p>Valor da viagem: <strong>R$ {{valor}}</strong></p>
+      <p>Informações do transporte: {{modeloVan}};</p>
+      <p><strong>OBS:</strong> A CVM oferece uma cortesia de <strong>50km</strong> livres para deslocamento. A
+        quilometragem excedente será calculada com um acréscimo de R$ {{valorAcrescimoKm}}
+        por km rodado;
+      </p>
+      <ul>
+        <li>Só sairemos para a viagem com a relação de passageiros em mãos, digitalizada e impressa com
+          <strong>documentação obrigatória de RG ou CPF;</strong> </li>
+        <li>Trabalhamos com um <strong>sinal de 30%</strong> do valor para a reserva do veículo;</li>
+        <li>Em caso de quebra de contrato o valor de 30% antecipados <strong>não serão estornados;</strong></li>
+        <li>Cada orçamento tem um prazo de validade de <strong>30 dias corridos;</strong></li>
+        <li>Pix para o valor de 30% da reserva <strong>cvmturismojn@gmail.com</strong></li>
+        <li><strong>Informações bancárias: </strong></li>
+        <div class="info-bank">
+          <p><strong>Nome: CRAIRTON DE MATOS LEITE</strong></p>
+          <p><strong>Instituição: BCO BRADESCO S.A.</strong></p>
+        </div>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

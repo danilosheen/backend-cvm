@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const ejs = require("ejs");
-const chromium = require("chrome-aws-lambda");
+const puppeteer = require("puppeteer");
+const handlebars = require("handlebars");
 
-exports.createPDF = async (
+async function createPDF(
   nomeCliente,
   telefoneContato,
   pacoteViagem,
@@ -13,26 +13,11 @@ exports.createPDF = async (
   dataRetorno,
   horaRetorno,
   valor,
-  modeloVan
-) => {
+  modeloVan,
+  valorAcrescimoKm
+) {
   try {
-
-
-
-    const browser = await chromium.puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath || null,
-      headless: true,
-    });
-
-
-    const page = await browser.newPage();
-
-    // Caminho do template EJS
-    const templatePath = path.join(__dirname, "../templates/orcamento.ejs");
-
-    // Renderiza o HTML usando o template EJS
-    const htmlContent = await ejs.renderFile(templatePath, {
+    const data = {
       nomeCliente,
       telefoneContato,
       pacoteViagem,
@@ -43,27 +28,42 @@ exports.createPDF = async (
       horaRetorno,
       valor,
       modeloVan,
+      valorAcrescimoKm
+    };
+
+    data.modeloVan == "" ? data.modeloVan = "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som" : data.modeloVan;
+    data.valorAcrescimoKm == "" ? data.valorAcrescimoKm = "4,25" : data.valorAcrescimoKm;
+    
+
+    // Ler o template corretamente
+    const templateHtml = fs.readFileSync(
+      path.join(__dirname, "../templates/orcamento.html"),
+      "utf8"
+    );
+    const template = handlebars.compile(templateHtml);
+    const html = template(data);
+
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox"],
+      headless: true,
     });
 
-    await page.setContent(htmlContent, { waitUntil: "load" });
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: "networkidle0" });
 
-    const filename = `orcamento-${Date.now()}.pdf`;
-    const filePath = path.join("/tmp", filename);
-
-    await page.pdf({ path: filePath, format: "A4" });
+    // Gerar PDF diretamente no buffer
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
 
     await browser.close();
-
-    return filePath;
+    return pdfBuffer;
   } catch (error) {
     console.error("Erro ao gerar PDF:", error);
     throw error;
   }
-};
+}
 
-// Função para deletar o arquivo após o uso
-exports.cleanupFile = (filePath) => {
-  fs.unlink(filePath, (err) => {
-    if (err) console.error("Erro ao deletar arquivo:", err);
-  });
-};
+// ⚠️ Certifique-se de exportar corretamente a função
+module.exports = { createPDF };
