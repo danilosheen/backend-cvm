@@ -31,6 +31,7 @@
 
     .container {
       padding: 20px 40px 20px 40px;
+      position: relative;
     }
 
     .logo-topo {
@@ -40,8 +41,8 @@
     .qr-code {
       width: 140px;
       position: absolute;
-      right: 30px;
-      top: 150px;
+      right: 40px;
+      top: 10px;
     }
 
     .info {
@@ -54,6 +55,7 @@
     .icon {
       width: 18px;
       margin-right: 10px;
+      margin-left: 20px;
 
     }
 
@@ -70,15 +72,33 @@
     .info-bank {
       margin-left: 10px;
     }
+
+    .rodape{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-top: 50px;
+    }
+
+    .rodape p{
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .rodape img{
+      width: 150px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
 <body>
   <img class="logo-topo"
     src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo-word.png" alt="img-info">
-  <img class="qr-code"
-    src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/qr-code-2.png" alt="qr-code">
   <div class="container">
+    <img class="qr-code"
+    src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/qr-code-2.png" alt="qr-code">
     <strong>
       <h1>ORÇAMENTO</h1>
     </strong>
@@ -154,6 +174,11 @@
           <p><strong>Instituição: BCO BRADESCO S.A.</strong></p>
         </div>
       </ul>
+    </div>
+    <div class="rodape">
+      <p>Crairton de Matos Leite</p>
+      <img src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/jesus.png" alt="jesus">
+      <p>Juazeiro do Norte - CE</p>
     </div>
   </div>
 </body>
