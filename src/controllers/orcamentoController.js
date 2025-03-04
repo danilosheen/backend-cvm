@@ -1,3 +1,4 @@
+const { getDateFormated } = require("../services/dateFormatedService");
 const pdfOrcamentoService = require("../services/orcamentoService");
 
 exports.generatePDF = async (req, res) => {
@@ -16,6 +17,8 @@ exports.generatePDF = async (req, res) => {
       valorAcrescimoKm
     } = req.body;
 
+    const dataGeracao = getDateFormated();
+
     const pdfBuffer = await pdfOrcamentoService.createPDF(
       nomeCliente,
       telefoneContato,
@@ -27,7 +30,8 @@ exports.generatePDF = async (req, res) => {
       horaRetorno,
       valor,
       modeloVan,
-      valorAcrescimoKm
+      valorAcrescimoKm,
+      dataGeracao
     );
 
     // Configura os headers para o navegador reconhecer o arquivo como PDF

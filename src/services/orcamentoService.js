@@ -16,7 +16,8 @@ async function createPDF(
   horaRetorno,
   valor,
   modeloVan,
-  valorAcrescimoKm
+  valorAcrescimoKm,
+  dataGeracao
 ) {
   try {
     const data = {
@@ -30,7 +31,8 @@ async function createPDF(
       horaRetorno,
       valor,
       modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
-      valorAcrescimoKm: valorAcrescimoKm || "4,25"
+      valorAcrescimoKm: valorAcrescimoKm || "4,25",
+      dataGeracao
     };
 
     const templateHtml = fs.readFileSync(

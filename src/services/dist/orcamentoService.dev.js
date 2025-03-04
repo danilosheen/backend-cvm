@@ -12,7 +12,7 @@ var puppeteerCore = require("puppeteer-core");
 
 var chromium = require("@sparticuz/chromium-min");
 
-function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan, valorAcrescimoKm) {
+function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valor, modeloVan, valorAcrescimoKm, dataGeracao) {
   var data, templateHtml, template, html, browser, executablePath, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
     while (1) {
@@ -30,7 +30,8 @@ function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataS
             horaRetorno: horaRetorno,
             valor: valor,
             modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
-            valorAcrescimoKm: valorAcrescimoKm || "4,25"
+            valorAcrescimoKm: valorAcrescimoKm || "4,25",
+            dataGeracao: dataGeracao
           };
           templateHtml = fs.readFileSync(path.join(__dirname, "../templates/orcamento.html"), "utf8");
           template = handlebars.compile(templateHtml);
