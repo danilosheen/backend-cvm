@@ -4,7 +4,7 @@ var express = require("express");
 
 var cors = require("cors");
 
-var pdfRoutes = require("./routes/pdfOrcamento");
+var pdfRoutes = require("./routes/routes");
 
 var app = express();
 app.use(cors());

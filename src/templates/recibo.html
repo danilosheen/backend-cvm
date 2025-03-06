@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento de Viagem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 11pt;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 25px;
+    }
+
+    h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    ul {
+      margin-left: 30px;
+    }
+
+    .container {
+      padding: 20px 70px;
+      position: relative;
+    }
+
+    .logo-topo {
+      width: 100%;
+    }
+
+    .valor{
+      text-align: end;
+    }
+
+    .content-text{
+      text-align: justify;
+      margin: 100px 0;
+      font-size: 12pt;
+    }
+
+    .local{
+      text-align: end;
+      font-size: 12pt;
+    }
+
+    .rodape {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-top: 300px;
+    }
+
+    .rodape p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .rodape img {
+      width: 150px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="logo-topo"
+    src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo-word.png" alt="img-info">
+  <div class="container">
+    <strong>
+      <h1>RECIBO</h1>
+    </strong>
+    <p class="valor">
+      <strong>Valor: {{valor}}</strong>
+    </p>
+    <p class="content-text">
+      Eu, <strong>Crairton de Matos Leite</strong>, representante da empresa <strong>CVM TURISMO</strong> inscrita no <strong>CNPJ: 24.512.420/0001-15</strong> declaro que
+      recebi de <strong>{{nomeCliente}}</strong> o valor de <strong>({{valorPorExtenso}})</strong> referente à {{pacoteViagem}}, esse montante foi pago
+      mediante a uma transação bancária (PIX) com a seguinte chave: <strong>cvmturismojn@gmail.com</strong>.
+    </p>
+    <p class="local">
+      <strong>Juazeiro do Norte - CE, &nbsp; {{dataGeracao}}</strong>
+    </p>
+    <div class="rodape">
+      <p>Crairton de Matos Leite</p>
+      <img src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/jesus.png" alt="jesus">
+      <p>Juazeiro do Norte - CE</p>
+    </div>
+  </div>
+</body>
+
+</html>
