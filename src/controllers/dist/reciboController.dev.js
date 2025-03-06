@@ -3,6 +3,8 @@
 var _require = require("../services/dateFormatedService"),
     getDateFormated = _require.getDateFormated;
 
+var porExtensoFormatado = require("../services/porExtenso");
+
 var pdfReciboService = require("../services/reciboService");
 
 var extenso = require('extenso');
@@ -18,11 +20,9 @@ exports.generatePDF = function _callee(req, res) {
           _req$body = req.body, nomeCliente = _req$body.nomeCliente, valor = _req$body.valor, pacoteViagem = _req$body.pacoteViagem;
           dataGeracao = getDateFormated(); //regex coloca as primeiras letras em maiúsculo
 
-          valorPorExtenso = extenso(valor, {
+          valorPorExtenso = porExtensoFormatado(extenso(valor, {
             mode: 'currency'
-          }).replace(/(^\w{1})|(\s+\w{1})/g, function (letra) {
-            return letra.toUpperCase() === 'E' ? 'e' : letra.toUpperCase();
-          });
+          }));
           _context.next = 6;
           return regeneratorRuntime.awrap(pdfReciboService.createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, dataGeracao));
 

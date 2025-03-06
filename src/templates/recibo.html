@@ -34,6 +34,13 @@
       position: relative;
     }
 
+    .marca-dagua{
+      position: absolute;
+      opacity: 10%;
+      width: 85%;
+      top: 300px;
+    }
+
     .logo-topo {
       width: 100%;
     }
@@ -51,6 +58,19 @@
     .local{
       text-align: end;
       font-size: 12pt;
+      margin-bottom: 100px;
+    }
+
+    .line{
+      background-color: black;
+      height: 1px;
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    .text-representante{
+      font-size: 12pt;
+      text-align: center;
     }
 
     .rodape {
@@ -58,7 +78,7 @@
       flex-direction: column;
       align-items: center;
       gap: 5px;
-      margin-top: 300px;
+      margin-top: 200px;
     }
 
     .rodape p {
@@ -77,6 +97,7 @@
   <img class="logo-topo"
     src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo-word.png" alt="img-info">
   <div class="container">
+    <img class="marca-dagua" src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo.png" alt="marca-dagua">
     <strong>
       <h1>RECIBO</h1>
     </strong>
@@ -91,8 +112,11 @@
     <p class="local">
       <strong>Juazeiro do Norte - CE, &nbsp; {{dataGeracao}}</strong>
     </p>
+    <div class="line"></div>
+    <p class="text-representante">
+      Representante CVM TURISMO
+    </p>
     <div class="rodape">
-      <p>Crairton de Matos Leite</p>
       <img src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/jesus.png" alt="jesus">
       <p>Juazeiro do Norte - CE</p>
     </div>

@@ -1,4 +1,5 @@
 const { getDateFormated } = require("../services/dateFormatedService");
+const porExtensoFormatado = require("../services/porExtenso");
 const pdfReciboService = require("../services/reciboService");
 const extenso = require('extenso');
 
@@ -12,9 +13,7 @@ exports.generatePDF = async (req, res) => {
 
     const dataGeracao = getDateFormated();
     //regex coloca as primeiras letras em maiúsculo
-    const valorPorExtenso = extenso(valor, {mode: 'currency'}).replace(/(^\w{1})|(\s+\w{1})/g, letra => 
-      letra.toUpperCase() === 'E' ? 'e' : letra.toUpperCase());
-
+    const valorPorExtenso = porExtensoFormatado(extenso(valor, {mode: 'currency'}));
     const pdfBuffer = await pdfReciboService.createPDF(
       nomeCliente,
       valor,
