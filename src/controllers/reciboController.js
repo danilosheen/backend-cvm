@@ -26,7 +26,11 @@ exports.generatePDF = async (req, res) => {
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="recibo.pdf"`);
     // Adiciona o header CORS para permitir a origem desejada
-    res.setHeader("Access-Control-Allow-Origin", "https://cvm-docs.vercel.app");
+    const allowedOrigins = ['https://cvm-docs.vercel.app', 'http://localhost:4200'];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+     res.setHeader("Access-Control-Allow-Origin", origin);
+    }
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);
