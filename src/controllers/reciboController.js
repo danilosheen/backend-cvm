@@ -13,7 +13,7 @@ exports.generatePDF = async (req, res) => {
 
     const dataGeracao = getDateFormated();
     //regex coloca as primeiras letras em maiúsculo
-    const valorPorExtenso = porExtensoFormatado(extenso(valor, {mode: 'currency'}));
+    const valorPorExtenso = porExtensoFormatado(extenso(valor, {mode: 'currency', currency: { code: 'BRL' }}));
     const pdfBuffer = await pdfReciboService.createPDF(
       nomeCliente,
       valor,

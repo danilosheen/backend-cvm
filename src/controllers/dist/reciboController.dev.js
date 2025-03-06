@@ -21,7 +21,10 @@ exports.generatePDF = function _callee(req, res) {
           dataGeracao = getDateFormated(); //regex coloca as primeiras letras em maiúsculo
 
           valorPorExtenso = porExtensoFormatado(extenso(valor, {
-            mode: 'currency'
+            mode: 'currency',
+            currency: {
+              code: 'BRL'
+            }
           }));
           _context.next = 6;
           return regeneratorRuntime.awrap(pdfReciboService.createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, dataGeracao));
