@@ -33,24 +33,26 @@ exports.generatePDF = function _callee(req, res) {
           pdfBuffer = _context.sent;
           // Configura os headers para o navegador reconhecer o arquivo como PDF
           res.setHeader("Content-Type", "application/pdf");
-          res.setHeader("Content-Disposition", "attachment; filename=\"recibo.pdf\""); // Envia o PDF para o cliente (frontend)
+          res.setHeader("Content-Disposition", "attachment; filename=\"recibo.pdf\""); // Adiciona o header CORS para permitir a origem desejada
+
+          res.setHeader("Access-Control-Allow-Origin", "https://cvm-docs.vercel.app"); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
-          _context.next = 16;
+          _context.next = 17;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t0);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 16:
+        case 17:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 13]]);
 };
