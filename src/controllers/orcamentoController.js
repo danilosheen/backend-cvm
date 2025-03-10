@@ -14,6 +14,7 @@ exports.generatePDF = async (req, res) => {
       horaRetorno,
       valor,
       modeloVan,
+      cortesiaKm,
       valorAcrescimoKm
     } = req.body;
 
@@ -30,6 +31,7 @@ exports.generatePDF = async (req, res) => {
       horaRetorno,
       valor,
       modeloVan,
+      cortesiaKm,
       valorAcrescimoKm,
       dataGeracao
     );

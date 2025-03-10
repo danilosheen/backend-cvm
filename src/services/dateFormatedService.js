@@ -9,8 +9,6 @@ function getDateFormated() {
   return (`${dia} de ${months[parseInt(mes) - 1]} de ${ano}`).replace(",", "");
 }
 
-console.log(getDateFormated())
-
 module.exports = {
   getDateFormated
 }

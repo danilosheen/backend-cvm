@@ -24,7 +24,6 @@ function getDateFormated() {
   return "".concat(dia, " de ").concat(months[parseInt(mes) - 1], " de ").concat(ano).replace(",", "");
 }
 
-console.log(getDateFormated());
 module.exports = {
   getDateFormated: getDateFormated
 };

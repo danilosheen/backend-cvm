@@ -16,6 +16,7 @@ async function createPDF(
   horaRetorno,
   valor,
   modeloVan,
+  cortesiaKm,
   valorAcrescimoKm,
   dataGeracao
 ) {
@@ -31,6 +32,7 @@ async function createPDF(
       horaRetorno,
       valor,
       modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
+      cortesiaKm: cortesiaKm || "30",
       valorAcrescimoKm: valorAcrescimoKm || "4,25",
       dataGeracao
     };
