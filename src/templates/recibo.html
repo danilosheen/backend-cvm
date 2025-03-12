@@ -67,6 +67,7 @@
       height: 1px;
       width: 70%;
       margin: 0 auto;
+      z-index: 2;
     }
 
     .text-representante {
@@ -90,6 +91,16 @@
     .rodape img {
       width: 150px;
       margin-top: 20px;
+    }
+
+    .assinatura{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .assinatura img{
+      width: 400px;
     }
   </style>
 </head>
@@ -116,6 +127,9 @@
     <p class="local">
       <strong>Juazeiro do Norte - CE, &nbsp; {{dataGeracao}}</strong>
     </p>
+    <div class="assinatura">
+      <img src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/assinatura.png" alt="">
+    </div>
     <div class="line"></div>
     <p class="text-representante">
       Representante CVM TURISMO
