@@ -31,7 +31,7 @@ function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataS
             valor: valor,
             modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
             cortesiaKm: cortesiaKm || "30",
-            valorAcrescimoKm: valorAcrescimoKm || "4,25",
+            valorAcrescimoKm: valorAcrescimoKm || "4,50",
             dataGeracao: dataGeracao
           };
           templateHtml = fs.readFileSync(path.join(__dirname, "../templates/orcamento.html"), "utf8");

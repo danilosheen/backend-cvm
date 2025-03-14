@@ -10,14 +10,23 @@ async function createPDF(
   valor,
   valorPorExtenso,
   pacoteViagem,
+  formaPagamento,
   dataGeracao
 ) {
   try {
+    if(formaPagamento === 'Dinheiro'){
+      formaPagamento = {prefix: 'em', sulfix: 'Dinheiro'};
+    } else if (formaPagamento === 'Cartão de crédito'){
+      formaPagamento = {prefix: 'no', sulfix: 'Cartão de crédito'};
+    } else {
+      formaPagamento = {prefix: 'mediante a uma transação bancária (PIX) com a seguinte chave:', sulfix: 'cvmturismojn@gmail.com'}
+    }
     const data = {
       nomeCliente,
       valor,
       valorPorExtenso,
       pacoteViagem,
+      formaPagamento,
       dataGeracao
     };
 

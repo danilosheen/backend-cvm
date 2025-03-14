@@ -10,16 +10,15 @@ var pdfReciboService = require("../services/reciboService");
 var extenso = require('extenso');
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, nomeCliente, valor, pacoteViagem, dataGeracao, valorPorExtenso, pdfBuffer, allowedOrigins, origin;
+  var _req$body, nomeCliente, valor, pacoteViagem, formaPagamento, dataGeracao, valorPorExtenso, pdfBuffer, allowedOrigins, origin;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _req$body = req.body, nomeCliente = _req$body.nomeCliente, valor = _req$body.valor, pacoteViagem = _req$body.pacoteViagem;
-          dataGeracao = getDateFormated(); //regex coloca as primeiras letras em maiúsculo
-
+          _req$body = req.body, nomeCliente = _req$body.nomeCliente, valor = _req$body.valor, pacoteViagem = _req$body.pacoteViagem, formaPagamento = _req$body.formaPagamento;
+          dataGeracao = getDateFormated();
           valorPorExtenso = porExtensoFormatado(extenso(valor, {
             mode: 'currency',
             currency: {
@@ -27,7 +26,7 @@ exports.generatePDF = function _callee(req, res) {
             }
           }));
           _context.next = 6;
-          return regeneratorRuntime.awrap(pdfReciboService.createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, dataGeracao));
+          return regeneratorRuntime.awrap(pdfReciboService.createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, formaPagamento, dataGeracao));
 
         case 6:
           pdfBuffer = _context.sent;
