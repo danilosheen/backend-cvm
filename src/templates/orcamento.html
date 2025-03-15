@@ -46,7 +46,7 @@
     }
 
     .info {
-      margin-bottom: 8px;
+      /* margin-bottom: 8px; */
       font-size: 14px;
       display: flex;
       align-items: center;
@@ -67,6 +67,7 @@
 
     .container-infos {
       margin-left: 20px;
+      margin-top: 10px;
     }
 
     .info-bank {
@@ -120,7 +121,6 @@
         Nome do Cliente: &nbsp;<strong>{{nomeCliente}}</strong>
       </p>
       <p class="info">
-        Valor: &nbsp;<strong> R$ {{valor}}</strong>
       </p>
     </div>
     <p class="info">
@@ -160,12 +160,21 @@
         alt="clock">
       Hora de retorno: &nbsp;<strong> {{horaRetorno}}</strong>
     </p>
-    <br>
     <div class="container-infos">
       <strong>
         <p class="text-red">Alguns pontos são importantes observar:</p>
       </strong>
-      <p>Valor da viagem: &nbsp;<strong>R$ {{valor}}</strong></p>
+      <ol style="margin-left: 30px;">
+        <li>
+          <p>Valor da viagem com despesas do motorista por conta do <strong>CLIENTE</strong>: &nbsp;<strong>R$ {{valorComDespesa}}</strong></p>
+        </li>
+        <li>
+          <p>Valor da viagem com despesas do motorista por conta da <strong>CVM</strong>: &nbsp;<strong>R$ {{valorSemDespesa}}</strong></p>
+        </li>
+        <li>
+          <p>Valor da viagem com emissão de nota fiscal de serviço: &nbsp;<strong>R$ {{valorComNota}}</strong></p>
+        </li>
+      </ol>
       <p>Informações do transporte: {{modeloVan}};</p>
       <p><strong>OBS:</strong> A CVM oferece uma cortesia de <strong>{{cortesiaKm}}km</strong> livres para deslocamento. A
         quilometragem excedente será calculada com um acréscimo de <strong>R$ {{valorAcrescimoKm}}</strong>
