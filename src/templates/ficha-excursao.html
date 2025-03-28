@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha de Excursão</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 11pt;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 25px;
+    }
+
+    h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    ul {
+      margin-left: 30px;
+    }
+
+    .container {
+      padding: 10px 40px 20px 40px;
+      position: relative;
+    }
+
+    .logo-topo {
+      width: 100%;
+    }
+
+    .qr-code {
+      width: 150px;
+      position: absolute;
+      bottom: 0px;
+      right: 100px;
+    }
+
+    .info {
+      font-size: 10pt;
+      display: flex;
+      align-items: center;
+      line-height: 22px;
+    }
+
+    .icon {
+      width: 18px;
+      margin-right: 10px;
+      margin-left: 20px;
+
+    }
+
+    .line-topo {
+      display: flex;
+      justify-content: space-between;
+      margin-right: 200px;
+    }
+
+    .container-infos {
+      margin-left: 20px;
+    }
+
+    .info-bank {
+      margin-left: 10px;
+    }
+
+    .rodape {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -20px;
+    }
+
+    .rodape p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .rodape img {
+      width: 150px;
+      margin-top: 15px;
+      
+    }
+
+    .data-geracao {
+      text-align: end;
+      margin-right: 40px;
+      position: absolute;
+      font-size: 8pt;
+      
+    }
+
+    .text-red {
+      color: red;
+    }
+
+    .flex-50 {
+      display: flex;
+    }
+
+    .flex-50 p {
+      min-width: 50%;
+    }
+
+    .flex-33{
+      display: flex;
+      font-size: 9pt;
+    }
+
+    .flex-33 p{
+      width: 33%;
+    }
+
+    .content-title {
+      text-align: center;
+    }
+
+    .content-info {
+      font-size: 9pt;
+      text-align: justify;
+      line-height: 16px;
+    }
+
+    .container-forma-pagamento{
+      line-height: 20px;
+      font-size: 11pt;
+    }
+
+    .tabela-dependentes{
+      width: 100%;
+    }
+
+    .tabela-dependentes th{
+      text-align: left;
+    }
+
+    .container-table{
+      min-height: 182px;
+    }
+
+    table{
+      margin-top: 5px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding-left: 10px;
+    }
+
+    .poltrona{
+      width: 100px;
+    }
+
+    .document{
+      width: 200px;
+    }
+
+    .assinaturas{
+      display: flex;
+      gap: 60px;
+      margin-top: 40px;
+    }
+
+    .assinaturas div{
+      width: 50%;
+      text-align: center;
+    }
+    
+    .line-assinatura{
+      border-top: 1px solid black;
+    }
+
+    .text-assinatura{
+      font-size: 9pt;
+      line-height: 12px;
+      width: 65%;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+
+<body>
+  <img class="logo-topo"
+    src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo-word.png" alt="img-info">
+  <div class="container">
+    <img class="qr-code"
+      src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/qr-code-2.png"
+      alt="qr-code">
+    <strong>
+      <h1>EXCURSÃO PARA: {{excursaoPara}}</h1>
+    </strong>
+    <p class="info">
+      <img class="icon"
+        src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/locale.png" alt="locale">
+      Local de Saída: &nbsp;<strong> {{localSaida}}</strong>
+    </p>
+    <div class="flex-50">
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/calendar.png"
+          alt="calendar">
+        Data de saída: &nbsp;<strong> {{dataSaida}}</strong>
+      </p>
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/clock.png" alt="clock">
+        Hora de saída: &nbsp;<strong> {{horaSaida}}</strong>
+      </p>
+    </div>
+    <div class="flex-50">
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/calendar.png"
+          alt="calendar">
+        Data de retorno: &nbsp;<strong> {{dataRetorno}}</strong>
+      </p>
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/clock.png" alt="clock">
+        Hora de retorno: &nbsp;<strong> {{horaRetorno}}</strong>
+      </p>
+    </div>
+    <p class="info">
+      <img class="icon"
+        src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/person.png" alt="person">
+      Nome do Cliente: &nbsp;<strong>{{cliente.nome}}</strong>
+    </p>
+    <div class="flex-50">
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/calendar.png"
+          alt="calendar">
+        Data de Nascimento: &nbsp;<strong>{{cliente.dataNascimento}}</strong>
+      </p>
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/person.png" alt="person">
+        CPF: &nbsp;<strong>{{cliente.cpf}}</strong>
+      </p>
+    </div>
+    <p class="info">
+      <img class="icon" src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/phone.png"
+        alt="phone">
+      Telefone: &nbsp;<strong>{{cliente.contato}}</strong>
+    </p>
+    <div class="flex-50">
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/locale.png"
+          alt="locale">
+        Rua: &nbsp;<strong> {{cliente.endereco.rua}}</strong>
+      </p>
+      <p class="info">
+        Nº: &nbsp;<strong> {{cliente.endereco.numero}}</strong>
+      </p>
+    </div>
+    <div class="flex-50">
+      <p class="info">
+        <img class="icon"
+          src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/locale.png"
+          alt="locale">
+        Bairro: &nbsp;<strong> {{cliente.endereco.bairro}}</strong>
+      </p>
+      <p class="info">
+        Cidade: &nbsp;<strong> {{cliente.endereco.cidade}}</strong>
+      </p>
+    </div>
+    <div class="container-infos">
+      <h2 class="content-title">FICHA DE CONTRATO DE EXCURSIONISTA</h2>
+      <p class="content-info"><strong>CLÁUSULA 1ª</strong> - O Excursionista terá direito aos seguintes serviços: 
+        ( )Café da manhã 
+        ( )Almoço 
+        ( )Jantar 
+        ( )Roteiro
+      </p>
+      <p class="content-info">Tipo de Hospedagem: 
+        ( )Casa de Praia 
+        ( )Pousada 
+        ( )Hotel;
+      </p>
+      <p class="content-info"><strong>CLÁUSULA 2ª</strong> - O Excursionista será único e exclusivo responsável pelos seus atos e objetos
+        pessoais durante a excursão, não seremos responsáveis por quaisquer item de valor: 
+        <strong>PERDIDO OU QUEBRADO NO TRANSPORTE, HOTEL, POUSADA, CASA DE PRAIA, ETC.</strong> 
+        Caso seja danificado algum objeto do local de hospedagem, o excursionista será responsabilizado pela reposição do item;
+      </p>
+      <p class="content-info"><strong>CLÁUSULA 3ª</strong> - Teremos horário de saída e chegada a serem cumpridos, sem que haja atrasos
+        dentro da programação;
+      </p>
+      <p class="content-info"><strong>CLÁUSULA 4ª</strong> - O Excursionista se responsabilizará por danos e prejuízos que possam ocorrer
+        sobre a sua tutela;
+      </p>
+      <p class="content-info"><strong>CLÁUSULA 5ª</strong> - Caso ocorra algum acidente grave, 
+        <strong>NÃO SEREMOS RESPONSÁVEIS</strong>.
+        Teremos apenas
+        <strong>PRIMEIROS SOCORROS;</strong>
+      </p>
+      <p class="content-info"><strong>CLÁUSULA 6ª</strong> - Caso ocorra algum acidente ou imprevisto que impossibilite a viagem por parte
+        do excursionista, não será devolvido o valor pago, será permitida a alocação outro passageiro no lugar do
+        contratante, condição aplicada somente na viagem fretada para o referido passeio;
+      </p>
+      <p class="content-info"><strong>CLÁUSULA 7ª</strong> - <strong>OBS:</strong> O cliente será obrigado a cumprir todas as regras
+        impostas pelo estabelecimento, hotel, pousada ou casa de praia. Em caso de descumprimento o cliente ficará sujeito às normas e
+        punições cabíveis aplicadas pelo local da hospedagem.
+      </p>
+      <div class="container-forma-pagamento">
+        <h2 class="content-title">DA FORMA DE PAGAMENTO</h2>
+        <p>VALOR TOTAL DA EXCURSÃO: R$: {{valorIntegralExcursao}}</p>
+        <p style="font-weight: bold; font-size: 11pt;">OBS: ACRÉSCIMO DE JUROS DE PARCELAMENTO POR CONTA DO CLIENTE.</p>
+        <div class="flex-33">
+          <p>ENTRADA: {{entradaParcelamento}}</p>
+          <p>{{qtdParcelas}} PARCELAS DE {{valorParcelas}}</p>
+          <p>DATA DE VENCIMENTO: {{dataPagamentoParcela}}</p>
+        </div>
+      </div>
+      <div class="container-table">
+        <table class="tabela-dependentes">
+          <tr>
+            <th>DEPENDENTES:</th>
+            <th>RG/CPF</th>
+            <th>POLTRONA</th>
+          </tr>
+          
+          {{#dependentes}}
+          <tr>
+            <td> {{ nome }} </td>
+            <td class="document"> {{ document }} </td>
+            <td class="poltrona"> {{poltrona}} </td>
+          </tr>
+          {{/dependentes}}
+        </table>
+      </div>
+      <div class="assinaturas">
+        <div class="line-assinatura">
+          <h2>CLIENTE/ CONTRATANTE</h2>
+          <p class="text-assinatura">
+            Li e concordo com os termos aqui
+            dispostos pelas normas da excursão
+          </p>
+        </div>
+        <div class="line-assinatura">
+          <h2>RESP: CVM TURISMO</h2>
+        </div>
+      </div>
+    </div>
+    <div class="rodape">
+      <img src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/jesus.png" alt="jesus">
+      <p>Juazeiro do Norte - CE</p>
+    </div>
+    <p class="data-geracao">Ficha de excursão gerada em:&nbsp;<span style="font-size: 8pt; font-weight: bold;">{{dataGeracao}}</span></p>
+  </div>
+</body>
+
+</html>
