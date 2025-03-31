@@ -29,6 +29,10 @@
       margin-left: 30px;
     }
 
+    strong{
+      font-size: 11pt;
+    }
+
     .container {
       padding: 10px 40px 20px 40px;
       position: relative;
@@ -144,7 +148,7 @@
     }
 
     .container-table{
-      min-height: 182px;
+      min-height: 156px;
     }
 
     table{
@@ -279,15 +283,10 @@
     <div class="container-infos">
       <h2 class="content-title">FICHA DE CONTRATO DE EXCURSIONISTA</h2>
       <p class="content-info"><strong>CLÁUSULA 1ª</strong> - O Excursionista terá direito aos seguintes serviços: 
-        ( )Café da manhã 
-        ( )Almoço 
-        ( )Jantar 
-        ( )Roteiro
+        <strong>{{servicosFormatado}}</strong>
       </p>
       <p class="content-info">Tipo de Hospedagem: 
-        ( )Casa de Praia 
-        ( )Pousada 
-        ( )Hotel;
+        <strong>{{tipoDeHospedagemFormatado}}.</strong>
       </p>
       <p class="content-info"><strong>CLÁUSULA 2ª</strong> - O Excursionista será único e exclusivo responsável pelos seus atos e objetos
         pessoais durante a excursão, não seremos responsáveis por quaisquer item de valor: 

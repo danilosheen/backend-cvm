@@ -3,7 +3,8 @@ const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core")
-const chromium  = require("@sparticuz/chromium-min")
+const chromium  = require("@sparticuz/chromium-min");
+const { formatServices, upperCase } = require("./formatServices");
 
 async function createPDF(
   excursaoPara,
@@ -24,6 +25,8 @@ async function createPDF(
   dataGeracao
 ) {
   try {
+    const servicosFormatado = formatServices(servicos);
+    const tipoDeHospedagemFormatado = upperCase(tipoDeHospedagem);
     const data = {
       excursaoPara,
       localSaida,
@@ -32,8 +35,8 @@ async function createPDF(
       dataRetorno,
       horaRetorno,
       cliente,
-      servicos,
-      tipoDeHospedagem,
+      servicosFormatado,
+      tipoDeHospedagemFormatado,
       valorIntegralExcursao,
       entradaParcelamento,
       valorParcelas,
