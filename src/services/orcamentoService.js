@@ -25,9 +25,10 @@ async function createPDF(
   dataGeracao
 ) {
   try {
-    const valorComDespesaPix = converteFloatToString(converteStringToFloat(valorComDespesa) * (1+(taxaPix/100)));
-    const valorSemDespesaPix = converteFloatToString(converteStringToFloat(valorSemDespesa) * (1+(taxaPix/100)));
-    const valorComNotaPix = converteFloatToString(converteStringToFloat(valorComNota) * (1+(taxaPix/100)));
+    const taxaPixNumber = parseFloat(taxaPix);
+    const valorComDespesaPix = converteFloatToString(converteStringToFloat(valorComDespesa) * (1+(taxaPixNumber/100)));
+    const valorSemDespesaPix = converteFloatToString(converteStringToFloat(valorSemDespesa) * (1+(taxaPixNumber/100)));
+    const valorComNotaPix = converteFloatToString(converteStringToFloat(valorComNota) * (1+(taxaPixNumber/100)));
     const data = {
       nomeCliente,
       telefoneContato,
@@ -48,8 +49,6 @@ async function createPDF(
       valorAcrescimoKm: valorAcrescimoKm || "4,50",
       dataGeracao
     };
-
-    console.log(data);
 
     const templateHtml = fs.readFileSync(
       path.join(__dirname, "../templates/orcamento.html"),

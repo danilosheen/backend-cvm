@@ -17,15 +17,16 @@ var _require = require("../utils/converteStringToFloat"),
     converteFloatToString = _require.converteFloatToString;
 
 function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao) {
-  var valorComDespesaPix, valorSemDespesaPix, valorComNotaPix, data, templateHtml, template, html, browser, executablePath, page, pdfBuffer;
+  var taxaPixNumber, valorComDespesaPix, valorSemDespesaPix, valorComNotaPix, data, templateHtml, template, html, browser, executablePath, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          valorComDespesaPix = converteFloatToString(converteStringToFloat(valorComDespesa) * (1 + taxaPix / 100));
-          valorSemDespesaPix = converteFloatToString(converteStringToFloat(valorSemDespesa) * (1 + taxaPix / 100));
-          valorComNotaPix = converteFloatToString(converteStringToFloat(valorComNota) * (1 + taxaPix / 100));
+          taxaPixNumber = parseFloat(taxaPix);
+          valorComDespesaPix = converteFloatToString(converteStringToFloat(valorComDespesa) * (1 + taxaPixNumber / 100));
+          valorSemDespesaPix = converteFloatToString(converteStringToFloat(valorSemDespesa) * (1 + taxaPixNumber / 100));
+          valorComNotaPix = converteFloatToString(converteStringToFloat(valorComNota) * (1 + taxaPixNumber / 100));
           data = {
             nomeCliente: nomeCliente,
             telefoneContato: telefoneContato,
@@ -46,7 +47,6 @@ function createPDF(nomeCliente, telefoneContato, pacoteViagem, localSaida, dataS
             valorAcrescimoKm: valorAcrescimoKm || "4,50",
             dataGeracao: dataGeracao
           };
-          console.log(data);
           templateHtml = fs.readFileSync(path.join(__dirname, "../templates/orcamento.html"), "utf8");
           template = handlebars.compile(templateHtml);
           html = template(data);
