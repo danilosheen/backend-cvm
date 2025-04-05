@@ -15,6 +15,7 @@ exports.generatePDF = async (req, res) => {
       valorComDespesa,
       valorSemDespesa,
       valorComNota,
+      taxaPix,
       modeloVan,
       cortesiaKm,
       valorAcrescimoKm
@@ -34,6 +35,7 @@ exports.generatePDF = async (req, res) => {
       valorComDespesa,
       valorSemDespesa,
       valorComNota,
+      taxaPix,
       modeloVan,
       cortesiaKm,
       valorAcrescimoKm,

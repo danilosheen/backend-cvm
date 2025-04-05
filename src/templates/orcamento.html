@@ -79,7 +79,7 @@
       flex-direction: column;
       align-items: center;
       gap: 5px;
-      margin-top: 30px;
+      margin-top: 10px;
     }
 
     .rodape p{
@@ -89,7 +89,6 @@
 
     .rodape img{
       width: 150px;
-      margin-top: 20px;
     }
 
     .data-geracao{
@@ -133,7 +132,6 @@
         alt="book">
       Pacote: &nbsp;<strong>{{pacoteViagem}}</strong>
     </p>
-    <br>
     <p class="info">
       <img class="icon"
         src="https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/locale.png" alt="locale">
@@ -167,13 +165,27 @@
       </strong>
       <ol style="margin-left: 30px;">
         <li>
-          <p>Valor da viagem com despesas do motorista por conta do <strong>CLIENTE</strong>: &nbsp;<strong>R$ {{valorComDespesa}}</strong></p>
+          <p>
+            Valor da viagem com despesas do motorista por conta do <strong>CLIENTE</strong>: <br>
+            &nbsp;<strong>R$ {{valorComDespesa}}</strong> (em Dinheiro) e <strong>R$ {{valorComDespesaPix}}</strong> (no PIX).
+          </p>
         </li>
         <li>
-          <p>Valor da viagem com despesas do motorista por conta da <strong>CVM</strong>: &nbsp;<strong>R$ {{valorSemDespesa}}</strong></p>
+          <p>
+            Valor da viagem com despesas do motorista por conta da <strong>CVM</strong>: <br>
+            &nbsp;<strong>R$ {{valorSemDespesa}}</strong> (em Dinheiro) e <strong>R$ {{valorSemDespesaPix}}</strong> (no PIX).
+        </p>
         </li>
         <li>
-          <p>Valor da viagem com emissão de nota fiscal de serviço: &nbsp;<strong>R$ {{valorComNota}}</strong></p>
+          <p>
+            Valor da viagem com emissão de nota fiscal de serviço: <br>
+            &nbsp;<strong>R$ {{valorComNota}}</strong> (em Dinheiro) e <strong>R$ {{valorComNotaPix}}</strong> (no PIX).
+          </p>
+        </li>
+        <li>
+          <p>
+            Em casos de parcelamento o acréscimo será de acordo com as taxas da maquineta.
+          </p>
         </li>
       </ol>
       <p>Informações do transporte: {{modeloVan}};</p>

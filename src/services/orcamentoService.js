@@ -3,7 +3,8 @@ const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core")
-const chromium  = require("@sparticuz/chromium-min")
+const chromium  = require("@sparticuz/chromium-min");
+const { converteStringToFloat, converteFloatToString } = require("../utils/converteStringToFloat");
 
 async function createPDF(
   nomeCliente,
@@ -17,12 +18,16 @@ async function createPDF(
   valorComDespesa,
   valorSemDespesa,
   valorComNota,
+  taxaPix,
   modeloVan,
   cortesiaKm,
   valorAcrescimoKm,
   dataGeracao
 ) {
   try {
+    const valorComDespesaPix = converteFloatToString(converteStringToFloat(valorComDespesa) * (1+(taxaPix/100)));
+    const valorSemDespesaPix = converteFloatToString(converteStringToFloat(valorSemDespesa) * (1+(taxaPix/100)));
+    const valorComNotaPix = converteFloatToString(converteStringToFloat(valorComNota) * (1+(taxaPix/100)));
     const data = {
       nomeCliente,
       telefoneContato,
@@ -35,11 +40,16 @@ async function createPDF(
       valorComDespesa,
       valorSemDespesa,
       valorComNota,
+      valorComDespesaPix,
+      valorSemDespesaPix,
+      valorComNotaPix,
       modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
       cortesiaKm: cortesiaKm || "30",
       valorAcrescimoKm: valorAcrescimoKm || "4,50",
       dataGeracao
     };
+
+    console.log(data);
 
     const templateHtml = fs.readFileSync(
       path.join(__dirname, "../templates/orcamento.html"),
