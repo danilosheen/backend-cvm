@@ -1,4 +1,4 @@
-const { getDateFormated } = require("../services/dateFormatedService");
+const { getDateFormated } = require("../utils/dateFormated");
 const pdfOrcamentoService = require("../services/orcamentoService");
 
 exports.generatePDF = async (req, res) => {

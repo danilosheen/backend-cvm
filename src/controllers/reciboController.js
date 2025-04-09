@@ -1,5 +1,5 @@
-const { getDateFormated } = require("../services/dateFormatedService");
-const porExtensoFormatado = require("../services/porExtenso");
+const { getDateFormated } = require("../utils/dateFormated");
+const porExtensoFormatado = require("../utils/porExtenso");
 const pdfReciboService = require("../services/reciboService");
 const extenso = require('extenso');
 

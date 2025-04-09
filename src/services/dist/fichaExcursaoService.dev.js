@@ -12,7 +12,7 @@ var puppeteerCore = require("puppeteer-core");
 
 var chromium = require("@sparticuz/chromium-min");
 
-var _require = require("./formatServices"),
+var _require = require("../utils/formatMoney"),
     formatServices = _require.formatServices,
     upperCase = _require.upperCase;
 

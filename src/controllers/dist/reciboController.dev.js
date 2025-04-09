@@ -1,9 +1,9 @@
 "use strict";
 
-var _require = require("../services/dateFormatedService"),
+var _require = require("../utils/dateFormated"),
     getDateFormated = _require.getDateFormated;
 
-var porExtensoFormatado = require("../services/porExtenso");
+var porExtensoFormatado = require("../utils/porExtenso");
 
 var pdfReciboService = require("../services/reciboService");
 

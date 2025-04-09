@@ -12,40 +12,33 @@ var puppeteerCore = require("puppeteer-core");
 
 var chromium = require("@sparticuz/chromium-min");
 
-function createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, formaPagamento, dataGeracao) {
+function createPDF(numeroCarroP1, numeroCarroP2, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, qtdPassageiros, passageiros, dataGeracao) {
   var data, templateHtml, template, html, browser, executablePath, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-
-          if (formaPagamento === 'Dinheiro') {
-            formaPagamento = {
-              prefix: 'em',
-              sulfix: 'Dinheiro'
-            };
-          } else if (formaPagamento === 'Cartão de crédito') {
-            formaPagamento = {
-              prefix: 'no',
-              sulfix: 'Cartão de crédito'
-            };
-          } else {
-            formaPagamento = {
-              prefix: 'mediante a uma transação bancária (PIX) com a seguinte chave:',
-              sulfix: 'cvmturismojn@gmail.com'
-            };
-          }
-
+          handlebars.registerHelper('addOne', function (index) {
+            return index + 1;
+          });
           data = {
-            nomeCliente: nomeCliente,
-            valor: valor,
-            valorPorExtenso: valorPorExtenso,
-            pacoteViagem: pacoteViagem,
-            formaPagamento: formaPagamento,
+            numeroCarroP1: numeroCarroP1,
+            numeroCarroP2: numeroCarroP2,
+            placa: placa,
+            motorista: motorista,
+            origem: origem,
+            destino: destino,
+            dataSaida: dataSaida,
+            horaSaida: horaSaida,
+            dataRetorno: dataRetorno,
+            horaRetorno: horaRetorno,
+            extensaoRoteiroKm: extensaoRoteiroKm,
+            qtdPassageiros: qtdPassageiros,
+            passageiros: passageiros,
             dataGeracao: dataGeracao
           };
-          templateHtml = fs.readFileSync(path.join(__dirname, "../templates/recibo.html"), "utf8");
+          templateHtml = fs.readFileSync(path.join(__dirname, "../templates/lista-passageiros.html"), "utf8");
           template = handlebars.compile(templateHtml);
           html = template(data);
 

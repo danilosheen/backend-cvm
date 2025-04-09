@@ -1,44 +1,41 @@
 const { getDateFormated } = require("../utils/dateFormated");
-const pdfFichaExcursaoService = require("../services/fichaExcursaoService");
+const pdfListaPassageirosService = require("../services/listaPassageirosService");
 
 exports.generatePDF = async (req, res) => {
   try {
     const {
-      excursaoPara,
-      localSaida,
+      numeroCarro,
+      placa,
+      motorista,
+      origem,
+      destino,
       dataSaida,
       horaSaida,
       dataRetorno,
       horaRetorno,
-      cliente,
-      servicos,
-      tipoDeHospedagem,
-      valorIntegralExcursao,
-      entradaParcelamento,
-      valorParcelas,
-      qtdParcelas,
-      dataPagamentoParcela,
-      dependentes
+      extensaoRoteiroKm,
+      passageiros
     } = req.body;
 
     const dataGeracao = getDateFormated();
+    const qtdPassageiros = passageiros.length + 1;
+    const numeroCarroP1 = numeroCarro.substring(0,4);
+    const numeroCarroP2 = numeroCarro.substring(4,8);
 
-    const pdfBuffer = await pdfFichaExcursaoService.createPDF(
-      excursaoPara,
-      localSaida,
+    const pdfBuffer = await pdfListaPassageirosService.createPDF(
+      numeroCarroP1,
+      numeroCarroP2,
+      placa,
+      motorista,
+      origem,
+      destino,
       dataSaida,
       horaSaida,
       dataRetorno,
       horaRetorno,
-      cliente,
-      servicos,
-      tipoDeHospedagem,
-      valorIntegralExcursao,
-      entradaParcelamento,
-      valorParcelas,
-      qtdParcelas,
-      dataPagamentoParcela,
-      dependentes,
+      extensaoRoteiroKm,
+      qtdPassageiros,
+      passageiros,
       dataGeracao
     );
 

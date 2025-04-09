@@ -4,50 +4,48 @@ const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core")
 const chromium  = require("@sparticuz/chromium-min");
-const { formatServices, upperCase } = require("../utils/formatMoney");
 
 async function createPDF(
-  excursaoPara,
-  localSaida,
+  numeroCarroP1,
+  numeroCarroP2,
+  placa,
+  motorista,
+  origem,
+  destino,
   dataSaida,
   horaSaida,
   dataRetorno,
   horaRetorno,
-  cliente,
-  servicos,
-  tipoDeHospedagem,
-  valorIntegralExcursao,
-  entradaParcelamento,
-  valorParcelas,
-  qtdParcelas,
-  dataPagamentoParcela,
-  dependentes,
+  extensaoRoteiroKm,
+  qtdPassageiros,
+  passageiros,
   dataGeracao
 ) {
   try {
-    const servicosFormatado = formatServices(servicos);
-    const tipoDeHospedagemFormatado = upperCase(tipoDeHospedagem);
+    
+    handlebars.registerHelper('addOne', function(index) {
+      return index + 1;
+    });
+
     const data = {
-      excursaoPara,
-      localSaida,
+      numeroCarroP1,
+      numeroCarroP2,
+      placa,
+      motorista,
+      origem,
+      destino,
       dataSaida,
       horaSaida,
       dataRetorno,
       horaRetorno,
-      cliente,
-      servicosFormatado,
-      tipoDeHospedagemFormatado,
-      valorIntegralExcursao,
-      entradaParcelamento,
-      valorParcelas,
-      qtdParcelas,
-      dataPagamentoParcela,
-      dependentes,
+      extensaoRoteiroKm,
+      qtdPassageiros,
+      passageiros,
       dataGeracao
     };
 
     const templateHtml = fs.readFileSync(
-      path.join(__dirname, "../templates/ficha-excursao.html"),
+      path.join(__dirname, "../templates/lista-passageiros.html"),
       "utf8"
     );
     const template = handlebars.compile(templateHtml);
