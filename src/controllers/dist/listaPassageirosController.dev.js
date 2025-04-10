@@ -15,7 +15,7 @@ exports.generatePDF = function _callee(req, res) {
           _context.prev = 0;
           _req$body = req.body, numeroCarro = _req$body.numeroCarro, placa = _req$body.placa, motorista = _req$body.motorista, origem = _req$body.origem, destino = _req$body.destino, dataSaida = _req$body.dataSaida, horaSaida = _req$body.horaSaida, dataRetorno = _req$body.dataRetorno, horaRetorno = _req$body.horaRetorno, extensaoRoteiroKm = _req$body.extensaoRoteiroKm, passageiros = _req$body.passageiros;
           dataGeracao = getDateFormated();
-          qtdPassageiros = passageiros.length + 1;
+          qtdPassageiros = passageiros.length;
           numeroCarroP1 = numeroCarro.substring(0, 4);
           numeroCarroP2 = numeroCarro.substring(4, 8);
           _context.next = 8;

@@ -18,7 +18,7 @@ exports.generatePDF = async (req, res) => {
     } = req.body;
 
     const dataGeracao = getDateFormated();
-    const qtdPassageiros = passageiros.length + 1;
+    const qtdPassageiros = passageiros.length;
     const numeroCarroP1 = numeroCarro.substring(0,4);
     const numeroCarroP2 = numeroCarro.substring(4,8);
 
