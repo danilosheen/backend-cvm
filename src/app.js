@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const pdfRoutes = require("./routes/routes");
+const clienteRoutes = require("./routes/clienteRoutes");
+const passageiroRoutes = require("./routes/passageiroRoutes");
 
 const app = express();
 app.use(cors({
@@ -9,5 +11,9 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/pdf", pdfRoutes);
+app.use("/api", clienteRoutes);
+app.use("/api", passageiroRoutes);
 
 module.exports = app;
+
+// npx vercel dev
