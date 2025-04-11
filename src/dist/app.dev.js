@@ -6,9 +6,9 @@ var cors = require("cors");
 
 var pdfRoutes = require("./routes/routes");
 
-var clienteRoutes = require("./routes/routes");
+var clienteRoutes = require("./routes/clienteRoutes");
 
-var passageiroRoutes = require("./routes/routes");
+var passageiroRoutes = require("./routes/passageiroRoutes");
 
 var app = express();
 app.use(cors({

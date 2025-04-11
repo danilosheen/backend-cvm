@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const pdfRoutes = require("./routes/routes");
-const clienteRoutes = require("./routes/routes");
-const passageiroRoutes = require("./routes/routes");
+const clienteRoutes = require("./routes/clienteRoutes");
+const passageiroRoutes = require("./routes/passageiroRoutes");
 
 const app = express();
 app.use(cors({

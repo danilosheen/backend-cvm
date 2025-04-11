@@ -1,6 +1,6 @@
 "use strict";
 
-var _require = require("@prisma/client"),
+var _require = require("../generated/prisma/client"),
     PrismaClient = _require.PrismaClient;
 
 var prisma = new PrismaClient();

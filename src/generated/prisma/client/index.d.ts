@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Cliente = $Result.DefaultSelection<Prisma.$ClientePayload>
+/**
+ * Model Passageiro
+ * 
+ */
+export type Passageiro = $Result.DefaultSelection<Prisma.$PassageiroPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get cliente(): Prisma.ClienteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.passageiro`: Exposes CRUD operations for the **Passageiro** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Passageiros
+    * const passageiros = await prisma.passageiro.findMany()
+    * ```
+    */
+  get passageiro(): Prisma.PassageiroDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Cliente: 'Cliente'
+    Cliente: 'Cliente',
+    Passageiro: 'Passageiro'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "cliente"
+      modelProps: "cliente" | "passageiro"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ClienteCountArgs<ExtArgs>
             result: $Utils.Optional<ClienteCountAggregateOutputType> | number
+          }
+        }
+      }
+      Passageiro: {
+        payload: Prisma.$PassageiroPayload<ExtArgs>
+        fields: Prisma.PassageiroFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PassageiroFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PassageiroFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>
+          }
+          findFirst: {
+            args: Prisma.PassageiroFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PassageiroFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>
+          }
+          findMany: {
+            args: Prisma.PassageiroFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>[]
+          }
+          create: {
+            args: Prisma.PassageiroCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>
+          }
+          createMany: {
+            args: Prisma.PassageiroCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PassageiroCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>[]
+          }
+          delete: {
+            args: Prisma.PassageiroDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>
+          }
+          update: {
+            args: Prisma.PassageiroUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>
+          }
+          deleteMany: {
+            args: Prisma.PassageiroDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PassageiroUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PassageiroUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>[]
+          }
+          upsert: {
+            args: Prisma.PassageiroUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PassageiroPayload>
+          }
+          aggregate: {
+            args: Prisma.PassageiroAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePassageiro>
+          }
+          groupBy: {
+            args: Prisma.PassageiroGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PassageiroGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PassageiroCountArgs<ExtArgs>
+            result: $Utils.Optional<PassageiroCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     cliente?: ClienteOmit
+    passageiro?: PassageiroOmit
   }
 
   /* Types for Logging */
@@ -875,92 +966,100 @@ export namespace Prisma {
 
   export type AggregateCliente = {
     _count: ClienteCountAggregateOutputType | null
-    _avg: ClienteAvgAggregateOutputType | null
-    _sum: ClienteSumAggregateOutputType | null
     _min: ClienteMinAggregateOutputType | null
     _max: ClienteMaxAggregateOutputType | null
   }
 
-  export type ClienteAvgAggregateOutputType = {
-    id: number | null
-    authorId: number | null
-  }
-
-  export type ClienteSumAggregateOutputType = {
-    id: number | null
-    authorId: number | null
-  }
-
   export type ClienteMinAggregateOutputType = {
-    id: number | null
+    id: string | null
+    nome: string | null
+    dataNascimento: Date | null
+    contato: string | null
+    cpf: string | null
+    documento: string | null
+    cidade: string | null
+    bairro: string | null
+    rua: string | null
+    numero: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    nome: string | null
-    content: string | null
-    published: boolean | null
-    authorId: number | null
   }
 
   export type ClienteMaxAggregateOutputType = {
-    id: number | null
+    id: string | null
+    nome: string | null
+    dataNascimento: Date | null
+    contato: string | null
+    cpf: string | null
+    documento: string | null
+    cidade: string | null
+    bairro: string | null
+    rua: string | null
+    numero: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    nome: string | null
-    content: string | null
-    published: boolean | null
-    authorId: number | null
   }
 
   export type ClienteCountAggregateOutputType = {
     id: number
+    nome: number
+    dataNascimento: number
+    contato: number
+    cpf: number
+    documento: number
+    cidade: number
+    bairro: number
+    rua: number
+    numero: number
     createdAt: number
     updatedAt: number
-    nome: number
-    content: number
-    published: number
-    authorId: number
     _all: number
   }
 
 
-  export type ClienteAvgAggregateInputType = {
-    id?: true
-    authorId?: true
-  }
-
-  export type ClienteSumAggregateInputType = {
-    id?: true
-    authorId?: true
-  }
-
   export type ClienteMinAggregateInputType = {
     id?: true
+    nome?: true
+    dataNascimento?: true
+    contato?: true
+    cpf?: true
+    documento?: true
+    cidade?: true
+    bairro?: true
+    rua?: true
+    numero?: true
     createdAt?: true
     updatedAt?: true
-    nome?: true
-    content?: true
-    published?: true
-    authorId?: true
   }
 
   export type ClienteMaxAggregateInputType = {
     id?: true
+    nome?: true
+    dataNascimento?: true
+    contato?: true
+    cpf?: true
+    documento?: true
+    cidade?: true
+    bairro?: true
+    rua?: true
+    numero?: true
     createdAt?: true
     updatedAt?: true
-    nome?: true
-    content?: true
-    published?: true
-    authorId?: true
   }
 
   export type ClienteCountAggregateInputType = {
     id?: true
+    nome?: true
+    dataNascimento?: true
+    contato?: true
+    cpf?: true
+    documento?: true
+    cidade?: true
+    bairro?: true
+    rua?: true
+    numero?: true
     createdAt?: true
     updatedAt?: true
-    nome?: true
-    content?: true
-    published?: true
-    authorId?: true
     _all?: true
   }
 
@@ -1002,18 +1101,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: ClienteAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ClienteSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClienteMinAggregateInputType
@@ -1044,23 +1131,24 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ClienteCountAggregateInputType | true
-    _avg?: ClienteAvgAggregateInputType
-    _sum?: ClienteSumAggregateInputType
     _min?: ClienteMinAggregateInputType
     _max?: ClienteMaxAggregateInputType
   }
 
   export type ClienteGroupByOutputType = {
-    id: number
+    id: string
+    nome: string
+    dataNascimento: Date | null
+    contato: string | null
+    cpf: string | null
+    documento: string | null
+    cidade: string | null
+    bairro: string | null
+    rua: string | null
+    numero: string | null
     createdAt: Date
     updatedAt: Date
-    nome: string
-    content: string | null
-    published: boolean
-    authorId: number
     _count: ClienteCountAggregateOutputType | null
-    _avg: ClienteAvgAggregateOutputType | null
-    _sum: ClienteSumAggregateOutputType | null
     _min: ClienteMinAggregateOutputType | null
     _max: ClienteMaxAggregateOutputType | null
   }
@@ -1081,57 +1169,82 @@ export namespace Prisma {
 
   export type ClienteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    nome?: boolean
+    dataNascimento?: boolean
+    contato?: boolean
+    cpf?: boolean
+    documento?: boolean
+    cidade?: boolean
+    bairro?: boolean
+    rua?: boolean
+    numero?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    nome?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
   }, ExtArgs["result"]["cliente"]>
 
   export type ClienteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    nome?: boolean
+    dataNascimento?: boolean
+    contato?: boolean
+    cpf?: boolean
+    documento?: boolean
+    cidade?: boolean
+    bairro?: boolean
+    rua?: boolean
+    numero?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    nome?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
   }, ExtArgs["result"]["cliente"]>
 
   export type ClienteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    nome?: boolean
+    dataNascimento?: boolean
+    contato?: boolean
+    cpf?: boolean
+    documento?: boolean
+    cidade?: boolean
+    bairro?: boolean
+    rua?: boolean
+    numero?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    nome?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
   }, ExtArgs["result"]["cliente"]>
 
   export type ClienteSelectScalar = {
     id?: boolean
+    nome?: boolean
+    dataNascimento?: boolean
+    contato?: boolean
+    cpf?: boolean
+    documento?: boolean
+    cidade?: boolean
+    bairro?: boolean
+    rua?: boolean
+    numero?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    nome?: boolean
-    content?: boolean
-    published?: boolean
-    authorId?: boolean
   }
 
-  export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "nome" | "content" | "published" | "authorId", ExtArgs["result"]["cliente"]>
+  export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "dataNascimento" | "contato" | "cpf" | "documento" | "cidade" | "bairro" | "rua" | "numero" | "createdAt" | "updatedAt", ExtArgs["result"]["cliente"]>
 
   export type $ClientePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cliente"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      id: string
+      nome: string
+      dataNascimento: Date | null
+      contato: string | null
+      cpf: string | null
+      documento: string | null
+      cidade: string | null
+      bairro: string | null
+      rua: string | null
+      numero: string | null
       createdAt: Date
       updatedAt: Date
-      nome: string
-      content: string | null
-      published: boolean
-      authorId: number
     }, ExtArgs["result"]["cliente"]>
     composites: {}
   }
@@ -1555,13 +1668,18 @@ export namespace Prisma {
    * Fields of the Cliente model
    */
   interface ClienteFieldRefs {
-    readonly id: FieldRef<"Cliente", 'Int'>
+    readonly id: FieldRef<"Cliente", 'String'>
+    readonly nome: FieldRef<"Cliente", 'String'>
+    readonly dataNascimento: FieldRef<"Cliente", 'DateTime'>
+    readonly contato: FieldRef<"Cliente", 'String'>
+    readonly cpf: FieldRef<"Cliente", 'String'>
+    readonly documento: FieldRef<"Cliente", 'String'>
+    readonly cidade: FieldRef<"Cliente", 'String'>
+    readonly bairro: FieldRef<"Cliente", 'String'>
+    readonly rua: FieldRef<"Cliente", 'String'>
+    readonly numero: FieldRef<"Cliente", 'String'>
     readonly createdAt: FieldRef<"Cliente", 'DateTime'>
     readonly updatedAt: FieldRef<"Cliente", 'DateTime'>
-    readonly nome: FieldRef<"Cliente", 'String'>
-    readonly content: FieldRef<"Cliente", 'String'>
-    readonly published: FieldRef<"Cliente", 'Boolean'>
-    readonly authorId: FieldRef<"Cliente", 'Int'>
   }
     
 
@@ -1929,6 +2047,1001 @@ export namespace Prisma {
 
 
   /**
+   * Model Passageiro
+   */
+
+  export type AggregatePassageiro = {
+    _count: PassageiroCountAggregateOutputType | null
+    _min: PassageiroMinAggregateOutputType | null
+    _max: PassageiroMaxAggregateOutputType | null
+  }
+
+  export type PassageiroMinAggregateOutputType = {
+    id: string | null
+    nome: string | null
+    documento: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PassageiroMaxAggregateOutputType = {
+    id: string | null
+    nome: string | null
+    documento: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PassageiroCountAggregateOutputType = {
+    id: number
+    nome: number
+    documento: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PassageiroMinAggregateInputType = {
+    id?: true
+    nome?: true
+    documento?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PassageiroMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    documento?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PassageiroCountAggregateInputType = {
+    id?: true
+    nome?: true
+    documento?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PassageiroAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Passageiro to aggregate.
+     */
+    where?: PassageiroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Passageiros to fetch.
+     */
+    orderBy?: PassageiroOrderByWithRelationInput | PassageiroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PassageiroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Passageiros from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Passageiros.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Passageiros
+    **/
+    _count?: true | PassageiroCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PassageiroMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PassageiroMaxAggregateInputType
+  }
+
+  export type GetPassageiroAggregateType<T extends PassageiroAggregateArgs> = {
+        [P in keyof T & keyof AggregatePassageiro]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePassageiro[P]>
+      : GetScalarType<T[P], AggregatePassageiro[P]>
+  }
+
+
+
+
+  export type PassageiroGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PassageiroWhereInput
+    orderBy?: PassageiroOrderByWithAggregationInput | PassageiroOrderByWithAggregationInput[]
+    by: PassageiroScalarFieldEnum[] | PassageiroScalarFieldEnum
+    having?: PassageiroScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PassageiroCountAggregateInputType | true
+    _min?: PassageiroMinAggregateInputType
+    _max?: PassageiroMaxAggregateInputType
+  }
+
+  export type PassageiroGroupByOutputType = {
+    id: string
+    nome: string
+    documento: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PassageiroCountAggregateOutputType | null
+    _min: PassageiroMinAggregateOutputType | null
+    _max: PassageiroMaxAggregateOutputType | null
+  }
+
+  type GetPassageiroGroupByPayload<T extends PassageiroGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PassageiroGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PassageiroGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PassageiroGroupByOutputType[P]>
+            : GetScalarType<T[P], PassageiroGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PassageiroSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    documento?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["passageiro"]>
+
+  export type PassageiroSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    documento?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["passageiro"]>
+
+  export type PassageiroSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    documento?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["passageiro"]>
+
+  export type PassageiroSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    documento?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PassageiroOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "documento" | "createdAt" | "updatedAt", ExtArgs["result"]["passageiro"]>
+
+  export type $PassageiroPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Passageiro"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nome: string
+      documento: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["passageiro"]>
+    composites: {}
+  }
+
+  type PassageiroGetPayload<S extends boolean | null | undefined | PassageiroDefaultArgs> = $Result.GetResult<Prisma.$PassageiroPayload, S>
+
+  type PassageiroCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PassageiroFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PassageiroCountAggregateInputType | true
+    }
+
+  export interface PassageiroDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Passageiro'], meta: { name: 'Passageiro' } }
+    /**
+     * Find zero or one Passageiro that matches the filter.
+     * @param {PassageiroFindUniqueArgs} args - Arguments to find a Passageiro
+     * @example
+     * // Get one Passageiro
+     * const passageiro = await prisma.passageiro.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PassageiroFindUniqueArgs>(args: SelectSubset<T, PassageiroFindUniqueArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Passageiro that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PassageiroFindUniqueOrThrowArgs} args - Arguments to find a Passageiro
+     * @example
+     * // Get one Passageiro
+     * const passageiro = await prisma.passageiro.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PassageiroFindUniqueOrThrowArgs>(args: SelectSubset<T, PassageiroFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Passageiro that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroFindFirstArgs} args - Arguments to find a Passageiro
+     * @example
+     * // Get one Passageiro
+     * const passageiro = await prisma.passageiro.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PassageiroFindFirstArgs>(args?: SelectSubset<T, PassageiroFindFirstArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Passageiro that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroFindFirstOrThrowArgs} args - Arguments to find a Passageiro
+     * @example
+     * // Get one Passageiro
+     * const passageiro = await prisma.passageiro.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PassageiroFindFirstOrThrowArgs>(args?: SelectSubset<T, PassageiroFindFirstOrThrowArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Passageiros that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Passageiros
+     * const passageiros = await prisma.passageiro.findMany()
+     * 
+     * // Get first 10 Passageiros
+     * const passageiros = await prisma.passageiro.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const passageiroWithIdOnly = await prisma.passageiro.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PassageiroFindManyArgs>(args?: SelectSubset<T, PassageiroFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Passageiro.
+     * @param {PassageiroCreateArgs} args - Arguments to create a Passageiro.
+     * @example
+     * // Create one Passageiro
+     * const Passageiro = await prisma.passageiro.create({
+     *   data: {
+     *     // ... data to create a Passageiro
+     *   }
+     * })
+     * 
+     */
+    create<T extends PassageiroCreateArgs>(args: SelectSubset<T, PassageiroCreateArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Passageiros.
+     * @param {PassageiroCreateManyArgs} args - Arguments to create many Passageiros.
+     * @example
+     * // Create many Passageiros
+     * const passageiro = await prisma.passageiro.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PassageiroCreateManyArgs>(args?: SelectSubset<T, PassageiroCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Passageiros and returns the data saved in the database.
+     * @param {PassageiroCreateManyAndReturnArgs} args - Arguments to create many Passageiros.
+     * @example
+     * // Create many Passageiros
+     * const passageiro = await prisma.passageiro.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Passageiros and only return the `id`
+     * const passageiroWithIdOnly = await prisma.passageiro.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PassageiroCreateManyAndReturnArgs>(args?: SelectSubset<T, PassageiroCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Passageiro.
+     * @param {PassageiroDeleteArgs} args - Arguments to delete one Passageiro.
+     * @example
+     * // Delete one Passageiro
+     * const Passageiro = await prisma.passageiro.delete({
+     *   where: {
+     *     // ... filter to delete one Passageiro
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PassageiroDeleteArgs>(args: SelectSubset<T, PassageiroDeleteArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Passageiro.
+     * @param {PassageiroUpdateArgs} args - Arguments to update one Passageiro.
+     * @example
+     * // Update one Passageiro
+     * const passageiro = await prisma.passageiro.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PassageiroUpdateArgs>(args: SelectSubset<T, PassageiroUpdateArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Passageiros.
+     * @param {PassageiroDeleteManyArgs} args - Arguments to filter Passageiros to delete.
+     * @example
+     * // Delete a few Passageiros
+     * const { count } = await prisma.passageiro.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PassageiroDeleteManyArgs>(args?: SelectSubset<T, PassageiroDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Passageiros.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Passageiros
+     * const passageiro = await prisma.passageiro.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PassageiroUpdateManyArgs>(args: SelectSubset<T, PassageiroUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Passageiros and returns the data updated in the database.
+     * @param {PassageiroUpdateManyAndReturnArgs} args - Arguments to update many Passageiros.
+     * @example
+     * // Update many Passageiros
+     * const passageiro = await prisma.passageiro.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Passageiros and only return the `id`
+     * const passageiroWithIdOnly = await prisma.passageiro.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PassageiroUpdateManyAndReturnArgs>(args: SelectSubset<T, PassageiroUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Passageiro.
+     * @param {PassageiroUpsertArgs} args - Arguments to update or create a Passageiro.
+     * @example
+     * // Update or create a Passageiro
+     * const passageiro = await prisma.passageiro.upsert({
+     *   create: {
+     *     // ... data to create a Passageiro
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Passageiro we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PassageiroUpsertArgs>(args: SelectSubset<T, PassageiroUpsertArgs<ExtArgs>>): Prisma__PassageiroClient<$Result.GetResult<Prisma.$PassageiroPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Passageiros.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroCountArgs} args - Arguments to filter Passageiros to count.
+     * @example
+     * // Count the number of Passageiros
+     * const count = await prisma.passageiro.count({
+     *   where: {
+     *     // ... the filter for the Passageiros we want to count
+     *   }
+     * })
+    **/
+    count<T extends PassageiroCountArgs>(
+      args?: Subset<T, PassageiroCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PassageiroCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Passageiro.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PassageiroAggregateArgs>(args: Subset<T, PassageiroAggregateArgs>): Prisma.PrismaPromise<GetPassageiroAggregateType<T>>
+
+    /**
+     * Group by Passageiro.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PassageiroGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PassageiroGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PassageiroGroupByArgs['orderBy'] }
+        : { orderBy?: PassageiroGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PassageiroGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPassageiroGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Passageiro model
+   */
+  readonly fields: PassageiroFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Passageiro.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PassageiroClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Passageiro model
+   */
+  interface PassageiroFieldRefs {
+    readonly id: FieldRef<"Passageiro", 'String'>
+    readonly nome: FieldRef<"Passageiro", 'String'>
+    readonly documento: FieldRef<"Passageiro", 'String'>
+    readonly createdAt: FieldRef<"Passageiro", 'DateTime'>
+    readonly updatedAt: FieldRef<"Passageiro", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Passageiro findUnique
+   */
+  export type PassageiroFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * Filter, which Passageiro to fetch.
+     */
+    where: PassageiroWhereUniqueInput
+  }
+
+  /**
+   * Passageiro findUniqueOrThrow
+   */
+  export type PassageiroFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * Filter, which Passageiro to fetch.
+     */
+    where: PassageiroWhereUniqueInput
+  }
+
+  /**
+   * Passageiro findFirst
+   */
+  export type PassageiroFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * Filter, which Passageiro to fetch.
+     */
+    where?: PassageiroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Passageiros to fetch.
+     */
+    orderBy?: PassageiroOrderByWithRelationInput | PassageiroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Passageiros.
+     */
+    cursor?: PassageiroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Passageiros from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Passageiros.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Passageiros.
+     */
+    distinct?: PassageiroScalarFieldEnum | PassageiroScalarFieldEnum[]
+  }
+
+  /**
+   * Passageiro findFirstOrThrow
+   */
+  export type PassageiroFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * Filter, which Passageiro to fetch.
+     */
+    where?: PassageiroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Passageiros to fetch.
+     */
+    orderBy?: PassageiroOrderByWithRelationInput | PassageiroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Passageiros.
+     */
+    cursor?: PassageiroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Passageiros from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Passageiros.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Passageiros.
+     */
+    distinct?: PassageiroScalarFieldEnum | PassageiroScalarFieldEnum[]
+  }
+
+  /**
+   * Passageiro findMany
+   */
+  export type PassageiroFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * Filter, which Passageiros to fetch.
+     */
+    where?: PassageiroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Passageiros to fetch.
+     */
+    orderBy?: PassageiroOrderByWithRelationInput | PassageiroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Passageiros.
+     */
+    cursor?: PassageiroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Passageiros from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Passageiros.
+     */
+    skip?: number
+    distinct?: PassageiroScalarFieldEnum | PassageiroScalarFieldEnum[]
+  }
+
+  /**
+   * Passageiro create
+   */
+  export type PassageiroCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Passageiro.
+     */
+    data: XOR<PassageiroCreateInput, PassageiroUncheckedCreateInput>
+  }
+
+  /**
+   * Passageiro createMany
+   */
+  export type PassageiroCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Passageiros.
+     */
+    data: PassageiroCreateManyInput | PassageiroCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Passageiro createManyAndReturn
+   */
+  export type PassageiroCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * The data used to create many Passageiros.
+     */
+    data: PassageiroCreateManyInput | PassageiroCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Passageiro update
+   */
+  export type PassageiroUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Passageiro.
+     */
+    data: XOR<PassageiroUpdateInput, PassageiroUncheckedUpdateInput>
+    /**
+     * Choose, which Passageiro to update.
+     */
+    where: PassageiroWhereUniqueInput
+  }
+
+  /**
+   * Passageiro updateMany
+   */
+  export type PassageiroUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Passageiros.
+     */
+    data: XOR<PassageiroUpdateManyMutationInput, PassageiroUncheckedUpdateManyInput>
+    /**
+     * Filter which Passageiros to update
+     */
+    where?: PassageiroWhereInput
+    /**
+     * Limit how many Passageiros to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Passageiro updateManyAndReturn
+   */
+  export type PassageiroUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * The data used to update Passageiros.
+     */
+    data: XOR<PassageiroUpdateManyMutationInput, PassageiroUncheckedUpdateManyInput>
+    /**
+     * Filter which Passageiros to update
+     */
+    where?: PassageiroWhereInput
+    /**
+     * Limit how many Passageiros to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Passageiro upsert
+   */
+  export type PassageiroUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Passageiro to update in case it exists.
+     */
+    where: PassageiroWhereUniqueInput
+    /**
+     * In case the Passageiro found by the `where` argument doesn't exist, create a new Passageiro with this data.
+     */
+    create: XOR<PassageiroCreateInput, PassageiroUncheckedCreateInput>
+    /**
+     * In case the Passageiro was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PassageiroUpdateInput, PassageiroUncheckedUpdateInput>
+  }
+
+  /**
+   * Passageiro delete
+   */
+  export type PassageiroDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+    /**
+     * Filter which Passageiro to delete.
+     */
+    where: PassageiroWhereUniqueInput
+  }
+
+  /**
+   * Passageiro deleteMany
+   */
+  export type PassageiroDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Passageiros to delete
+     */
+    where?: PassageiroWhereInput
+    /**
+     * Limit how many Passageiros to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Passageiro without action
+   */
+  export type PassageiroDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Passageiro
+     */
+    select?: PassageiroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Passageiro
+     */
+    omit?: PassageiroOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1944,15 +3057,31 @@ export namespace Prisma {
 
   export const ClienteScalarFieldEnum: {
     id: 'id',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
     nome: 'nome',
-    content: 'content',
-    published: 'published',
-    authorId: 'authorId'
+    dataNascimento: 'dataNascimento',
+    contato: 'contato',
+    cpf: 'cpf',
+    documento: 'documento',
+    cidade: 'cidade',
+    bairro: 'bairro',
+    rua: 'rua',
+    numero: 'numero',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ClienteScalarFieldEnum = (typeof ClienteScalarFieldEnum)[keyof typeof ClienteScalarFieldEnum]
+
+
+  export const PassageiroScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    documento: 'documento',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PassageiroScalarFieldEnum = (typeof PassageiroScalarFieldEnum)[keyof typeof PassageiroScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1985,16 +3114,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'String'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'String[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -2013,37 +3142,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'String'
+   * Reference to a field of type 'Int'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'String[]'
+   * Reference to a field of type 'Int[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
   /**
    * Deep Input Types
@@ -2054,153 +3162,300 @@ export namespace Prisma {
     AND?: ClienteWhereInput | ClienteWhereInput[]
     OR?: ClienteWhereInput[]
     NOT?: ClienteWhereInput | ClienteWhereInput[]
-    id?: IntFilter<"Cliente"> | number
+    id?: StringFilter<"Cliente"> | string
+    nome?: StringFilter<"Cliente"> | string
+    dataNascimento?: DateTimeNullableFilter<"Cliente"> | Date | string | null
+    contato?: StringNullableFilter<"Cliente"> | string | null
+    cpf?: StringNullableFilter<"Cliente"> | string | null
+    documento?: StringNullableFilter<"Cliente"> | string | null
+    cidade?: StringNullableFilter<"Cliente"> | string | null
+    bairro?: StringNullableFilter<"Cliente"> | string | null
+    rua?: StringNullableFilter<"Cliente"> | string | null
+    numero?: StringNullableFilter<"Cliente"> | string | null
     createdAt?: DateTimeFilter<"Cliente"> | Date | string
     updatedAt?: DateTimeFilter<"Cliente"> | Date | string
-    nome?: StringFilter<"Cliente"> | string
-    content?: StringNullableFilter<"Cliente"> | string | null
-    published?: BoolFilter<"Cliente"> | boolean
-    authorId?: IntFilter<"Cliente"> | number
   }
 
   export type ClienteOrderByWithRelationInput = {
     id?: SortOrder
+    nome?: SortOrder
+    dataNascimento?: SortOrderInput | SortOrder
+    contato?: SortOrderInput | SortOrder
+    cpf?: SortOrderInput | SortOrder
+    documento?: SortOrderInput | SortOrder
+    cidade?: SortOrderInput | SortOrder
+    bairro?: SortOrderInput | SortOrder
+    rua?: SortOrderInput | SortOrder
+    numero?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    nome?: SortOrder
-    content?: SortOrderInput | SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
   }
 
   export type ClienteWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: ClienteWhereInput | ClienteWhereInput[]
     OR?: ClienteWhereInput[]
     NOT?: ClienteWhereInput | ClienteWhereInput[]
+    nome?: StringFilter<"Cliente"> | string
+    dataNascimento?: DateTimeNullableFilter<"Cliente"> | Date | string | null
+    contato?: StringNullableFilter<"Cliente"> | string | null
+    cpf?: StringNullableFilter<"Cliente"> | string | null
+    documento?: StringNullableFilter<"Cliente"> | string | null
+    cidade?: StringNullableFilter<"Cliente"> | string | null
+    bairro?: StringNullableFilter<"Cliente"> | string | null
+    rua?: StringNullableFilter<"Cliente"> | string | null
+    numero?: StringNullableFilter<"Cliente"> | string | null
     createdAt?: DateTimeFilter<"Cliente"> | Date | string
     updatedAt?: DateTimeFilter<"Cliente"> | Date | string
-    nome?: StringFilter<"Cliente"> | string
-    content?: StringNullableFilter<"Cliente"> | string | null
-    published?: BoolFilter<"Cliente"> | boolean
-    authorId?: IntFilter<"Cliente"> | number
   }, "id">
 
   export type ClienteOrderByWithAggregationInput = {
     id?: SortOrder
+    nome?: SortOrder
+    dataNascimento?: SortOrderInput | SortOrder
+    contato?: SortOrderInput | SortOrder
+    cpf?: SortOrderInput | SortOrder
+    documento?: SortOrderInput | SortOrder
+    cidade?: SortOrderInput | SortOrder
+    bairro?: SortOrderInput | SortOrder
+    rua?: SortOrderInput | SortOrder
+    numero?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    nome?: SortOrder
-    content?: SortOrderInput | SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
     _count?: ClienteCountOrderByAggregateInput
-    _avg?: ClienteAvgOrderByAggregateInput
     _max?: ClienteMaxOrderByAggregateInput
     _min?: ClienteMinOrderByAggregateInput
-    _sum?: ClienteSumOrderByAggregateInput
   }
 
   export type ClienteScalarWhereWithAggregatesInput = {
     AND?: ClienteScalarWhereWithAggregatesInput | ClienteScalarWhereWithAggregatesInput[]
     OR?: ClienteScalarWhereWithAggregatesInput[]
     NOT?: ClienteScalarWhereWithAggregatesInput | ClienteScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Cliente"> | number
+    id?: StringWithAggregatesFilter<"Cliente"> | string
+    nome?: StringWithAggregatesFilter<"Cliente"> | string
+    dataNascimento?: DateTimeNullableWithAggregatesFilter<"Cliente"> | Date | string | null
+    contato?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    cpf?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    documento?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    cidade?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    bairro?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    rua?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    numero?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Cliente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Cliente"> | Date | string
-    nome?: StringWithAggregatesFilter<"Cliente"> | string
-    content?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
-    published?: BoolWithAggregatesFilter<"Cliente"> | boolean
-    authorId?: IntWithAggregatesFilter<"Cliente"> | number
+  }
+
+  export type PassageiroWhereInput = {
+    AND?: PassageiroWhereInput | PassageiroWhereInput[]
+    OR?: PassageiroWhereInput[]
+    NOT?: PassageiroWhereInput | PassageiroWhereInput[]
+    id?: StringFilter<"Passageiro"> | string
+    nome?: StringFilter<"Passageiro"> | string
+    documento?: StringFilter<"Passageiro"> | string
+    createdAt?: DateTimeFilter<"Passageiro"> | Date | string
+    updatedAt?: DateTimeFilter<"Passageiro"> | Date | string
+  }
+
+  export type PassageiroOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    documento?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PassageiroWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PassageiroWhereInput | PassageiroWhereInput[]
+    OR?: PassageiroWhereInput[]
+    NOT?: PassageiroWhereInput | PassageiroWhereInput[]
+    nome?: StringFilter<"Passageiro"> | string
+    documento?: StringFilter<"Passageiro"> | string
+    createdAt?: DateTimeFilter<"Passageiro"> | Date | string
+    updatedAt?: DateTimeFilter<"Passageiro"> | Date | string
+  }, "id">
+
+  export type PassageiroOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    documento?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PassageiroCountOrderByAggregateInput
+    _max?: PassageiroMaxOrderByAggregateInput
+    _min?: PassageiroMinOrderByAggregateInput
+  }
+
+  export type PassageiroScalarWhereWithAggregatesInput = {
+    AND?: PassageiroScalarWhereWithAggregatesInput | PassageiroScalarWhereWithAggregatesInput[]
+    OR?: PassageiroScalarWhereWithAggregatesInput[]
+    NOT?: PassageiroScalarWhereWithAggregatesInput | PassageiroScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Passageiro"> | string
+    nome?: StringWithAggregatesFilter<"Passageiro"> | string
+    documento?: StringWithAggregatesFilter<"Passageiro"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Passageiro"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Passageiro"> | Date | string
   }
 
   export type ClienteCreateInput = {
+    id?: string
+    nome: string
+    dataNascimento?: Date | string | null
+    contato?: string | null
+    cpf?: string | null
+    documento?: string | null
+    cidade?: string | null
+    bairro?: string | null
+    rua?: string | null
+    numero?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    nome: string
-    content?: string | null
-    published?: boolean
-    authorId: number
   }
 
   export type ClienteUncheckedCreateInput = {
-    id?: number
+    id?: string
+    nome: string
+    dataNascimento?: Date | string | null
+    contato?: string | null
+    cpf?: string | null
+    documento?: string | null
+    cidade?: string | null
+    bairro?: string | null
+    rua?: string | null
+    numero?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    nome: string
-    content?: string | null
-    published?: boolean
-    authorId: number
   }
 
   export type ClienteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contato?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    documento?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    rua?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    nome?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    authorId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ClienteUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contato?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    documento?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    rua?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    nome?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    authorId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ClienteCreateManyInput = {
-    id?: number
+    id?: string
+    nome: string
+    dataNascimento?: Date | string | null
+    contato?: string | null
+    cpf?: string | null
+    documento?: string | null
+    cidade?: string | null
+    bairro?: string | null
+    rua?: string | null
+    numero?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    nome: string
-    content?: string | null
-    published?: boolean
-    authorId: number
   }
 
   export type ClienteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contato?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    documento?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    rua?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    nome?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    authorId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ClienteUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    contato?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    documento?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    rua?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PassageiroCreateInput = {
+    id?: string
+    nome: string
+    documento: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PassageiroUncheckedCreateInput = {
+    id?: string
+    nome: string
+    documento: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PassageiroUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    authorId?: IntFieldUpdateOperationsInput | number
+    documento?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type PassageiroUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    documento?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type PassageiroCreateManyInput = {
+    id?: string
+    nome: string
+    documento: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PassageiroUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    documento?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PassageiroUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    documento?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2218,6 +3473,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -2233,9 +3499,15 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type SortOrderInput = {
@@ -2245,72 +3517,47 @@ export namespace Prisma {
 
   export type ClienteCountOrderByAggregateInput = {
     id?: SortOrder
+    nome?: SortOrder
+    dataNascimento?: SortOrder
+    contato?: SortOrder
+    cpf?: SortOrder
+    documento?: SortOrder
+    cidade?: SortOrder
+    bairro?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    nome?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type ClienteAvgOrderByAggregateInput = {
-    id?: SortOrder
-    authorId?: SortOrder
   }
 
   export type ClienteMaxOrderByAggregateInput = {
     id?: SortOrder
+    nome?: SortOrder
+    dataNascimento?: SortOrder
+    contato?: SortOrder
+    cpf?: SortOrder
+    documento?: SortOrder
+    cidade?: SortOrder
+    bairro?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    nome?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
   }
 
   export type ClienteMinOrderByAggregateInput = {
     id?: SortOrder
+    nome?: SortOrder
+    dataNascimento?: SortOrder
+    contato?: SortOrder
+    cpf?: SortOrder
+    documento?: SortOrder
+    cidade?: SortOrder
+    bairro?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    nome?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type ClienteSumOrderByAggregateInput = {
-    id?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2331,6 +3578,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -2349,50 +3610,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2400,7 +3618,50 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type PassageiroCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    documento?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PassageiroMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    documento?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PassageiroMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    documento?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2417,6 +3678,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -2431,39 +3703,7 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2471,10 +3711,7 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2494,6 +3731,42 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -2511,23 +3784,18 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 

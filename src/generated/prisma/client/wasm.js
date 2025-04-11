@@ -119,12 +119,25 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.ClienteScalarFieldEnum = {
   id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   nome: 'nome',
-  content: 'content',
-  published: 'published',
-  authorId: 'authorId'
+  dataNascimento: 'dataNascimento',
+  contato: 'contato',
+  cpf: 'cpf',
+  documento: 'documento',
+  cidade: 'cidade',
+  bairro: 'bairro',
+  rua: 'rua',
+  numero: 'numero',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PassageiroScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  documento: 'documento',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -144,7 +157,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Cliente: 'Cliente'
+  Cliente: 'Cliente',
+  Passageiro: 'Passageiro'
 };
 
 /**
