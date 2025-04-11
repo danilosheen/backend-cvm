@@ -23,7 +23,6 @@ exports.generatePDF = function _callee(req, res) {
           // Configura os headers para o navegador reconhecer o arquivo como PDF
           res.setHeader("Content-Type", "application/pdf");
           res.setHeader("Content-Disposition", "attachment; filename=\"orcamento.pdf\""); // Adiciona o header CORS para permitir a origem desejada
-          // Adiciona o header CORS para permitir a origem desejada
 
           allowedOrigins = ['https://cvm-docs.vercel.app', 'http://localhost:4200'];
           origin = req.headers.origin;
