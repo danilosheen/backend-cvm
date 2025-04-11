@@ -7,15 +7,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Cliente {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  nome      String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  authorId  Int
+  id             String     @id @default(uuid())
+  nome           String
+  dataNascimento String? 
+  contato        String? 
+  cpf            String? 
+  documento      String? 
+  cidade         String? 
+  bairro         String? 
+  rua            String? 
+  numero         String? 
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 }
 
-  // author    User     @relation(fields: [authorId], references: [id])
+model Passageiro {
+  id         String   @id @default(uuid())
+  nome       String
+  documento  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
