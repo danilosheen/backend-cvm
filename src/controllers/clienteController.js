@@ -11,7 +11,11 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-  const clientes = await prisma.cliente.findMany();
+  const clientes = await prisma.cliente.findMany({
+    orderBy: {
+      nome: 'asc'
+    }
+  });
   res.json(clientes);
 };
 

@@ -46,7 +46,11 @@ exports.findAll = function _callee2(req, res) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return regeneratorRuntime.awrap(prisma.cliente.findMany());
+          return regeneratorRuntime.awrap(prisma.cliente.findMany({
+            orderBy: {
+              nome: 'asc'
+            }
+          }));
 
         case 2:
           clientes = _context2.sent;
