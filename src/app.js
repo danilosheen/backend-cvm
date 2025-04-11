@@ -11,8 +11,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/pdf", pdfRoutes);
-app.use("/api/clientes", clienteRoutes);
-app.use("/api/passageiros", passageiroRoutes);
+app.use("/api", clienteRoutes);
+app.use("/api", passageiroRoutes);
 
 module.exports = app;
 

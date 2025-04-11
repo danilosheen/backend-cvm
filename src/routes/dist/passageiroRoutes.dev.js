@@ -6,9 +6,9 @@ var router = express.Router();
 
 var passageiroController = require("../controllers/passageiroController");
 
-router.post("/", passageiroController.create);
-router.get("/", passageiroController.findAll);
-router.get("/:id", passageiroController.findById);
-router.put("/:id", passageiroController.update);
-router["delete"]("/:id", passageiroController.remove);
+router.post("/passageiro", passageiroController.create);
+router.get("/passageiros", passageiroController.findAll);
+router.get("/passageiro:id", passageiroController.findById);
+router.put("/passageiro:id", passageiroController.update);
+router["delete"]("passageiro/:id", passageiroController.remove);
 module.exports = router;
