@@ -4,8 +4,8 @@ const passageiroController = require("../controllers/passageiroController");
 
 router.post("/passageiro", passageiroController.create);
 router.get("/passageiros", passageiroController.findAll);
-router.get("/passageiro:id", passageiroController.findById);
-router.put("/passageiro:id", passageiroController.update);
+router.get("/passageiro/:id", passageiroController.findById);
+router.put("/passageiro/:id", passageiroController.update);
 router.delete("passageiro/:id", passageiroController.remove);
 
 module.exports = router;
