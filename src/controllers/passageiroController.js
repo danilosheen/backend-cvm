@@ -14,7 +14,11 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const passageiros = await prisma.passageiro.findMany();
+    const passageiros = await prisma.passageiro.findMany({
+      orderBy: {
+        nome: 'asc'
+      }
+    });
     res.json(passageiros);
   } catch (error) {
     res.status(500).json({ error: "Erro ao buscar passageiros", details: error });

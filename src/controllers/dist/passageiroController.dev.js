@@ -47,7 +47,11 @@ exports.findAll = function _callee2(req, res) {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return regeneratorRuntime.awrap(prisma.passageiro.findMany());
+          return regeneratorRuntime.awrap(prisma.passageiro.findMany({
+            orderBy: {
+              nome: 'asc'
+            }
+          }));
 
         case 3:
           passageiros = _context2.sent;

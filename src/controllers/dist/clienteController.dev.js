@@ -45,23 +45,34 @@ exports.findAll = function _callee2(req, res) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          _context2.prev = 0;
+          _context2.next = 3;
           return regeneratorRuntime.awrap(prisma.cliente.findMany({
             orderBy: {
               nome: 'asc'
             }
           }));
 
-        case 2:
+        case 3:
           clientes = _context2.sent;
           res.json(clientes);
+          _context2.next = 10;
+          break;
 
-        case 4:
+        case 7:
+          _context2.prev = 7;
+          _context2.t0 = _context2["catch"](0);
+          res.status(500).json({
+            error: "Erro ao buscar clientes",
+            details: _context2.t0
+          });
+
+        case 10:
         case "end":
           return _context2.stop();
       }
     }
-  });
+  }, null, null, [[0, 7]]);
 };
 
 exports.findById = function _callee3(req, res) {

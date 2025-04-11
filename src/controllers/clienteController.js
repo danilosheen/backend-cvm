@@ -11,12 +11,16 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-  const clientes = await prisma.cliente.findMany({
-    orderBy: {
-      nome: 'asc'
-    }
-  });
-  res.json(clientes);
+  try {
+    const clientes = await prisma.cliente.findMany({
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    res.json(clientes);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar clientes", details: error });
+  }
 };
 
 exports.findById = async (req, res) => {
