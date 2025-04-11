@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma/client"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -10,7 +11,7 @@ datasource db {
 model Cliente {
   id             String     @id @default(uuid())
   nome           String
-  dataNascimento DateTime? 
+  dataNascimento String? 
   contato        String? 
   cpf            String? 
   documento      String? 
