@@ -15,3 +15,5 @@ app.use("/api/clientes", clienteRoutes);
 app.use("/api/passageiros", passageiroRoutes);
 
 module.exports = app;
+
+// npx vercel dev
