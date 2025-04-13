@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const passageiroController = require("../controllers/passageiroController");
+const authMiddleware = require("../middleware/authMiddleware");
+
+router.use(authMiddleware);
 
 router.post("/passageiro", passageiroController.create);
 router.get("/passageiros", passageiroController.findAll);

@@ -6,6 +6,9 @@ var router = express.Router();
 
 var clienteController = require("../controllers/clienteController");
 
+var authMiddleware = require("../middleware/authMiddleware");
+
+router.use(authMiddleware);
 router.post("/cliente", clienteController.create);
 router.get("/clientes", clienteController.findAll);
 router.get("/cliente/:id", clienteController.findById);

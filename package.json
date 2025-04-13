@@ -15,11 +15,13 @@
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "@sparticuz/chromium-min": "^131.0.1",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "extenso": "^2.1.0",
     "handlebars": "^4.7.8",
+    "jsonwebtoken": "^9.0.2",
     "puppeteer": "^23.10.4",
     "puppeteer-core": "^23.10.4"
   },

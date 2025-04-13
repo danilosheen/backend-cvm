@@ -140,6 +140,13 @@ exports.Prisma.PassageiroScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UsuarioScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  senha: 'senha',
+  nome: 'nome'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -158,7 +165,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Cliente: 'Cliente',
-  Passageiro: 'Passageiro'
+  Passageiro: 'Passageiro',
+  Usuario: 'Usuario'
 };
 
 /**
