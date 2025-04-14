@@ -8,10 +8,9 @@ var clienteController = require("../controllers/clienteController");
 
 var authMiddleware = require("../middleware/authMiddleware");
 
-router.use(authMiddleware);
-router.post("/cliente", clienteController.create);
-router.get("/clientes", clienteController.findAll);
-router.get("/cliente/:id", clienteController.findById);
-router.put("/cliente/:id", clienteController.update);
-router["delete"]("/cliente/:id", clienteController.remove);
+router.post("/cliente", authMiddleware, clienteController.create);
+router.get("/clientes", authMiddleware, clienteController.findAll);
+router.get("/cliente/:id", authMiddleware, clienteController.findById);
+router.put("/cliente/:id", authMiddleware, clienteController.update);
+router["delete"]("/cliente/:id", authMiddleware, clienteController.remove);
 module.exports = router;

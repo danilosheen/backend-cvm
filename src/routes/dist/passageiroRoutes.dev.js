@@ -6,12 +6,12 @@ var router = express.Router();
 
 var passageiroController = require("../controllers/passageiroController");
 
-var authMiddleware = require("../middleware/authMiddleware");
+var authMiddleware = require("../middleware/authMiddleware"); // router.use(authMiddleware);
 
-router.use(authMiddleware);
-router.post("/passageiro", passageiroController.create);
-router.get("/passageiros", passageiroController.findAll);
-router.get("/passageiro/:id", passageiroController.findById);
-router.put("/passageiro/:id", passageiroController.update);
-router["delete"]("passageiro/:id", passageiroController.remove);
+
+router.post("/passageiro", authMiddleware, passageiroController.create);
+router.get("/passageiros", authMiddleware, passageiroController.findAll);
+router.get("/passageiro/:id", authMiddleware, passageiroController.findById);
+router.put("/passageiro/:id", authMiddleware, passageiroController.update);
+router["delete"]("passageiro/:id", authMiddleware, passageiroController.remove);
 module.exports = router;
