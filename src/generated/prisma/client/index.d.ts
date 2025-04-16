@@ -1066,7 +1066,7 @@ export namespace Prisma {
     nome: string | null
     dataNascimento: string | null
     contato: string | null
-    cpf: string | null
+    typeDocumentSelected: string | null
     documento: string | null
     cidade: string | null
     bairro: string | null
@@ -1081,7 +1081,7 @@ export namespace Prisma {
     nome: string | null
     dataNascimento: string | null
     contato: string | null
-    cpf: string | null
+    typeDocumentSelected: string | null
     documento: string | null
     cidade: string | null
     bairro: string | null
@@ -1096,7 +1096,7 @@ export namespace Prisma {
     nome: number
     dataNascimento: number
     contato: number
-    cpf: number
+    typeDocumentSelected: number
     documento: number
     cidade: number
     bairro: number
@@ -1113,7 +1113,7 @@ export namespace Prisma {
     nome?: true
     dataNascimento?: true
     contato?: true
-    cpf?: true
+    typeDocumentSelected?: true
     documento?: true
     cidade?: true
     bairro?: true
@@ -1128,7 +1128,7 @@ export namespace Prisma {
     nome?: true
     dataNascimento?: true
     contato?: true
-    cpf?: true
+    typeDocumentSelected?: true
     documento?: true
     cidade?: true
     bairro?: true
@@ -1143,7 +1143,7 @@ export namespace Prisma {
     nome?: true
     dataNascimento?: true
     contato?: true
-    cpf?: true
+    typeDocumentSelected?: true
     documento?: true
     cidade?: true
     bairro?: true
@@ -1231,7 +1231,7 @@ export namespace Prisma {
     nome: string
     dataNascimento: string | null
     contato: string | null
-    cpf: string | null
+    typeDocumentSelected: string | null
     documento: string | null
     cidade: string | null
     bairro: string | null
@@ -1263,7 +1263,7 @@ export namespace Prisma {
     nome?: boolean
     dataNascimento?: boolean
     contato?: boolean
-    cpf?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     cidade?: boolean
     bairro?: boolean
@@ -1278,7 +1278,7 @@ export namespace Prisma {
     nome?: boolean
     dataNascimento?: boolean
     contato?: boolean
-    cpf?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     cidade?: boolean
     bairro?: boolean
@@ -1293,7 +1293,7 @@ export namespace Prisma {
     nome?: boolean
     dataNascimento?: boolean
     contato?: boolean
-    cpf?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     cidade?: boolean
     bairro?: boolean
@@ -1308,7 +1308,7 @@ export namespace Prisma {
     nome?: boolean
     dataNascimento?: boolean
     contato?: boolean
-    cpf?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     cidade?: boolean
     bairro?: boolean
@@ -1318,7 +1318,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "dataNascimento" | "contato" | "cpf" | "documento" | "cidade" | "bairro" | "rua" | "numero" | "createdAt" | "updatedAt", ExtArgs["result"]["cliente"]>
+  export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "dataNascimento" | "contato" | "typeDocumentSelected" | "documento" | "cidade" | "bairro" | "rua" | "numero" | "createdAt" | "updatedAt", ExtArgs["result"]["cliente"]>
 
   export type $ClientePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cliente"
@@ -1328,7 +1328,7 @@ export namespace Prisma {
       nome: string
       dataNascimento: string | null
       contato: string | null
-      cpf: string | null
+      typeDocumentSelected: string | null
       documento: string | null
       cidade: string | null
       bairro: string | null
@@ -1763,7 +1763,7 @@ export namespace Prisma {
     readonly nome: FieldRef<"Cliente", 'String'>
     readonly dataNascimento: FieldRef<"Cliente", 'String'>
     readonly contato: FieldRef<"Cliente", 'String'>
-    readonly cpf: FieldRef<"Cliente", 'String'>
+    readonly typeDocumentSelected: FieldRef<"Cliente", 'String'>
     readonly documento: FieldRef<"Cliente", 'String'>
     readonly cidade: FieldRef<"Cliente", 'String'>
     readonly bairro: FieldRef<"Cliente", 'String'>
@@ -2150,6 +2150,7 @@ export namespace Prisma {
   export type PassageiroMinAggregateOutputType = {
     id: string | null
     nome: string | null
+    typeDocumentSelected: string | null
     documento: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2158,6 +2159,7 @@ export namespace Prisma {
   export type PassageiroMaxAggregateOutputType = {
     id: string | null
     nome: string | null
+    typeDocumentSelected: string | null
     documento: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2166,6 +2168,7 @@ export namespace Prisma {
   export type PassageiroCountAggregateOutputType = {
     id: number
     nome: number
+    typeDocumentSelected: number
     documento: number
     createdAt: number
     updatedAt: number
@@ -2176,6 +2179,7 @@ export namespace Prisma {
   export type PassageiroMinAggregateInputType = {
     id?: true
     nome?: true
+    typeDocumentSelected?: true
     documento?: true
     createdAt?: true
     updatedAt?: true
@@ -2184,6 +2188,7 @@ export namespace Prisma {
   export type PassageiroMaxAggregateInputType = {
     id?: true
     nome?: true
+    typeDocumentSelected?: true
     documento?: true
     createdAt?: true
     updatedAt?: true
@@ -2192,6 +2197,7 @@ export namespace Prisma {
   export type PassageiroCountAggregateInputType = {
     id?: true
     nome?: true
+    typeDocumentSelected?: true
     documento?: true
     createdAt?: true
     updatedAt?: true
@@ -2273,6 +2279,7 @@ export namespace Prisma {
   export type PassageiroGroupByOutputType = {
     id: string
     nome: string
+    typeDocumentSelected: string
     documento: string
     createdAt: Date
     updatedAt: Date
@@ -2298,6 +2305,7 @@ export namespace Prisma {
   export type PassageiroSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nome?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2306,6 +2314,7 @@ export namespace Prisma {
   export type PassageiroSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nome?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2314,6 +2323,7 @@ export namespace Prisma {
   export type PassageiroSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nome?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2322,12 +2332,13 @@ export namespace Prisma {
   export type PassageiroSelectScalar = {
     id?: boolean
     nome?: boolean
+    typeDocumentSelected?: boolean
     documento?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PassageiroOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "documento" | "createdAt" | "updatedAt", ExtArgs["result"]["passageiro"]>
+  export type PassageiroOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "typeDocumentSelected" | "documento" | "createdAt" | "updatedAt", ExtArgs["result"]["passageiro"]>
 
   export type $PassageiroPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Passageiro"
@@ -2335,6 +2346,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       nome: string
+      typeDocumentSelected: string
       documento: string
       createdAt: Date
       updatedAt: Date
@@ -2763,6 +2775,7 @@ export namespace Prisma {
   interface PassageiroFieldRefs {
     readonly id: FieldRef<"Passageiro", 'String'>
     readonly nome: FieldRef<"Passageiro", 'String'>
+    readonly typeDocumentSelected: FieldRef<"Passageiro", 'String'>
     readonly documento: FieldRef<"Passageiro", 'String'>
     readonly createdAt: FieldRef<"Passageiro", 'DateTime'>
     readonly updatedAt: FieldRef<"Passageiro", 'DateTime'>
@@ -4167,7 +4180,7 @@ export namespace Prisma {
     nome: 'nome',
     dataNascimento: 'dataNascimento',
     contato: 'contato',
-    cpf: 'cpf',
+    typeDocumentSelected: 'typeDocumentSelected',
     documento: 'documento',
     cidade: 'cidade',
     bairro: 'bairro',
@@ -4183,6 +4196,7 @@ export namespace Prisma {
   export const PassageiroScalarFieldEnum: {
     id: 'id',
     nome: 'nome',
+    typeDocumentSelected: 'typeDocumentSelected',
     documento: 'documento',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -4297,7 +4311,7 @@ export namespace Prisma {
     nome?: StringFilter<"Cliente"> | string
     dataNascimento?: StringNullableFilter<"Cliente"> | string | null
     contato?: StringNullableFilter<"Cliente"> | string | null
-    cpf?: StringNullableFilter<"Cliente"> | string | null
+    typeDocumentSelected?: StringNullableFilter<"Cliente"> | string | null
     documento?: StringNullableFilter<"Cliente"> | string | null
     cidade?: StringNullableFilter<"Cliente"> | string | null
     bairro?: StringNullableFilter<"Cliente"> | string | null
@@ -4312,7 +4326,7 @@ export namespace Prisma {
     nome?: SortOrder
     dataNascimento?: SortOrderInput | SortOrder
     contato?: SortOrderInput | SortOrder
-    cpf?: SortOrderInput | SortOrder
+    typeDocumentSelected?: SortOrderInput | SortOrder
     documento?: SortOrderInput | SortOrder
     cidade?: SortOrderInput | SortOrder
     bairro?: SortOrderInput | SortOrder
@@ -4330,7 +4344,7 @@ export namespace Prisma {
     nome?: StringFilter<"Cliente"> | string
     dataNascimento?: StringNullableFilter<"Cliente"> | string | null
     contato?: StringNullableFilter<"Cliente"> | string | null
-    cpf?: StringNullableFilter<"Cliente"> | string | null
+    typeDocumentSelected?: StringNullableFilter<"Cliente"> | string | null
     documento?: StringNullableFilter<"Cliente"> | string | null
     cidade?: StringNullableFilter<"Cliente"> | string | null
     bairro?: StringNullableFilter<"Cliente"> | string | null
@@ -4345,7 +4359,7 @@ export namespace Prisma {
     nome?: SortOrder
     dataNascimento?: SortOrderInput | SortOrder
     contato?: SortOrderInput | SortOrder
-    cpf?: SortOrderInput | SortOrder
+    typeDocumentSelected?: SortOrderInput | SortOrder
     documento?: SortOrderInput | SortOrder
     cidade?: SortOrderInput | SortOrder
     bairro?: SortOrderInput | SortOrder
@@ -4366,7 +4380,7 @@ export namespace Prisma {
     nome?: StringWithAggregatesFilter<"Cliente"> | string
     dataNascimento?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
     contato?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
-    cpf?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
+    typeDocumentSelected?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
     documento?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
     cidade?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
     bairro?: StringNullableWithAggregatesFilter<"Cliente"> | string | null
@@ -4382,6 +4396,7 @@ export namespace Prisma {
     NOT?: PassageiroWhereInput | PassageiroWhereInput[]
     id?: StringFilter<"Passageiro"> | string
     nome?: StringFilter<"Passageiro"> | string
+    typeDocumentSelected?: StringFilter<"Passageiro"> | string
     documento?: StringFilter<"Passageiro"> | string
     createdAt?: DateTimeFilter<"Passageiro"> | Date | string
     updatedAt?: DateTimeFilter<"Passageiro"> | Date | string
@@ -4390,6 +4405,7 @@ export namespace Prisma {
   export type PassageiroOrderByWithRelationInput = {
     id?: SortOrder
     nome?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4401,6 +4417,7 @@ export namespace Prisma {
     OR?: PassageiroWhereInput[]
     NOT?: PassageiroWhereInput | PassageiroWhereInput[]
     nome?: StringFilter<"Passageiro"> | string
+    typeDocumentSelected?: StringFilter<"Passageiro"> | string
     documento?: StringFilter<"Passageiro"> | string
     createdAt?: DateTimeFilter<"Passageiro"> | Date | string
     updatedAt?: DateTimeFilter<"Passageiro"> | Date | string
@@ -4409,6 +4426,7 @@ export namespace Prisma {
   export type PassageiroOrderByWithAggregationInput = {
     id?: SortOrder
     nome?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4423,6 +4441,7 @@ export namespace Prisma {
     NOT?: PassageiroScalarWhereWithAggregatesInput | PassageiroScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Passageiro"> | string
     nome?: StringWithAggregatesFilter<"Passageiro"> | string
+    typeDocumentSelected?: StringWithAggregatesFilter<"Passageiro"> | string
     documento?: StringWithAggregatesFilter<"Passageiro"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Passageiro"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Passageiro"> | Date | string
@@ -4482,7 +4501,7 @@ export namespace Prisma {
     nome: string
     dataNascimento?: string | null
     contato?: string | null
-    cpf?: string | null
+    typeDocumentSelected?: string | null
     documento?: string | null
     cidade?: string | null
     bairro?: string | null
@@ -4497,7 +4516,7 @@ export namespace Prisma {
     nome: string
     dataNascimento?: string | null
     contato?: string | null
-    cpf?: string | null
+    typeDocumentSelected?: string | null
     documento?: string | null
     cidade?: string | null
     bairro?: string | null
@@ -4512,7 +4531,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     dataNascimento?: NullableStringFieldUpdateOperationsInput | string | null
     contato?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    typeDocumentSelected?: NullableStringFieldUpdateOperationsInput | string | null
     documento?: NullableStringFieldUpdateOperationsInput | string | null
     cidade?: NullableStringFieldUpdateOperationsInput | string | null
     bairro?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4527,7 +4546,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     dataNascimento?: NullableStringFieldUpdateOperationsInput | string | null
     contato?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    typeDocumentSelected?: NullableStringFieldUpdateOperationsInput | string | null
     documento?: NullableStringFieldUpdateOperationsInput | string | null
     cidade?: NullableStringFieldUpdateOperationsInput | string | null
     bairro?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4542,7 +4561,7 @@ export namespace Prisma {
     nome: string
     dataNascimento?: string | null
     contato?: string | null
-    cpf?: string | null
+    typeDocumentSelected?: string | null
     documento?: string | null
     cidade?: string | null
     bairro?: string | null
@@ -4557,7 +4576,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     dataNascimento?: NullableStringFieldUpdateOperationsInput | string | null
     contato?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    typeDocumentSelected?: NullableStringFieldUpdateOperationsInput | string | null
     documento?: NullableStringFieldUpdateOperationsInput | string | null
     cidade?: NullableStringFieldUpdateOperationsInput | string | null
     bairro?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4572,7 +4591,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     dataNascimento?: NullableStringFieldUpdateOperationsInput | string | null
     contato?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    typeDocumentSelected?: NullableStringFieldUpdateOperationsInput | string | null
     documento?: NullableStringFieldUpdateOperationsInput | string | null
     cidade?: NullableStringFieldUpdateOperationsInput | string | null
     bairro?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4585,6 +4604,7 @@ export namespace Prisma {
   export type PassageiroCreateInput = {
     id?: string
     nome: string
+    typeDocumentSelected: string
     documento: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4593,6 +4613,7 @@ export namespace Prisma {
   export type PassageiroUncheckedCreateInput = {
     id?: string
     nome: string
+    typeDocumentSelected: string
     documento: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4601,6 +4622,7 @@ export namespace Prisma {
   export type PassageiroUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
+    typeDocumentSelected?: StringFieldUpdateOperationsInput | string
     documento?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4609,6 +4631,7 @@ export namespace Prisma {
   export type PassageiroUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
+    typeDocumentSelected?: StringFieldUpdateOperationsInput | string
     documento?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4617,6 +4640,7 @@ export namespace Prisma {
   export type PassageiroCreateManyInput = {
     id?: string
     nome: string
+    typeDocumentSelected: string
     documento: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4625,6 +4649,7 @@ export namespace Prisma {
   export type PassageiroUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
+    typeDocumentSelected?: StringFieldUpdateOperationsInput | string
     documento?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4633,6 +4658,7 @@ export namespace Prisma {
   export type PassageiroUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
+    typeDocumentSelected?: StringFieldUpdateOperationsInput | string
     documento?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4735,7 +4761,7 @@ export namespace Prisma {
     nome?: SortOrder
     dataNascimento?: SortOrder
     contato?: SortOrder
-    cpf?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     cidade?: SortOrder
     bairro?: SortOrder
@@ -4750,7 +4776,7 @@ export namespace Prisma {
     nome?: SortOrder
     dataNascimento?: SortOrder
     contato?: SortOrder
-    cpf?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     cidade?: SortOrder
     bairro?: SortOrder
@@ -4765,7 +4791,7 @@ export namespace Prisma {
     nome?: SortOrder
     dataNascimento?: SortOrder
     contato?: SortOrder
-    cpf?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     cidade?: SortOrder
     bairro?: SortOrder
@@ -4828,6 +4854,7 @@ export namespace Prisma {
   export type PassageiroCountOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4836,6 +4863,7 @@ export namespace Prisma {
   export type PassageiroMaxOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4844,6 +4872,7 @@ export namespace Prisma {
   export type PassageiroMinOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
+    typeDocumentSelected?: SortOrder
     documento?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder

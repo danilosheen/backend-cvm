@@ -122,7 +122,7 @@ exports.Prisma.ClienteScalarFieldEnum = {
   nome: 'nome',
   dataNascimento: 'dataNascimento',
   contato: 'contato',
-  cpf: 'cpf',
+  typeDocumentSelected: 'typeDocumentSelected',
   documento: 'documento',
   cidade: 'cidade',
   bairro: 'bairro',
@@ -135,6 +135,7 @@ exports.Prisma.ClienteScalarFieldEnum = {
 exports.Prisma.PassageiroScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
+  typeDocumentSelected: 'typeDocumentSelected',
   documento: 'documento',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
