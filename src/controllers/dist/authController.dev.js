@@ -55,11 +55,11 @@ exports.login = function _callee(req, res) {
           }));
 
         case 12:
+          // const token = jwt.sign({ userId: user.id }, SECRET, { expiresIn: "10h" });
+          //implementar refresh token
           token = jwt.sign({
             userId: user.id
-          }, SECRET, {
-            expiresIn: "10h"
-          });
+          }, SECRET);
           res.json({
             token: token
           });
