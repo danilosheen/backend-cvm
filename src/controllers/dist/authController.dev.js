@@ -58,7 +58,7 @@ exports.login = function _callee(req, res) {
           token = jwt.sign({
             userId: user.id
           }, SECRET, {
-            expiresIn: "5d"
+            expiresIn: "7d"
           });
           res.json({
             token: token
