@@ -6,8 +6,8 @@ exports.generatePDF = async (req, res) => {
     const {
       nomeCliente,
       telefoneContato,
-      pacoteViagem,
       localSaida,
+      destinoViagem,
       dataSaida,
       horaSaida,
       dataRetorno,
@@ -26,8 +26,8 @@ exports.generatePDF = async (req, res) => {
     const pdfBuffer = await pdfOrcamentoService.createPDF(
       nomeCliente,
       telefoneContato,
-      pacoteViagem,
       localSaida,
+      destinoViagem,
       dataSaida,
       horaSaida,
       dataRetorno,

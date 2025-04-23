@@ -9,8 +9,8 @@ const { converteStringToFloat, converteFloatToString } = require("../utils/conve
 async function createPDF(
   nomeCliente,
   telefoneContato,
-  pacoteViagem,
   localSaida,
+  destinoViagem,
   dataSaida,
   horaSaida,
   dataRetorno,
@@ -32,8 +32,8 @@ async function createPDF(
     const data = {
       nomeCliente,
       telefoneContato,
-      pacoteViagem,
       localSaida,
+      destinoViagem,
       dataSaida,
       horaSaida,
       dataRetorno,
