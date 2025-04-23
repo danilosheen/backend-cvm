@@ -4,10 +4,12 @@ const pdfOrcamentoController = require("../controllers/orcamentoController");
 const pdfReciboController = require("../controllers/reciboController");
 const pdfFichaExcursaoController = require("../controllers/fichaExcursaoController");
 const pdflistaPassageirosController = require("../controllers/listaPassageirosController");
+const pdfNotaAgradecimentoController = require("../controllers/notaAgradecimentoController");
 
 router.post("/orcamento", pdfOrcamentoController.generatePDF);
 router.post("/recibo", pdfReciboController.generatePDF);
 router.post("/ficha-excursao", pdfFichaExcursaoController.generatePDF);
 router.post("/lista-passageiros", pdflistaPassageirosController.generatePDF);
+router.post("/nota-agradecimento", pdfNotaAgradecimentoController.generatePDF);
 
 module.exports = router;
