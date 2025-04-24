@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-
 // Função para enviar e-mail
 async function enviarEmail(nomeCliente, destinatario, assunto) {
   try {
