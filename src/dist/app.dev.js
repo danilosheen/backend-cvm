@@ -14,6 +14,8 @@ var usuarioRoutes = require("./routes/usuarioRoutes");
 
 var authRoutes = require("./routes/authRoutes");
 
+var fluxoRoutes = require("./routes/fluxoCaixaRouter");
+
 var app = express();
 app.use(cors({
   origin: ['https://cvm-docs.vercel.app', 'http://localhost:4200']
@@ -24,4 +26,5 @@ app.use("/api", clienteRoutes);
 app.use("/api", passageiroRoutes);
 app.use("/api/usuario", usuarioRoutes);
 app.use("/api", authRoutes);
+app.use('/api/fluxo-caixa', fluxoRoutes);
 module.exports = app; // npx vercel dev

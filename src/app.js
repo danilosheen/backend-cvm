@@ -5,6 +5,7 @@ const clienteRoutes = require("./routes/clienteRoutes");
 const passageiroRoutes = require("./routes/passageiroRoutes");
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const authRoutes = require("./routes/authRoutes");
+const fluxoRoutes = require("./routes/fluxoCaixaRouter");
 
 const app = express();
 app.use(cors({
@@ -17,6 +18,7 @@ app.use("/api", clienteRoutes);
 app.use("/api", passageiroRoutes);
 app.use("/api/usuario", usuarioRoutes);
 app.use("/api", authRoutes);
+app.use('/api/fluxo-caixa', fluxoRoutes);
 
 module.exports = app;
 

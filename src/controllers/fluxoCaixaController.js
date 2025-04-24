@@ -1,0 +1,92 @@
+const { PrismaClient } = require('../generated/prisma/client');
+const prisma = new PrismaClient();
+
+exports.criarFluxo = async (req, res) => {
+  try {
+    const { tipo, valor, data, formaPagamento, descricao } = req.body;
+
+    const dataString = data;
+
+    // Quebra a string em partes: [dia, mês, ano]
+    const [dia, mes, ano] = dataString.split('/');
+
+    // Cria um objeto Date
+    const dataOrdenada = new Date(ano, mes - 1, dia);
+
+    // Converte para ISO 8601
+    const isoString = dataOrdenada.toISOString();
+
+    const fluxo = await prisma.fluxoCaixa.create({
+      data: {
+        tipo,
+        valor,
+        data: isoString,
+        formaPagamento,
+        descricao
+      }
+    });
+
+    res.status(201).json(fluxo);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Erro ao criar fluxo de caixa.' });
+  }
+};
+
+exports.listarFluxos = async (req, res) => {
+  try {
+    const fluxos = await prisma.fluxoCaixa.findMany({
+      orderBy: { data: 'desc' }
+    });
+    res.json(fluxos);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao listar fluxos de caixa.' });
+  }
+};
+
+exports.buscarFluxoPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const fluxo = await prisma.fluxoCaixa.findUnique({ where: { id } });
+
+    if (!fluxo) {
+      return res.status(404).json({ error: 'Fluxo não encontrado.' });
+    }
+
+    res.json(fluxo);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar fluxo de caixa.' });
+  }
+};
+
+exports.atualizarFluxo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { tipo, valor, data, formaPagamento, descricao } = req.body;
+
+    const fluxo = await prisma.fluxoCaixa.update({
+      where: { id },
+      data: {
+        tipo,
+        valor,
+        data: new Date(data),
+        formaPagamento,
+        descricao
+      }
+    });
+
+    res.json(fluxo);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao atualizar fluxo de caixa.' });
+  }
+};
+
+exports.deletarFluxo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.fluxoCaixa.delete({ where: { id } });
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao deletar fluxo de caixa.' });
+  }
+};
