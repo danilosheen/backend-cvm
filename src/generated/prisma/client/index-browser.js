@@ -122,12 +122,25 @@ exports.Prisma.ClienteScalarFieldEnum = {
   nome: 'nome',
   dataNascimento: 'dataNascimento',
   contato: 'contato',
+  email: 'email',
   typeDocumentSelected: 'typeDocumentSelected',
   documento: 'documento',
   cidade: 'cidade',
   bairro: 'bairro',
   rua: 'rua',
   numero: 'numero',
+  ultimaViagem: 'ultimaViagem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DependenteScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  documento: 'documento',
+  poltrona: 'poltrona',
+  clienteId: 'clienteId',
+  viagemId: 'viagemId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -137,6 +150,25 @@ exports.Prisma.PassageiroScalarFieldEnum = {
   nome: 'nome',
   typeDocumentSelected: 'typeDocumentSelected',
   documento: 'documento',
+  clienteId: 'clienteId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FluxoCaixaScalarFieldEnum = {
+  id: 'id',
+  tipo: 'tipo',
+  valor: 'valor',
+  data: 'data',
+  formaPagamento: 'formaPagamento',
+  descricao: 'descricao',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ViagemScalarFieldEnum = {
+  id: 'id',
+  dataViagem: 'dataViagem',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -162,11 +194,23 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.TipoOperacao = exports.$Enums.TipoOperacao = {
+  ENTRADA: 'ENTRADA',
+  SAIDA: 'SAIDA'
+};
 
+exports.FormaPagamento = exports.$Enums.FormaPagamento = {
+  PIX: 'PIX',
+  DINHEIRO: 'DINHEIRO',
+  CARTAO_DE_CREDITO: 'CARTAO_DE_CREDITO'
+};
 
 exports.Prisma.ModelName = {
   Cliente: 'Cliente',
+  Dependente: 'Dependente',
   Passageiro: 'Passageiro',
+  FluxoCaixa: 'FluxoCaixa',
+  Viagem: 'Viagem',
   Usuario: 'Usuario'
 };
 

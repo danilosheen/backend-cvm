@@ -6,22 +6,39 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model Cliente {
-  id                   String   @id @default(uuid())
+  id                   String       @id @default(uuid())
   nome                 String
   dataNascimento       String?
   contato              String?
+  email                String?
   typeDocumentSelected String?
   documento            String?
   cidade               String?
   bairro               String?
   rua                  String?
   numero               String?
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  ultimaViagem         DateTime?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  dependentes          Dependente[]
+  passageiro           Passageiro?
+}
+
+model Dependente {
+  id        String   @id @default(uuid())
+  nome      String
+  documento String?
+  poltrona  String?
+  clienteId String
+  viagemId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  viagens   Viagem[] @relation("ViagemDependentes")
 }
 
 model Passageiro {
@@ -29,8 +46,42 @@ model Passageiro {
   nome                 String
   typeDocumentSelected String
   documento            String
+  clienteId            String?  @unique
+  cliente              Cliente? @relation(fields: [clienteId], references: [id])
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
+  viagens              Viagem[] @relation("ViagemPassageiros")
+}
+
+model FluxoCaixa {
+  id             String         @id @default(uuid())
+  tipo           TipoOperacao
+  valor          Float
+  data           DateTime
+  formaPagamento FormaPagamento
+  descricao      String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+enum TipoOperacao {
+  ENTRADA
+  SAIDA
+}
+
+enum FormaPagamento {
+  PIX
+  DINHEIRO
+  CARTAO_DE_CREDITO
+}
+
+model Viagem {
+  id          String       @id @default(uuid())
+  dataViagem  DateTime
+  passageiros Passageiro[] @relation("ViagemPassageiros")
+  dependentes Dependente[] @relation("ViagemDependentes")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model Usuario {
