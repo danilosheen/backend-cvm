@@ -14,7 +14,7 @@ var _require = require('../generated/prisma/client'),
 var prisma = new PrismaClient();
 
 exports.criarFluxo = function _callee(req, res) {
-  var _req$body, tipo, valor, data, formaPagamento, descricao, dataString, _dataString$split, _dataString$split2, dia, mes, ano, dataOrdenada, isoString, fluxo;
+  var _req$body, tipo, valor, data, formaPagamento, descricao, dataString, _dataString$split, _dataString$split2, dia, mes, ano, dataOrdenada, isoString, valorNumerico, fluxo;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -29,37 +29,38 @@ exports.criarFluxo = function _callee(req, res) {
           dataOrdenada = new Date(ano, mes - 1, dia); // Converte para ISO 8601
 
           isoString = dataOrdenada.toISOString();
-          _context.next = 8;
+          valorNumerico = parseFloat(valor.replace(',', '.'));
+          _context.next = 9;
           return regeneratorRuntime.awrap(prisma.fluxoCaixa.create({
             data: {
               tipo: tipo,
-              valor: valor,
+              valor: valorNumerico,
               data: isoString,
               formaPagamento: formaPagamento,
               descricao: descricao
             }
           }));
 
-        case 8:
+        case 9:
           fluxo = _context.sent;
           res.status(201).json(fluxo);
-          _context.next = 16;
+          _context.next = 17;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
           res.status(500).json({
             error: 'Erro ao criar fluxo de caixa.'
           });
 
-        case 16:
+        case 17:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 13]]);
 };
 
 exports.listarFluxos = function _callee2(req, res) {
@@ -72,7 +73,7 @@ exports.listarFluxos = function _callee2(req, res) {
           _context2.next = 3;
           return regeneratorRuntime.awrap(prisma.fluxoCaixa.findMany({
             orderBy: {
-              data: 'desc'
+              createdAt: 'desc'
             }
           }));
 
@@ -205,7 +206,9 @@ exports.deletarFluxo = function _callee5(req, res) {
           }));
 
         case 4:
-          res.status(204).send();
+          res.status(201).json({
+            success: 'Fluxo removido com sucesso!'
+          });
           _context5.next = 10;
           break;
 

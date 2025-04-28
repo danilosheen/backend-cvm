@@ -16,10 +16,12 @@ exports.criarFluxo = async (req, res) => {
     // Converte para ISO 8601
     const isoString = dataOrdenada.toISOString();
 
+    const valorNumerico = parseFloat(valor.replace(',', '.'));
+
     const fluxo = await prisma.fluxoCaixa.create({
       data: {
         tipo,
-        valor,
+        valor: valorNumerico,
         data: isoString,
         formaPagamento,
         descricao
@@ -36,7 +38,7 @@ exports.criarFluxo = async (req, res) => {
 exports.listarFluxos = async (req, res) => {
   try {
     const fluxos = await prisma.fluxoCaixa.findMany({
-      orderBy: { data: 'desc' }
+      orderBy: { createdAt: 'desc' }
     });
     res.json(fluxos);
   } catch (error) {
@@ -85,7 +87,7 @@ exports.deletarFluxo = async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.fluxoCaixa.delete({ where: { id } });
-    res.status(204).send();
+    res.status(201).json({success: 'Fluxo removido com sucesso!'});
   } catch (error) {
     res.status(500).json({ error: 'Erro ao deletar fluxo de caixa.' });
   }
