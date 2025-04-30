@@ -34,7 +34,12 @@ exports.create = function _callee(req, res) {
           return _context.abrupt("return", res.status(200).json(existingDependente));
 
         case 7:
-          _context.next = 9;
+          if (!clienteId) {
+            _context.next = 12;
+            break;
+          }
+
+          _context.next = 10;
           return regeneratorRuntime.awrap(prisma.dependente.create({
             data: {
               nome: nome,
@@ -44,14 +49,19 @@ exports.create = function _callee(req, res) {
             }
           }));
 
-        case 9:
+        case 10:
           dependente = _context.sent;
-          res.status(201).json(dependente);
-          _context.next = 17;
+          return _context.abrupt("return", res.status(201).json(dependente));
+
+        case 12:
+          res.status(202).json({
+            msg: "não há cliente cadastrado para associar esse dependente"
+          });
+          _context.next = 19;
           break;
 
-        case 13:
-          _context.prev = 13;
+        case 15:
+          _context.prev = 15;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
           res.status(400).json({
@@ -59,12 +69,12 @@ exports.create = function _callee(req, res) {
             details: _context.t0.message || _context.t0
           });
 
-        case 17:
+        case 19:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 15]]);
 };
 
 exports.getAll = function _callee2(req, res) {

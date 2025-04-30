@@ -1,6 +1,8 @@
 const { getDateFormated } = require("../utils/dateFormated");
+const { getDataArquivo } = require("../utils/dateFormated");
 const porExtensoFormatado = require("../utils/porExtenso");
 const pdfReciboService = require("../services/reciboService");
+const emailService = require("../services/emailService")
 const extenso = require('extenso');
 
 exports.generatePDF = async (req, res) => {
@@ -32,6 +34,9 @@ exports.generatePDF = async (req, res) => {
     if (allowedOrigins.includes(origin)) {
      res.setHeader("Access-Control-Allow-Origin", origin);
     }
+
+    const dataAtual = getDataArquivo();
+    emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', `Recibo_${dataAtual}`);
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);

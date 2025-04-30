@@ -3,15 +3,20 @@
 var _require = require("../utils/dateFormated"),
     getDateFormated = _require.getDateFormated;
 
+var _require2 = require("../utils/dateFormated"),
+    getDataArquivo = _require2.getDataArquivo;
+
 var pdfListaPassageirosService = require("../services/listaPassageirosService");
 
-var _require2 = require("../generated/prisma/client"),
-    PrismaClient = _require2.PrismaClient;
+var emailService = require("../services/emailService");
+
+var _require3 = require("../generated/prisma/client"),
+    PrismaClient = _require3.PrismaClient;
 
 var prisma = new PrismaClient();
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, numeroCarro, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, passageiros, dataGeracao, qtdPassageiros, numeroCarroP1, numeroCarroP2, dataAtual, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, passageiro, documento, passageiroEncontrado, pdfBuffer, allowedOrigins, origin;
+  var _req$body, numeroCarro, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, passageiros, dataGeracao, qtdPassageiros, numeroCarroP1, numeroCarroP2, dataAtual, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, passageiro, documento, passageiroEncontrado, pdfBuffer, allowedOrigins, origin, dataHoje;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -127,25 +132,27 @@ exports.generatePDF = function _callee(req, res) {
 
           if (allowedOrigins.includes(origin)) {
             res.setHeader("Access-Control-Allow-Origin", origin);
-          } // Envia o PDF para o cliente (frontend)
+          }
 
+          dataHoje = getDataArquivo();
+          emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Lista de passageiros_".concat(dataHoje)); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
-          _context.next = 55;
+          _context.next = 57;
           break;
 
-        case 51:
-          _context.prev = 51;
+        case 53:
+          _context.prev = 53;
           _context.t1 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t1);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 55:
+        case 57:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 51], [10, 28, 32, 40], [33,, 35, 39]]);
+  }, null, null, [[0, 53], [10, 28, 32, 40], [33,, 35, 39]]);
 };

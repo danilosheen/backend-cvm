@@ -3,14 +3,19 @@
 var _require = require("../utils/dateFormated"),
     getDateFormated = _require.getDateFormated;
 
+var _require2 = require("../utils/dateFormated"),
+    getDataArquivo = _require2.getDataArquivo;
+
 var porExtensoFormatado = require("../utils/porExtenso");
 
 var pdfReciboService = require("../services/reciboService");
 
+var emailService = require("../services/emailService");
+
 var extenso = require('extenso');
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, nomeCliente, valor, pacoteViagem, formaPagamento, dataGeracao, valorPorExtenso, pdfBuffer, allowedOrigins, origin;
+  var _req$body, nomeCliente, valor, pacoteViagem, formaPagamento, dataGeracao, valorPorExtenso, pdfBuffer, allowedOrigins, origin, dataAtual;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -39,25 +44,27 @@ exports.generatePDF = function _callee(req, res) {
 
           if (allowedOrigins.includes(origin)) {
             res.setHeader("Access-Control-Allow-Origin", origin);
-          } // Envia o PDF para o cliente (frontend)
+          }
 
+          dataAtual = getDataArquivo();
+          emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Recibo_".concat(dataAtual)); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
-          _context.next = 19;
+          _context.next = 21;
           break;
 
-        case 15:
-          _context.prev = 15;
+        case 17:
+          _context.prev = 17;
           _context.t0 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t0);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 19:
+        case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 15]]);
+  }, null, null, [[0, 17]]);
 };

@@ -43,4 +43,30 @@ async function enviarEmail(nomeCliente, destinatario, assunto) {
   }
 }
 
-module.exports = enviarEmail;
+async function enviarDocumento(documentoBuffer, destinatario, assunto, tipoDocumento) {
+  try{
+    const info = await transporter.sendMail({
+      from: `"CVM Turismo - ${tipoDocumento}" <${process.env.EMAIL}>`,
+      to: destinatario,
+      subject: assunto,
+      text: 'Segue a cópia do documento gerado em anexo.',
+      attachments: [
+        {
+          filename: `${tipoDocumento}.pdf`,
+          content: documentoBuffer,
+          contentType: 'application/pdf'
+        }
+      ]
+    });
+
+    console.log("📨 Email enviado: ", info.messageId);
+    return info;
+  } catch (error){
+    console.error("❌ Erro ao enviar email: ", error);
+  }
+}
+
+module.exports = {
+  enviarEmail,
+  enviarDocumento
+}

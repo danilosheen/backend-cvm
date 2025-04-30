@@ -3,10 +3,15 @@
 var _require = require("../utils/dateFormated"),
     getDateFormated = _require.getDateFormated;
 
+var _require2 = require("../utils/dateFormated"),
+    getDataArquivo = _require2.getDataArquivo;
+
 var pdfOrcamentoService = require("../services/orcamentoService");
 
+var emailService = require("../services/emailService");
+
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao, pdfBuffer, allowedOrigins, origin;
+  var _req$body, nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao, pdfBuffer, allowedOrigins, origin, dataAtual;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -29,25 +34,27 @@ exports.generatePDF = function _callee(req, res) {
 
           if (allowedOrigins.includes(origin)) {
             res.setHeader("Access-Control-Allow-Origin", origin);
-          } // Envia o PDF para o cliente (frontend)
+          }
 
+          dataAtual = getDataArquivo();
+          emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Or\xE7amento_".concat(dataAtual)); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
-          _context.next = 18;
+          _context.next = 20;
           break;
 
-        case 14:
-          _context.prev = 14;
+        case 16:
+          _context.prev = 16;
           _context.t0 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t0);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 18:
+        case 20:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 16]]);
 };

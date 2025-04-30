@@ -1,5 +1,8 @@
 const { getDateFormated } = require("../utils/dateFormated");
+const { getDataArquivo } = require("../utils/dateFormated");
 const pdfListaPassageirosService = require("../services/listaPassageirosService");
+const emailService = require("../services/emailService");
+
 const { PrismaClient } = require("../generated/prisma/client");
 const prisma = new PrismaClient();
 
@@ -76,6 +79,9 @@ exports.generatePDF = async (req, res) => {
     if (allowedOrigins.includes(origin)) {
      res.setHeader("Access-Control-Allow-Origin", origin);
     }
+
+    const dataHoje = getDataArquivo();
+    emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', `Lista de passageiros_${dataHoje}`);
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);

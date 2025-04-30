@@ -1,5 +1,7 @@
 const { getDateFormated } = require("../utils/dateFormated");
+const { getDataArquivo } = require("../utils/dateFormated");
 const pdfFichaExcursaoService = require("../services/fichaExcursaoService");
+const emailService = require("../services/emailService");
 
 exports.generatePDF = async (req, res) => {
   try {
@@ -51,6 +53,9 @@ exports.generatePDF = async (req, res) => {
     if (allowedOrigins.includes(origin)) {
      res.setHeader("Access-Control-Allow-Origin", origin);
     }
+
+    const dataAtual = getDataArquivo();
+    emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', `Ficha de excursão_${dataAtual}`);
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);
