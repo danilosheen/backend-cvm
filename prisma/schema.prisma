@@ -29,15 +29,14 @@ model Cliente {
 }
 
 model Dependente {
-  id        String   @id @default(uuid())
-  nome      String
-  documento String?
-  poltrona  String?
-  clienteId String
-  viagemId  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  id                   String   @id @default(uuid())
+  nome                 String
+  typeDocumentSelected String?
+  documento            String?
+  clienteId            String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  cliente              Cliente  @relation(fields: [clienteId], references: [id])
 }
 
 model Passageiro {

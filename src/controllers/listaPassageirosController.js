@@ -1,5 +1,7 @@
 const { getDateFormated } = require("../utils/dateFormated");
 const pdfListaPassageirosService = require("../services/listaPassageirosService");
+const { PrismaClient } = require("../generated/prisma/client");
+const prisma = new PrismaClient();
 
 exports.generatePDF = async (req, res) => {
   try {
@@ -21,6 +23,32 @@ exports.generatePDF = async (req, res) => {
     const qtdPassageiros = passageiros.length;
     const numeroCarroP1 = numeroCarro.substring(0,4);
     const numeroCarroP2 = numeroCarro.substring(4,8);
+
+    // buscar clientes e atualizar campo de última viagem
+    const dataAtual = new Date();
+
+    for (const passageiro of passageiros) {
+      const documento = passageiro.documento;
+
+      if (!documento) continue;
+
+      const passageiroEncontrado = await prisma.passageiro.findFirst({
+        where: {
+          documento: documento
+        }
+      });
+
+      if (passageiroEncontrado && passageiroEncontrado.clienteId) {
+        await prisma.cliente.update({
+          where: {
+            id: passageiroEncontrado.clienteId
+          },
+          data: {
+            ultimaViagem: dataAtual
+          }
+        });
+      }
+    }
 
     const pdfBuffer = await pdfListaPassageirosService.createPDF(
       numeroCarroP1,

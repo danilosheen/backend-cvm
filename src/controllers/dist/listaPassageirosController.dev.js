@@ -5,8 +5,13 @@ var _require = require("../utils/dateFormated"),
 
 var pdfListaPassageirosService = require("../services/listaPassageirosService");
 
+var _require2 = require("../generated/prisma/client"),
+    PrismaClient = _require2.PrismaClient;
+
+var prisma = new PrismaClient();
+
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, numeroCarro, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, passageiros, dataGeracao, qtdPassageiros, numeroCarroP1, numeroCarroP2, pdfBuffer, allowedOrigins, origin;
+  var _req$body, numeroCarro, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, passageiros, dataGeracao, qtdPassageiros, numeroCarroP1, numeroCarroP2, dataAtual, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, passageiro, documento, passageiroEncontrado, pdfBuffer, allowedOrigins, origin;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -17,11 +22,101 @@ exports.generatePDF = function _callee(req, res) {
           dataGeracao = getDateFormated();
           qtdPassageiros = passageiros.length;
           numeroCarroP1 = numeroCarro.substring(0, 4);
-          numeroCarroP2 = numeroCarro.substring(4, 8);
-          _context.next = 8;
+          numeroCarroP2 = numeroCarro.substring(4, 8); // buscar clientes e atualizar campo de última viagem
+
+          dataAtual = new Date();
+          _iteratorNormalCompletion = true;
+          _didIteratorError = false;
+          _iteratorError = undefined;
+          _context.prev = 10;
+          _iterator = passageiros[Symbol.iterator]();
+
+        case 12:
+          if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+            _context.next = 26;
+            break;
+          }
+
+          passageiro = _step.value;
+          documento = passageiro.documento;
+
+          if (documento) {
+            _context.next = 17;
+            break;
+          }
+
+          return _context.abrupt("continue", 23);
+
+        case 17:
+          _context.next = 19;
+          return regeneratorRuntime.awrap(prisma.passageiro.findFirst({
+            where: {
+              documento: documento
+            }
+          }));
+
+        case 19:
+          passageiroEncontrado = _context.sent;
+
+          if (!(passageiroEncontrado && passageiroEncontrado.clienteId)) {
+            _context.next = 23;
+            break;
+          }
+
+          _context.next = 23;
+          return regeneratorRuntime.awrap(prisma.cliente.update({
+            where: {
+              id: passageiroEncontrado.clienteId
+            },
+            data: {
+              ultimaViagem: dataAtual
+            }
+          }));
+
+        case 23:
+          _iteratorNormalCompletion = true;
+          _context.next = 12;
+          break;
+
+        case 26:
+          _context.next = 32;
+          break;
+
+        case 28:
+          _context.prev = 28;
+          _context.t0 = _context["catch"](10);
+          _didIteratorError = true;
+          _iteratorError = _context.t0;
+
+        case 32:
+          _context.prev = 32;
+          _context.prev = 33;
+
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+
+        case 35:
+          _context.prev = 35;
+
+          if (!_didIteratorError) {
+            _context.next = 38;
+            break;
+          }
+
+          throw _iteratorError;
+
+        case 38:
+          return _context.finish(35);
+
+        case 39:
+          return _context.finish(32);
+
+        case 40:
+          _context.next = 42;
           return regeneratorRuntime.awrap(pdfListaPassageirosService.createPDF(numeroCarroP1, numeroCarroP2, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, qtdPassageiros, passageiros, dataGeracao));
 
-        case 8:
+        case 42:
           pdfBuffer = _context.sent;
           // Configura os headers para o navegador reconhecer o arquivo como PDF
           res.setHeader("Content-Type", "application/pdf");
@@ -36,21 +131,21 @@ exports.generatePDF = function _callee(req, res) {
 
 
           res.end(pdfBuffer);
-          _context.next = 21;
+          _context.next = 55;
           break;
 
-        case 17:
-          _context.prev = 17;
-          _context.t0 = _context["catch"](0);
-          console.error("Erro ao gerar PDF:", _context.t0);
+        case 51:
+          _context.prev = 51;
+          _context.t1 = _context["catch"](0);
+          console.error("Erro ao gerar PDF:", _context.t1);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 21:
+        case 55:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 51], [10, 28, 32, 40], [33,, 35, 39]]);
 };

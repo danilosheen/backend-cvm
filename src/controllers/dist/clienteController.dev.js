@@ -6,37 +6,59 @@ var _require = require("../generated/prisma/client"),
 var prisma = new PrismaClient();
 
 exports.create = function _callee(req, res) {
-  var cliente;
+  var clientData, data, cliente;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _context.next = 3;
+          clientData = req.body;
+          data = {
+            nome: clientData.nome,
+            dataNascimento: clientData.dataNascimento,
+            contato: clientData.contato,
+            email: clientData.email,
+            typeDocumentSelected: clientData.typeDocumentSelected,
+            documento: clientData.documento,
+            cidade: clientData.cidade,
+            bairro: clientData.bairro,
+            rua: clientData.rua,
+            numero: clientData.numero,
+            passageiro: {
+              create: {
+                nome: clientData.nome,
+                typeDocumentSelected: clientData.typeDocumentSelected,
+                documento: clientData.documento
+              }
+            }
+          };
+          _context.next = 5;
           return regeneratorRuntime.awrap(prisma.cliente.create({
-            data: req.body
+            data: data
           }));
 
-        case 3:
+        case 5:
           cliente = _context.sent;
           res.status(201).json(cliente);
-          _context.next = 10;
+          _context.next = 13;
           break;
 
-        case 7:
-          _context.prev = 7;
+        case 9:
+          _context.prev = 9;
           _context.t0 = _context["catch"](0);
+          console.error(_context.t0); // sempre bom logar o erro no servidor
+
           res.status(400).json({
             error: "Erro ao criar cliente",
             details: _context.t0
           });
 
-        case 10:
+        case 13:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 9]]);
 };
 
 exports.findAll = function _callee2(req, res) {
@@ -103,13 +125,16 @@ exports.findById = function _callee3(req, res) {
 };
 
 exports.update = function _callee4(req, res) {
-  var cliente;
+  var _req$body, nome, typeDocumentSelected, documento, cliente, passageiro;
+
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          _context4.next = 3;
+          _req$body = req.body, nome = _req$body.nome, typeDocumentSelected = _req$body.typeDocumentSelected, documento = _req$body.documento; // Atualiza o Cliente
+
+          _context4.next = 4;
           return regeneratorRuntime.awrap(prisma.cliente.update({
             where: {
               id: req.params.id
@@ -117,60 +142,143 @@ exports.update = function _callee4(req, res) {
             data: req.body
           }));
 
-        case 3:
+        case 4:
           cliente = _context4.sent;
-          res.json(cliente);
-          _context4.next = 10;
-          break;
+          _context4.next = 7;
+          return regeneratorRuntime.awrap(prisma.passageiro.findFirst({
+            where: {
+              clienteId: cliente.id
+            }
+          }));
 
         case 7:
-          _context4.prev = 7;
+          passageiro = _context4.sent;
+
+          if (!passageiro) {
+            _context4.next = 11;
+            break;
+          }
+
+          _context4.next = 11;
+          return regeneratorRuntime.awrap(prisma.passageiro.update({
+            where: {
+              id: passageiro.id
+            },
+            data: {
+              nome: nome,
+              typeDocumentSelected: typeDocumentSelected,
+              documento: documento
+            }
+          }));
+
+        case 11:
+          res.json(cliente);
+          _context4.next = 18;
+          break;
+
+        case 14:
+          _context4.prev = 14;
           _context4.t0 = _context4["catch"](0);
+          console.error(_context4.t0);
           res.status(400).json({
             error: "Erro ao atualizar cliente",
             details: _context4.t0
           });
 
-        case 10:
+        case 18:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 14]]);
 };
 
 exports.remove = function _callee5(req, res) {
+  var cliente, dependenteIds;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
+          return regeneratorRuntime.awrap(prisma.cliente.findUnique({
+            where: {
+              id: req.params.id
+            },
+            include: {
+              passageiro: true,
+              // Inclui o passageiro
+              dependentes: true // Inclui os dependentes
+
+            }
+          }));
+
+        case 3:
+          cliente = _context5.sent;
+
+          if (!cliente) {
+            _context5.next = 12;
+            break;
+          }
+
+          if (!cliente.passageiro) {
+            _context5.next = 8;
+            break;
+          }
+
+          _context5.next = 8;
+          return regeneratorRuntime.awrap(prisma.passageiro["delete"]({
+            where: {
+              id: cliente.passageiro.id
+            }
+          }));
+
+        case 8:
+          if (!(cliente.dependentes && cliente.dependentes.length > 0)) {
+            _context5.next = 12;
+            break;
+          }
+
+          dependenteIds = cliente.dependentes.map(function (dep) {
+            return dep.id;
+          });
+          _context5.next = 12;
+          return regeneratorRuntime.awrap(prisma.dependente.deleteMany({
+            where: {
+              id: {
+                "in": dependenteIds
+              }
+            }
+          }));
+
+        case 12:
+          _context5.next = 14;
           return regeneratorRuntime.awrap(prisma.cliente["delete"]({
             where: {
               id: req.params.id
             }
           }));
 
-        case 3:
+        case 14:
           res.json({
-            message: "Cliente removido com sucesso"
+            message: "Cliente, passageiro e dependentes removidos com sucesso"
           });
-          _context5.next = 9;
+          _context5.next = 21;
           break;
 
-        case 6:
-          _context5.prev = 6;
+        case 17:
+          _context5.prev = 17;
           _context5.t0 = _context5["catch"](0);
+          console.error(_context5.t0);
           res.status(400).json({
             error: "Erro ao remover cliente",
             details: _context5.t0
           });
 
-        case 9:
+        case 21:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 6]]);
+  }, null, null, [[0, 17]]);
 };
