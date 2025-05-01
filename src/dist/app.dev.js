@@ -20,7 +20,7 @@ var dependenteRoutes = require("./routes/dependenteRoutes");
 
 var app = express();
 app.use(cors({
-  origin: ['https://cvm-docs.vercel.app', 'http://localhost:4200']
+  origin: ['https://cvm-docs.vercel.app', 'http://localhost:4200', 'https://cvm-docs-ja7dttrcq-danilosheens-projects.vercel.app']
 }));
 app.use(express.json());
 app.use("/api/pdf", pdfRoutes);
