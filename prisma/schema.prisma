@@ -32,7 +32,7 @@ model Dependente {
   id                   String      @id @default(uuid())
   nome                 String
   typeDocumentSelected String?
-  documento            String?
+  documento            String?     @unique
   clienteId            String
   createdAt            DateTime    @default(now())
   updatedAt            DateTime    @updatedAt
@@ -44,7 +44,7 @@ model Passageiro {
   id                   String      @id @default(uuid())
   nome                 String
   typeDocumentSelected String
-  documento            String
+  documento            String      @unique
   clienteId            String?     @unique
   dependenteId         String?     @unique
   createdAt            DateTime    @default(now())

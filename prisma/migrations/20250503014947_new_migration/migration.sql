@@ -28,10 +28,9 @@ CREATE TABLE "Cliente" (
 CREATE TABLE "Dependente" (
     "id" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
+    "typeDocumentSelected" TEXT,
     "documento" TEXT,
-    "poltrona" TEXT,
     "clienteId" TEXT NOT NULL,
-    "viagemId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -45,6 +44,7 @@ CREATE TABLE "Passageiro" (
     "typeDocumentSelected" TEXT NOT NULL,
     "documento" TEXT NOT NULL,
     "clienteId" TEXT,
+    "dependenteId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -76,13 +76,22 @@ CREATE TABLE "Usuario" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Passageiro_documento_key" ON "Passageiro"("documento");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Passageiro_clienteId_key" ON "Passageiro"("clienteId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Passageiro_dependenteId_key" ON "Passageiro"("dependenteId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Usuario_email_key" ON "Usuario"("email");
 
 -- AddForeignKey
-ALTER TABLE "Dependente" ADD CONSTRAINT "Dependente_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Dependente" ADD CONSTRAINT "Dependente_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Passageiro" ADD CONSTRAINT "Passageiro_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Passageiro" ADD CONSTRAINT "Passageiro_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Passageiro" ADD CONSTRAINT "Passageiro_dependenteId_fkey" FOREIGN KEY ("dependenteId") REFERENCES "Dependente"("id") ON DELETE CASCADE ON UPDATE CASCADE;

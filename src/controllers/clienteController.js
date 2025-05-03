@@ -5,34 +5,52 @@ exports.create = async (req, res) => {
   try {
     const clientData = req.body;
 
-    const data = {
-      nome: clientData.nome,
-      dataNascimento: clientData.dataNascimento,
-      contato: clientData.contato,
-      email: clientData.email,
-      typeDocumentSelected: clientData.typeDocumentSelected,
-      documento: clientData.documento,
-      cidade: clientData.cidade,
-      bairro: clientData.bairro,
-      rua: clientData.rua,
-      numero: clientData.numero,
-      passageiro: {
-        create: {
+    // Cria o cliente sem criar passageiro ainda
+    const cliente = await prisma.cliente.create({
+      data: {
+        nome: clientData.nome,
+        dataNascimento: clientData.dataNascimento,
+        contato: clientData.contato,
+        email: clientData.email,
+        typeDocumentSelected: clientData.typeDocumentSelected,
+        documento: clientData.documento,
+        cidade: clientData.cidade,
+        bairro: clientData.bairro,
+        rua: clientData.rua,
+        numero: clientData.numero,
+      },
+    });
+
+    // Verifica se já existe passageiro com o mesmo documento
+    const existingPassageiro = await prisma.passageiro.findUnique({
+      where: { documento: clientData.documento },
+    });
+
+    if (existingPassageiro) {
+      // Atualiza o passageiro para vincular ao cliente criado
+      await prisma.passageiro.update({
+        where: { id: existingPassageiro.id },
+        data: { clienteId: cliente.id },
+      });
+    } else {
+      // Cria um novo passageiro vinculado ao cliente
+      await prisma.passageiro.create({
+        data: {
           nome: clientData.nome,
           typeDocumentSelected: clientData.typeDocumentSelected,
-          documento: clientData.documento
-        }
-      }
-    };
+          documento: clientData.documento,
+          clienteId: cliente.id,
+        },
+      });
+    }
 
-    const cliente = await prisma.cliente.create({ data });
     res.status(201).json(cliente);
-
   } catch (err) {
-    console.error(err);  // sempre bom logar o erro no servidor
+    console.error(err);
     res.status(400).json({ error: "Erro ao criar cliente", details: err });
   }
 };
+
 
 
 exports.findAll = async (req, res) => {

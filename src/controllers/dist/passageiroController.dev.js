@@ -186,45 +186,42 @@ exports.remove = function _callee5(req, res) {
           }));
 
         case 6:
-          _context5.next = 8;
+          if (!(passageiro.clienteId || passageiro.dependenteId)) {
+            _context5.next = 8;
+            break;
+          }
+
+          return _context5.abrupt("return", res.status(400).json({
+            error: "Não é permitido remover passageiro vinculado a cliente ou dependente"
+          }));
+
+        case 8:
+          _context5.next = 10;
           return regeneratorRuntime.awrap(prisma.passageiro["delete"]({
             where: {
               id: req.params.id
             }
           }));
 
-        case 8:
-          if (!passageiro.dependenteId) {
-            _context5.next = 11;
-            break;
-          }
-
-          _context5.next = 11;
-          return regeneratorRuntime.awrap(prisma.dependente["delete"]({
-            where: {
-              id: passageiro.dependenteId
-            }
-          }));
-
-        case 11:
+        case 10:
           res.json({
-            message: "Passageiro e dependente (caso exista) removido com sucesso"
+            message: "Passageiro removido com sucesso"
           });
-          _context5.next = 17;
+          _context5.next = 16;
           break;
 
-        case 14:
-          _context5.prev = 14;
+        case 13:
+          _context5.prev = 13;
           _context5.t0 = _context5["catch"](0);
           res.status(400).json({
             error: "Erro ao remover passageiro",
             details: _context5.t0
           });
 
-        case 17:
+        case 16:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 13]]);
 };

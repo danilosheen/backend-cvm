@@ -6,59 +6,92 @@ var _require = require("../generated/prisma/client"),
 var prisma = new PrismaClient();
 
 exports.create = function _callee(req, res) {
-  var clientData, data, cliente;
+  var clientData, cliente, existingPassageiro;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          clientData = req.body;
-          data = {
-            nome: clientData.nome,
-            dataNascimento: clientData.dataNascimento,
-            contato: clientData.contato,
-            email: clientData.email,
-            typeDocumentSelected: clientData.typeDocumentSelected,
-            documento: clientData.documento,
-            cidade: clientData.cidade,
-            bairro: clientData.bairro,
-            rua: clientData.rua,
-            numero: clientData.numero,
-            passageiro: {
-              create: {
-                nome: clientData.nome,
-                typeDocumentSelected: clientData.typeDocumentSelected,
-                documento: clientData.documento
-              }
-            }
-          };
-          _context.next = 5;
+          clientData = req.body; // Cria o cliente sem criar passageiro ainda
+
+          _context.next = 4;
           return regeneratorRuntime.awrap(prisma.cliente.create({
-            data: data
+            data: {
+              nome: clientData.nome,
+              dataNascimento: clientData.dataNascimento,
+              contato: clientData.contato,
+              email: clientData.email,
+              typeDocumentSelected: clientData.typeDocumentSelected,
+              documento: clientData.documento,
+              cidade: clientData.cidade,
+              bairro: clientData.bairro,
+              rua: clientData.rua,
+              numero: clientData.numero
+            }
           }));
 
-        case 5:
+        case 4:
           cliente = _context.sent;
-          res.status(201).json(cliente);
-          _context.next = 13;
+          _context.next = 7;
+          return regeneratorRuntime.awrap(prisma.passageiro.findUnique({
+            where: {
+              documento: clientData.documento
+            }
+          }));
+
+        case 7:
+          existingPassageiro = _context.sent;
+
+          if (!existingPassageiro) {
+            _context.next = 13;
+            break;
+          }
+
+          _context.next = 11;
+          return regeneratorRuntime.awrap(prisma.passageiro.update({
+            where: {
+              id: existingPassageiro.id
+            },
+            data: {
+              clienteId: cliente.id
+            }
+          }));
+
+        case 11:
+          _context.next = 15;
           break;
 
-        case 9:
-          _context.prev = 9;
-          _context.t0 = _context["catch"](0);
-          console.error(_context.t0); // sempre bom logar o erro no servidor
+        case 13:
+          _context.next = 15;
+          return regeneratorRuntime.awrap(prisma.passageiro.create({
+            data: {
+              nome: clientData.nome,
+              typeDocumentSelected: clientData.typeDocumentSelected,
+              documento: clientData.documento,
+              clienteId: cliente.id
+            }
+          }));
 
+        case 15:
+          res.status(201).json(cliente);
+          _context.next = 22;
+          break;
+
+        case 18:
+          _context.prev = 18;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
           res.status(400).json({
             error: "Erro ao criar cliente",
             details: _context.t0
           });
 
-        case 13:
+        case 22:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 18]]);
 };
 
 exports.findAll = function _callee2(req, res) {

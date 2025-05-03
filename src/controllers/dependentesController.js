@@ -8,47 +8,68 @@ exports.create = async (req, res) => {
     // Verifica se já existe um dependente com o mesmo documento para o cliente
     const existingDependente = await prisma.dependente.findFirst({
       where: {
-        clienteId: clienteId,
-        documento: documento,
+        clienteId,
+        documento,
       },
     });
 
     if (existingDependente) {
-      // Se já existe, apenas retorna o dependente existente
       return res.status(200).json(existingDependente);
     }
 
-    // Se não existe, cria um novo dependente
-    if (clienteId) {
-      const dependente = await prisma.dependente.create({
-        data: {
-          nome,
-          typeDocumentSelected,
-          documento,
-          clienteId,
-          passageiro: {
-            create: {
-              nome,
-              typeDocumentSelected: typeDocumentSelected ?? '',
-              documento: documento ?? '',
-            }
-          }
+    if (!clienteId) {
+      return res.status(202).json({ msg: "Não há cliente cadastrado para associar esse dependente" });
+    }
+
+    // Cria o dependente
+    const novoDependente = await prisma.dependente.create({
+      data: {
+        nome,
+        typeDocumentSelected,
+        documento,
+        clienteId
+      }
+    });
+
+    // Verifica se já existe passageiro com mesmo documento
+    const existingPassageiro = await prisma.passageiro.findUnique({
+      where: {
+        documento
+      }
+    });
+
+    let passageiro;
+
+    if (existingPassageiro) {
+      // Atualiza passageiro existente com o novo dependenteId
+      passageiro = await prisma.passageiro.update({
+        where: {
+          id: existingPassageiro.id
         },
-        include: {
-          passageiro: true
+        data: {
+          dependenteId: novoDependente.id
         }
       });
-    
-      return res.status(201).json(dependente);
+    } else {
+      // Cria passageiro novo
+      passageiro = await prisma.passageiro.create({
+        data: {
+          nome,
+          typeDocumentSelected: typeDocumentSelected ?? '',
+          documento: documento ?? '',
+          dependenteId: novoDependente.id
+        }
+      });
     }
-    
-    res.status(202).json({msg: "não há cliente cadastrado para associar esse dependente"});
+
+    return res.status(201).json({ ...novoDependente, passageiro });
 
   } catch (err) {
     console.error(err);
     res.status(400).json({ error: "Erro ao criar dependente", details: err.message || err });
   }
 };
+
 
 exports.getAll = async (req, res) => {
   try {

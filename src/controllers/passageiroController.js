@@ -63,20 +63,22 @@ exports.remove = async (req, res) => {
       return res.status(404).json({ error: "Passageiro não encontrado" });
     }
 
+    // Verifica se o passageiro está vinculado a um cliente ou dependente
+    if (passageiro.clienteId || passageiro.dependenteId) {
+      return res.status(400).json({
+        error: "Não é permitido remover passageiro vinculado a cliente ou dependente",
+      });
+    }
+
     // Remove o passageiro
     await prisma.passageiro.delete({
       where: { id: req.params.id },
     });
 
-    // Se for um passageiro que também é dependente, remova o dependente
-    if (passageiro.dependenteId) {
-      await prisma.dependente.delete({
-        where: { id: passageiro.dependenteId },
-      });
-    }
+    res.json({ message: "Passageiro removido com sucesso" });
 
-    res.json({ message: "Passageiro e dependente (caso exista) removido com sucesso" });
   } catch (error) {
     res.status(400).json({ error: "Erro ao remover passageiro", details: error });
   }
 };
+
