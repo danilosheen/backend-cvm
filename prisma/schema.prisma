@@ -24,30 +24,33 @@ model Cliente {
   ultimaViagem         DateTime?
   createdAt            DateTime     @default(now())
   updatedAt            DateTime     @updatedAt
-  dependentes          Dependente[]
-  passageiro           Passageiro?
+  dependentes          Dependente[] @relation("DependentesDoCliente")
+  passageiro           Passageiro?  @relation("PassageiroDoCliente")
 }
 
 model Dependente {
-  id                   String   @id @default(uuid())
+  id                   String      @id @default(uuid())
   nome                 String
   typeDocumentSelected String?
   documento            String?
   clienteId            String
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-  cliente              Cliente  @relation(fields: [clienteId], references: [id])
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  cliente              Cliente     @relation("DependentesDoCliente", fields: [clienteId], references: [id], onDelete: Cascade)
+  passageiro           Passageiro? @relation("PassageiroDoDependente")
 }
 
 model Passageiro {
-  id                   String   @id @default(uuid())
+  id                   String      @id @default(uuid())
   nome                 String
   typeDocumentSelected String
   documento            String
-  clienteId            String?  @unique
-  cliente              Cliente? @relation(fields: [clienteId], references: [id])
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  clienteId            String?     @unique
+  dependenteId         String?     @unique
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  cliente              Cliente?    @relation("PassageiroDoCliente", fields: [clienteId], references: [id], onDelete: Cascade)
+  dependente           Dependente? @relation("PassageiroDoDependente", fields: [dependenteId], references: [id], onDelete: Cascade)
 }
 
 model FluxoCaixa {

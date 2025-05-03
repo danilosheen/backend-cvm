@@ -160,37 +160,71 @@ exports.update = function _callee4(req, res) {
 };
 
 exports.remove = function _callee5(req, res) {
+  var passageiro;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return regeneratorRuntime.awrap(prisma.passageiro["delete"]({
+          return regeneratorRuntime.awrap(prisma.passageiro.findUnique({
             where: {
               id: req.params.id
             }
           }));
 
         case 3:
-          res.json({
-            message: "Passageiro removido com sucesso"
-          });
-          _context5.next = 9;
-          break;
+          passageiro = _context5.sent;
+
+          if (passageiro) {
+            _context5.next = 6;
+            break;
+          }
+
+          return _context5.abrupt("return", res.status(404).json({
+            error: "Passageiro não encontrado"
+          }));
 
         case 6:
-          _context5.prev = 6;
+          _context5.next = 8;
+          return regeneratorRuntime.awrap(prisma.passageiro["delete"]({
+            where: {
+              id: req.params.id
+            }
+          }));
+
+        case 8:
+          if (!passageiro.dependenteId) {
+            _context5.next = 11;
+            break;
+          }
+
+          _context5.next = 11;
+          return regeneratorRuntime.awrap(prisma.dependente["delete"]({
+            where: {
+              id: passageiro.dependenteId
+            }
+          }));
+
+        case 11:
+          res.json({
+            message: "Passageiro e dependente (caso exista) removido com sucesso"
+          });
+          _context5.next = 17;
+          break;
+
+        case 14:
+          _context5.prev = 14;
           _context5.t0 = _context5["catch"](0);
           res.status(400).json({
             error: "Erro ao remover passageiro",
             details: _context5.t0
           });
 
-        case 9:
+        case 17:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 6]]);
+  }, null, null, [[0, 14]]);
 };

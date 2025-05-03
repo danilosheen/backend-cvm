@@ -95,39 +95,11 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
-    // Primeiro, procura o cliente associado ao passageiro e aos dependentes
-    const cliente = await prisma.cliente.findUnique({
-      where: { id: req.params.id },
-      include: {
-        passageiro: true,  // Inclui o passageiro
-        dependentes: true, // Inclui os dependentes
-      },
-    });
-
-    // Se o cliente existir
-    if (cliente) {
-      // Se tiver um passageiro, exclui
-      if (cliente.passageiro) {
-        await prisma.passageiro.delete({
-          where: { id: cliente.passageiro.id },
-        });
-      }
-
-      // Se tiver dependentes, exclui todos
-      if (cliente.dependentes && cliente.dependentes.length > 0) {
-        const dependenteIds = cliente.dependentes.map(dep => dep.id);
-        await prisma.dependente.deleteMany({
-          where: { id: { in: dependenteIds } },
-        });
-      }
-    }
-
-    // Agora, exclui o cliente
     await prisma.cliente.delete({
       where: { id: req.params.id },
     });
 
-    res.json({ message: "Cliente, passageiro e dependentes removidos com sucesso" });
+    res.json({ message: "Cliente e dados relacionados removidos com sucesso" });
 
   } catch (err) {
     console.error(err);

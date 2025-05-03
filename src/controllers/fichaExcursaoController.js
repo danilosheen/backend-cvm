@@ -55,7 +55,7 @@ exports.generatePDF = async (req, res) => {
     }
 
     const dataAtual = getDataArquivo();
-    emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', `Ficha de excursão_${dataAtual}`);
+    emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', `Ficha de excursão_${dataAtual}`);
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);

@@ -8,7 +8,9 @@ var path = require("path");
 
 var handlebars = require("handlebars");
 
-require('dotenv').config(); // Configurar o transporte
+require('dotenv').config();
+
+var formatarNome = require("../utils/formatNomeCliente"); // Configurar o transporte
 
 
 var transporter = nodemailer.createTransport({
@@ -21,9 +23,9 @@ var transporter = nodemailer.createTransport({
   }
 }); // Função para enviar e-mail
 
-function enviarEmail(nomeCliente, destinatario, assunto) {
+function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) {
   var data, templateHtml, template, html, info;
-  return regeneratorRuntime.async(function enviarEmail$(_context) {
+  return regeneratorRuntime.async(function enviarEmailNotaAgradecimento$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -63,9 +65,9 @@ function enviarEmail(nomeCliente, destinatario, assunto) {
   }, null, null, [[0, 12]]);
 }
 
-function enviarDocumento(documentoBuffer, destinatario, assunto, tipoDocumento) {
+function enviarDocumentoGerado(documentoBuffer, destinatario, assunto, tipoDocumento) {
   var info;
-  return regeneratorRuntime.async(function enviarDocumento$(_context2) {
+  return regeneratorRuntime.async(function enviarDocumentoGerado$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -101,7 +103,51 @@ function enviarDocumento(documentoBuffer, destinatario, assunto, tipoDocumento) 
   }, null, null, [[0, 8]]);
 }
 
+function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
+  var nomeClienteFormatado, data, templateHtml, template, html, info;
+  return regeneratorRuntime.async(function enviarFelizAniversario$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          nomeClienteFormatado = formatarNome.formatarNome(nomeCliente);
+          data = {
+            nomeClienteFormatado: nomeClienteFormatado,
+            destinatario: destinatario,
+            assunto: assunto
+          };
+          templateHtml = fs.readFileSync(path.join(__dirname, "../templates/feliz-aniversario.html"), "utf8");
+          template = handlebars.compile(templateHtml);
+          html = template(data);
+          _context3.next = 8;
+          return regeneratorRuntime.awrap(transporter.sendMail({
+            from: "\"CVM Turismo\" <".concat(process.env.EMAIL, ">"),
+            to: destinatario,
+            subject: assunto,
+            html: "".concat(html) // Formato HTML
+
+          }));
+
+        case 8:
+          info = _context3.sent;
+          console.log("📨 Email enviado: ", info.messageId);
+          return _context3.abrupt("return", info);
+
+        case 13:
+          _context3.prev = 13;
+          _context3.t0 = _context3["catch"](0);
+          console.error("❌ Erro ao enviar email: ", _context3.t0);
+
+        case 16:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+}
+
 module.exports = {
-  enviarEmail: enviarEmail,
-  enviarDocumento: enviarDocumento
+  enviarEmailNotaAgradecimento: enviarEmailNotaAgradecimento,
+  enviarDocumentoGerado: enviarDocumentoGerado,
+  enviarFelizAniversario: enviarFelizAniversario
 };

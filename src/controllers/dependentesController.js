@@ -19,17 +19,29 @@ exports.create = async (req, res) => {
     }
 
     // Se não existe, cria um novo dependente
-    if(clienteId){
+    if (clienteId) {
       const dependente = await prisma.dependente.create({
         data: {
           nome,
           typeDocumentSelected,
           documento,
           clienteId,
+          passageiro: {
+            create: {
+              nome,
+              typeDocumentSelected: typeDocumentSelected ?? '',
+              documento: documento ?? '',
+            }
+          }
         },
+        include: {
+          passageiro: true
+        }
       });
+    
       return res.status(201).json(dependente);
     }
+    
     res.status(202).json({msg: "não há cliente cadastrado para associar esse dependente"});
 
   } catch (err) {

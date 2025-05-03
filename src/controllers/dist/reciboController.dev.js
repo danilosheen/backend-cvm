@@ -47,7 +47,7 @@ exports.generatePDF = function _callee(req, res) {
           }
 
           dataAtual = getDataArquivo();
-          emailService.enviarDocumento(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Recibo_".concat(dataAtual)); // Envia o PDF para o cliente (frontend)
+          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Recibo_".concat(dataAtual)); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
           _context.next = 21;

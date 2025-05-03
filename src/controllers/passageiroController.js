@@ -55,10 +55,27 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
+    const passageiro = await prisma.passageiro.findUnique({
+      where: { id: req.params.id },
+    });
+
+    if (!passageiro) {
+      return res.status(404).json({ error: "Passageiro não encontrado" });
+    }
+
+    // Remove o passageiro
     await prisma.passageiro.delete({
       where: { id: req.params.id },
     });
-    res.json({ message: "Passageiro removido com sucesso" });
+
+    // Se for um passageiro que também é dependente, remova o dependente
+    if (passageiro.dependenteId) {
+      await prisma.dependente.delete({
+        where: { id: passageiro.dependenteId },
+      });
+    }
+
+    res.json({ message: "Passageiro e dependente (caso exista) removido com sucesso" });
   } catch (error) {
     res.status(400).json({ error: "Erro ao remover passageiro", details: error });
   }

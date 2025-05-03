@@ -194,80 +194,27 @@ exports.update = function _callee4(req, res) {
 };
 
 exports.remove = function _callee5(req, res) {
-  var cliente, dependenteIds;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return regeneratorRuntime.awrap(prisma.cliente.findUnique({
-            where: {
-              id: req.params.id
-            },
-            include: {
-              passageiro: true,
-              // Inclui o passageiro
-              dependentes: true // Inclui os dependentes
-
-            }
-          }));
-
-        case 3:
-          cliente = _context5.sent;
-
-          if (!cliente) {
-            _context5.next = 12;
-            break;
-          }
-
-          if (!cliente.passageiro) {
-            _context5.next = 8;
-            break;
-          }
-
-          _context5.next = 8;
-          return regeneratorRuntime.awrap(prisma.passageiro["delete"]({
-            where: {
-              id: cliente.passageiro.id
-            }
-          }));
-
-        case 8:
-          if (!(cliente.dependentes && cliente.dependentes.length > 0)) {
-            _context5.next = 12;
-            break;
-          }
-
-          dependenteIds = cliente.dependentes.map(function (dep) {
-            return dep.id;
-          });
-          _context5.next = 12;
-          return regeneratorRuntime.awrap(prisma.dependente.deleteMany({
-            where: {
-              id: {
-                "in": dependenteIds
-              }
-            }
-          }));
-
-        case 12:
-          _context5.next = 14;
           return regeneratorRuntime.awrap(prisma.cliente["delete"]({
             where: {
               id: req.params.id
             }
           }));
 
-        case 14:
+        case 3:
           res.json({
-            message: "Cliente, passageiro e dependentes removidos com sucesso"
+            message: "Cliente e dados relacionados removidos com sucesso"
           });
-          _context5.next = 21;
+          _context5.next = 10;
           break;
 
-        case 17:
-          _context5.prev = 17;
+        case 6:
+          _context5.prev = 6;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
           res.status(400).json({
@@ -275,10 +222,10 @@ exports.remove = function _callee5(req, res) {
             details: _context5.t0
           });
 
-        case 21:
+        case 10:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 6]]);
 };

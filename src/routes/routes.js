@@ -12,6 +12,7 @@ router.post("/recibo", pdfReciboController.generatePDF);
 router.post("/ficha-excursao", pdfFichaExcursaoController.generatePDF);
 router.post("/lista-passageiros", pdflistaPassageirosController.generatePDF);
 router.post("/nota-agradecimento", pdfNotaAgradecimentoController.generatePDF);
-router.post("/enviar-email", enviarEmailController.enviarEmail);
+router.post("/enviar-nota-agradecimento", enviarEmailController.enviarEmailNotaAgradecimento);
+router.post("/feliz-aniversario", enviarEmailController.enviarEmailAniversario);
 
 module.exports = router;
