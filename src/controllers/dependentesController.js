@@ -151,13 +151,36 @@ exports.remove = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Exclui o dependente pelo ID
-    await prisma.dependente.delete({
+    // Verifica se o dependente existe e busca o passageiro relacionado
+    const dependente = await prisma.dependente.findUnique({
       where: { id },
+      include: {
+        passageiro: true
+      }
     });
+
+    if (!dependente) {
+      return res.status(404).json({ error: "Dependente não encontrado." });
+    }
+
+    // Se o passageiro existir e não estiver ligado a um cliente, remove também
+    if (dependente.passageiro) {
+      const passageiro = await prisma.passageiro.findUnique({
+        where: { id: dependente.passageiro.id },
+        select: { clienteId: true }
+      });
+
+      if (!passageiro?.clienteId) {
+        await prisma.passageiro.delete({ where: { id: dependente.passageiro.id } });
+      }
+    }
+
+    // Agora sim, remove o dependente
+    await prisma.dependente.delete({ where: { id } });
 
     res.status(200).json({ message: "Dependente removido com sucesso." });
   } catch (err) {
     res.status(400).json({ error: "Erro ao excluir dependente", details: err });
   }
 };
+

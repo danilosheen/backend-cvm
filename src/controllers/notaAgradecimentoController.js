@@ -3,7 +3,8 @@ const pdfNotaAgradecimentoService = require("../services/notaAgradecimentoServic
 exports.generatePDF = async (req, res) => {
   try {
     const {
-      nomeCliente
+      nomeCliente,
+      pdfName
     } = req.body;
 
     const pdfBuffer = await pdfNotaAgradecimentoService.createPDF(

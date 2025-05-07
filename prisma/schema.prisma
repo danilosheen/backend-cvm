@@ -50,7 +50,7 @@ model Passageiro {
   createdAt            DateTime    @default(now())
   updatedAt            DateTime    @updatedAt
   cliente              Cliente?    @relation("PassageiroDoCliente", fields: [clienteId], references: [id], onDelete: Cascade)
-  dependente           Dependente? @relation("PassageiroDoDependente", fields: [dependenteId], references: [id], onDelete: Cascade)
+  dependente           Dependente? @relation("PassageiroDoDependente", fields: [dependenteId], references: [id])
 }
 
 model FluxoCaixa {

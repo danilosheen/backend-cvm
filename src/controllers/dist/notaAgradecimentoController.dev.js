@@ -3,13 +3,14 @@
 var pdfNotaAgradecimentoService = require("../services/notaAgradecimentoService");
 
 exports.generatePDF = function _callee(req, res) {
-  var nomeCliente, pdfBuffer, allowedOrigins, origin;
+  var _req$body, nomeCliente, pdfName, pdfBuffer, allowedOrigins, origin;
+
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          nomeCliente = req.body.nomeCliente;
+          _req$body = req.body, nomeCliente = _req$body.nomeCliente, pdfName = _req$body.pdfName;
           _context.next = 4;
           return regeneratorRuntime.awrap(pdfNotaAgradecimentoService.createPDF(nomeCliente));
 
