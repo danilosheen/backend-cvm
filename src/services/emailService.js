@@ -36,8 +36,6 @@ async function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) 
       subject: assunto,
       html: `${html}` // Formato HTML
     });
-
-    console.log("📨 Email enviado: ", info.messageId);
     return info;
   } catch (error) {
     console.error("❌ Erro ao enviar email: ", error);
@@ -59,8 +57,6 @@ async function enviarDocumentoGerado(documentoBuffer, destinatario, assunto, tip
         }
       ]
     });
-
-    console.log("📨 Email enviado: ", info.messageId);
     return info;
   } catch (error){
     console.error("❌ Erro ao enviar email: ", error);
@@ -91,8 +87,6 @@ async function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
       subject: assunto,
       html: `${html}` // Formato HTML
     });
-
-    console.log("📨 Email enviado: ", info.messageId);
     return info;
   } catch (error) {
     console.error("❌ Erro ao enviar email: ", error);

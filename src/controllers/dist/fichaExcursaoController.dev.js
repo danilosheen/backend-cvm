@@ -3,27 +3,25 @@
 var _require = require("../utils/dateFormated"),
     getDateFormated = _require.getDateFormated;
 
-var _require2 = require("../utils/dateFormated"),
-    getDataArquivo = _require2.getDataArquivo;
-
 var pdfFichaExcursaoService = require("../services/fichaExcursaoService");
 
 var emailService = require("../services/emailService");
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, cliente, servicos, tipoDeHospedagem, valorIntegralExcursao, entradaParcelamento, valorParcelas, qtdParcelas, dataPagamentoParcela, dependentes, dataGeracao, pdfBuffer, allowedOrigins, origin, dataAtual;
+  var _req$body$pdfData, excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, cliente, servicos, tipoDeHospedagem, valorIntegralExcursao, entradaParcelamento, valorParcelas, qtdParcelas, dataPagamentoParcela, dependentes, pdfName, dataGeracao, pdfBuffer, allowedOrigins, origin;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _req$body = req.body, excursaoPara = _req$body.excursaoPara, localSaida = _req$body.localSaida, dataSaida = _req$body.dataSaida, horaSaida = _req$body.horaSaida, dataRetorno = _req$body.dataRetorno, horaRetorno = _req$body.horaRetorno, cliente = _req$body.cliente, servicos = _req$body.servicos, tipoDeHospedagem = _req$body.tipoDeHospedagem, valorIntegralExcursao = _req$body.valorIntegralExcursao, entradaParcelamento = _req$body.entradaParcelamento, valorParcelas = _req$body.valorParcelas, qtdParcelas = _req$body.qtdParcelas, dataPagamentoParcela = _req$body.dataPagamentoParcela, dependentes = _req$body.dependentes;
+          _req$body$pdfData = req.body.pdfData, excursaoPara = _req$body$pdfData.excursaoPara, localSaida = _req$body$pdfData.localSaida, dataSaida = _req$body$pdfData.dataSaida, horaSaida = _req$body$pdfData.horaSaida, dataRetorno = _req$body$pdfData.dataRetorno, horaRetorno = _req$body$pdfData.horaRetorno, cliente = _req$body$pdfData.cliente, servicos = _req$body$pdfData.servicos, tipoDeHospedagem = _req$body$pdfData.tipoDeHospedagem, valorIntegralExcursao = _req$body$pdfData.valorIntegralExcursao, entradaParcelamento = _req$body$pdfData.entradaParcelamento, valorParcelas = _req$body$pdfData.valorParcelas, qtdParcelas = _req$body$pdfData.qtdParcelas, dataPagamentoParcela = _req$body$pdfData.dataPagamentoParcela, dependentes = _req$body$pdfData.dependentes;
+          pdfName = req.body.pdfName;
           dataGeracao = getDateFormated();
-          _context.next = 5;
+          _context.next = 6;
           return regeneratorRuntime.awrap(pdfFichaExcursaoService.createPDF(excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, cliente, servicos, tipoDeHospedagem, valorIntegralExcursao, entradaParcelamento, valorParcelas, qtdParcelas, dataPagamentoParcela, dependentes, dataGeracao));
 
-        case 5:
+        case 6:
           pdfBuffer = _context.sent;
           // Configura os headers para o navegador reconhecer o arquivo como PDF
           res.setHeader("Content-Type", "application/pdf");
@@ -36,8 +34,7 @@ exports.generatePDF = function _callee(req, res) {
             res.setHeader("Access-Control-Allow-Origin", origin);
           }
 
-          dataAtual = getDataArquivo();
-          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Ficha de excurs\xE3o_".concat(dataAtual)); // Envia o PDF para o cliente (frontend)
+          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da ficha de excursão gerada', pdfName); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
           _context.next = 20;

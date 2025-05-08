@@ -49,20 +49,19 @@ function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) {
 
         case 7:
           info = _context.sent;
-          console.log("📨 Email enviado: ", info.messageId);
           return _context.abrupt("return", info);
 
-        case 12:
-          _context.prev = 12;
+        case 11:
+          _context.prev = 11;
           _context.t0 = _context["catch"](0);
           console.error("❌ Erro ao enviar email: ", _context.t0);
 
-        case 15:
+        case 14:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 11]]);
 }
 
 function enviarDocumentoGerado(documentoBuffer, destinatario, assunto, tipoDocumento) {
@@ -87,20 +86,19 @@ function enviarDocumentoGerado(documentoBuffer, destinatario, assunto, tipoDocum
 
         case 3:
           info = _context2.sent;
-          console.log("📨 Email enviado: ", info.messageId);
           return _context2.abrupt("return", info);
 
-        case 8:
-          _context2.prev = 8;
+        case 7:
+          _context2.prev = 7;
           _context2.t0 = _context2["catch"](0);
           console.error("❌ Erro ao enviar email: ", _context2.t0);
 
-        case 11:
+        case 10:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 8]]);
+  }, null, null, [[0, 7]]);
 }
 
 function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
@@ -130,20 +128,19 @@ function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
 
         case 8:
           info = _context3.sent;
-          console.log("📨 Email enviado: ", info.messageId);
           return _context3.abrupt("return", info);
 
-        case 13:
-          _context3.prev = 13;
+        case 12:
+          _context3.prev = 12;
           _context3.t0 = _context3["catch"](0);
           console.error("❌ Erro ao enviar email: ", _context3.t0);
 
-        case 16:
+        case 15:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 12]]);
 }
 
 module.exports = {

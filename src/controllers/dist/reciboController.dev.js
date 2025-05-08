@@ -3,9 +3,6 @@
 var _require = require("../utils/dateFormated"),
     getDateFormated = _require.getDateFormated;
 
-var _require2 = require("../utils/dateFormated"),
-    getDataArquivo = _require2.getDataArquivo;
-
 var porExtensoFormatado = require("../utils/porExtenso");
 
 var pdfReciboService = require("../services/reciboService");
@@ -15,14 +12,15 @@ var emailService = require("../services/emailService");
 var extenso = require('extenso');
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body, nomeCliente, valor, pacoteViagem, formaPagamento, dataGeracao, valorPorExtenso, pdfBuffer, allowedOrigins, origin, dataAtual;
+  var _req$body$pdfData, nomeCliente, valor, pacoteViagem, formaPagamento, pdfName, dataGeracao, valorPorExtenso, pdfBuffer, allowedOrigins, origin;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _req$body = req.body, nomeCliente = _req$body.nomeCliente, valor = _req$body.valor, pacoteViagem = _req$body.pacoteViagem, formaPagamento = _req$body.formaPagamento;
+          _req$body$pdfData = req.body.pdfData, nomeCliente = _req$body$pdfData.nomeCliente, valor = _req$body$pdfData.valor, pacoteViagem = _req$body$pdfData.pacoteViagem, formaPagamento = _req$body$pdfData.formaPagamento;
+          pdfName = req.body.pdfName;
           dataGeracao = getDateFormated();
           valorPorExtenso = porExtensoFormatado(extenso(valor, {
             mode: 'currency',
@@ -30,10 +28,10 @@ exports.generatePDF = function _callee(req, res) {
               code: 'BRL'
             }
           }));
-          _context.next = 6;
+          _context.next = 7;
           return regeneratorRuntime.awrap(pdfReciboService.createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, formaPagamento, dataGeracao));
 
-        case 6:
+        case 7:
           pdfBuffer = _context.sent;
           // Configura os headers para o navegador reconhecer o arquivo como PDF
           res.setHeader("Content-Type", "application/pdf");
@@ -46,8 +44,7 @@ exports.generatePDF = function _callee(req, res) {
             res.setHeader("Access-Control-Allow-Origin", origin);
           }
 
-          dataAtual = getDataArquivo();
-          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', "Recibo_".concat(dataAtual)); // Envia o PDF para o cliente (frontend)
+          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup do recibo gerado', pdfName); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
           _context.next = 21;

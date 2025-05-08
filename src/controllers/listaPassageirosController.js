@@ -1,5 +1,4 @@
 const { getDateFormated } = require("../utils/dateFormated");
-const { getDataArquivo } = require("../utils/dateFormated");
 const pdfListaPassageirosService = require("../services/listaPassageirosService");
 const emailService = require("../services/emailService");
 
@@ -20,7 +19,9 @@ exports.generatePDF = async (req, res) => {
       horaRetorno,
       extensaoRoteiroKm,
       passageiros
-    } = req.body;
+    } = req.body.pdfData;
+
+    const pdfName = req.body.pdfName;
 
     const dataGeracao = getDateFormated();
     const qtdPassageiros = passageiros.length;
@@ -80,8 +81,7 @@ exports.generatePDF = async (req, res) => {
      res.setHeader("Access-Control-Allow-Origin", origin);
     }
 
-    const dataHoje = getDataArquivo();
-    emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de documento gerado', `Lista de passageiros_${dataHoje}`);
+    emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da lista de passageiros gerada', pdfName);
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);
