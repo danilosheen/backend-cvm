@@ -139,24 +139,61 @@ exports.update = function _callee4(req, res) {
 
         case 3:
           passageiro = _context4.sent;
-          res.json(passageiro);
-          _context4.next = 10;
-          break;
+
+          if (!passageiro.clienteId) {
+            _context4.next = 7;
+            break;
+          }
+
+          _context4.next = 7;
+          return regeneratorRuntime.awrap(prisma.cliente.update({
+            where: {
+              id: passageiro.clienteId
+            },
+            data: {
+              nome: req.body.nome,
+              typeDocumentSelected: req.body.typeDocumentSelected,
+              documento: req.body.documento
+            }
+          }));
 
         case 7:
-          _context4.prev = 7;
+          if (!passageiro.dependenteId) {
+            _context4.next = 10;
+            break;
+          }
+
+          _context4.next = 10;
+          return regeneratorRuntime.awrap(prisma.dependente.update({
+            where: {
+              id: passageiro.dependenteId
+            },
+            data: {
+              nome: req.body.nome,
+              typeDocumentSelected: req.body.typeDocumentSelected,
+              documento: req.body.documento
+            }
+          }));
+
+        case 10:
+          res.json(passageiro);
+          _context4.next = 16;
+          break;
+
+        case 13:
+          _context4.prev = 13;
           _context4.t0 = _context4["catch"](0);
           res.status(400).json({
             error: "Erro ao atualizar passageiro",
             details: _context4.t0
           });
 
-        case 10:
+        case 16:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 13]]);
 };
 
 exports.remove = function _callee5(req, res) {

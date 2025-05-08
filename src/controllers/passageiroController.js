@@ -47,11 +47,36 @@ exports.update = async (req, res) => {
       where: { id: req.params.id },
       data: req.body,
     });
+
+    // Se o passageiro estiver vinculado a um cliente, atualize também o cliente
+    if (passageiro.clienteId) {
+      await prisma.cliente.update({
+        where: { id: passageiro.clienteId },
+        data: {
+          nome: req.body.nome,
+          typeDocumentSelected: req.body.typeDocumentSelected,
+          documento: req.body.documento,
+        }
+      });
+    }
+
+    if (passageiro.dependenteId){
+      await prisma.dependente.update({
+        where:{id: passageiro.dependenteId},
+        data: {
+          nome: req.body.nome,
+          typeDocumentSelected: req.body.typeDocumentSelected,
+          documento: req.body.documento,
+        }
+      });
+    }
+
     res.json(passageiro);
   } catch (error) {
     res.status(400).json({ error: "Erro ao atualizar passageiro", details: error });
   }
 };
+
 
 exports.remove = async (req, res) => {
   try {
