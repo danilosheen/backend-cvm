@@ -16,12 +16,10 @@ exports.criarFluxo = async (req, res) => {
     // Converte para ISO 8601
     const isoString = dataOrdenada.toISOString();
 
-    const valorNumerico = parseFloat(valor.replace(',', '.'));
-
     const fluxo = await prisma.fluxoCaixa.create({
       data: {
         tipo,
-        valor: valorNumerico,
+        valor,
         data: isoString,
         formaPagamento,
         descricao
@@ -46,6 +44,72 @@ exports.listarFluxos = async (req, res) => {
   }
 };
 
+exports.listarFluxosPorMes = async (req, res) => {
+  try {
+    const { mes, ano } = req.query;
+
+    if (!mes || !ano) {
+      return res.status(400).json({ error: 'Mês e ano são obrigatórios.' });
+    }
+
+    const mesNum = parseInt(mes, 10) - 1; // JS começa os meses no 0
+    const anoNum = parseInt(ano, 10);
+
+    const inicio = new Date(anoNum, mesNum, 1);
+    const fim = new Date(anoNum, mesNum + 1, 0, 23, 59, 59, 999); // Último dia do mês
+
+    const fluxos = await prisma.fluxoCaixa.findMany({
+      where: {
+        data: {
+          gte: inicio,
+          lte: fim,
+        }
+      },
+      orderBy: {
+        data: 'asc'
+      }
+    });
+
+    res.json(fluxos);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Erro ao listar fluxos por mês.' });
+  }
+};
+
+exports.listarFluxosPorIntervalo = async (req, res) => {
+  try {
+    const { dataInicio, dataFim } = req.query;
+
+    if (!dataInicio || !dataFim) {
+      return res.status(400).json({ error: 'Data inicial e final são obrigatórias.' });
+    }
+
+    const inicio = new Date(dataInicio);
+    const fim = new Date(dataFim);
+    fim.setHours(23, 59, 59, 999); // Para incluir o dia final completo
+
+    const fluxos = await prisma.fluxoCaixa.findMany({
+      where: {
+        data: {
+          gte: inicio,
+          lte: fim,
+        }
+      },
+      orderBy: {
+        data: 'asc'
+      }
+    });
+
+    res.json(fluxos);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Erro ao listar fluxos por intervalo.' });
+  }
+};
+
+
+
 exports.buscarFluxoPorId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -65,13 +129,16 @@ exports.atualizarFluxo = async (req, res) => {
   try {
     const { id } = req.params;
     const { tipo, valor, data, formaPagamento, descricao } = req.body;
+    
+    const [dia, mes, ano] = data.split("/").map(Number);
+    const dateIso = new Date(ano, mes - 1, dia);
 
     const fluxo = await prisma.fluxoCaixa.update({
       where: { id },
       data: {
         tipo,
         valor,
-        data: new Date(data),
+        data: dateIso,
         formaPagamento,
         descricao
       }
