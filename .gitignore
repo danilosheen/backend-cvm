@@ -5,3 +5,6 @@
 
 /src/generated
 .\src\generated
+
+/prisma/migrations
+.\prisma\migrations
