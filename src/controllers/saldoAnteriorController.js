@@ -19,12 +19,14 @@ exports.create = async (req, res) => {
     //se já existir, apenas atualiza
     if(saldoCadastrado){
       novoSaldo = await prisma.saldoAnterior.update({
+        where:{id: saldoCadastrado.id},
         data:{
           mes: mes,
           ano: ano,
           saldoAnterior: saldoAnterior
         }
       })
+      return res.status(200).json(novoSaldo);
     } else {
       novoSaldo = await prisma.saldoAnterior.create({
         data: {

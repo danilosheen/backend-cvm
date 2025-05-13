@@ -27,12 +27,15 @@ exports.create = function _callee(req, res) {
           saldoCadastrado = _context.sent;
 
           if (!saldoCadastrado) {
-            _context.next = 11;
+            _context.next = 12;
             break;
           }
 
           _context.next = 8;
           return regeneratorRuntime.awrap(prisma.saldoAnterior.update({
+            where: {
+              id: saldoCadastrado.id
+            },
             data: {
               mes: mes,
               ano: ano,
@@ -42,11 +45,10 @@ exports.create = function _callee(req, res) {
 
         case 8:
           novoSaldo = _context.sent;
-          _context.next = 14;
-          break;
+          return _context.abrupt("return", res.status(200).json(novoSaldo));
 
-        case 11:
-          _context.next = 13;
+        case 12:
+          _context.next = 14;
           return regeneratorRuntime.awrap(prisma.saldoAnterior.create({
             data: {
               saldoAnterior: saldoAnterior,
@@ -55,25 +57,25 @@ exports.create = function _callee(req, res) {
             }
           }));
 
-        case 13:
+        case 14:
           novoSaldo = _context.sent;
 
-        case 14:
+        case 15:
           res.status(201).json(novoSaldo);
-          _context.next = 20;
+          _context.next = 21;
           break;
 
-        case 17:
-          _context.prev = 17;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](0);
           res.status(500).json("Não foi possível cadastrar o saldo restante");
 
-        case 20:
+        case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 18]]);
 };
 
 exports.read = function _callee2(req, res) {
