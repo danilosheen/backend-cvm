@@ -52,11 +52,12 @@ exports.listarFluxosPorMes = async (req, res) => {
       return res.status(400).json({ error: 'Mês e ano são obrigatórios.' });
     }
 
-    const mesNum = parseInt(mes, 10) - 1; // JS começa os meses no 0
+    const mesNum = parseInt(mes, 10) - 1; // JS começa no 0
     const anoNum = parseInt(ano, 10);
 
-    const inicio = new Date(anoNum, mesNum, 1);
-    const fim = new Date(anoNum, mesNum + 1, 0, 23, 59, 59, 999); // Último dia do mês
+    // Criando datas em UTC correto
+    const inicio = new Date(Date.UTC(anoNum, mesNum, 1, 0, 0, 0, 0));
+    const fim = new Date(Date.UTC(anoNum, mesNum + 1, 0, 23, 59, 59, 999));
 
     const fluxos = await prisma.fluxoCaixa.findMany({
       where: {
@@ -76,6 +77,7 @@ exports.listarFluxosPorMes = async (req, res) => {
     res.status(500).json({ error: 'Erro ao listar fluxos por mês.' });
   }
 };
+
 
 exports.listarFluxosPorIntervalo = async (req, res) => {
   try {

@@ -117,12 +117,12 @@ exports.listarFluxosPorMes = function _callee3(req, res) {
           }));
 
         case 4:
-          mesNum = parseInt(mes, 10) - 1; // JS começa os meses no 0
+          mesNum = parseInt(mes, 10) - 1; // JS começa no 0
 
-          anoNum = parseInt(ano, 10);
-          inicio = new Date(anoNum, mesNum, 1);
-          fim = new Date(anoNum, mesNum + 1, 0, 23, 59, 59, 999); // Último dia do mês
+          anoNum = parseInt(ano, 10); // Criando datas em UTC correto
 
+          inicio = new Date(Date.UTC(anoNum, mesNum, 1, 0, 0, 0, 0));
+          fim = new Date(Date.UTC(anoNum, mesNum + 1, 0, 23, 59, 59, 999));
           _context3.next = 10;
           return regeneratorRuntime.awrap(prisma.fluxoCaixa.findMany({
             where: {
