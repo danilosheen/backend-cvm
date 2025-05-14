@@ -17,10 +17,11 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL,
-    // Seu e-mail
-    pass: process.env.PASS // Senha de App do Gmail
-
-  }
+    pass: process.env.PASS
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 }); // Função para enviar e-mail
 
 function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) {
