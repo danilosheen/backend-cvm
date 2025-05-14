@@ -39,7 +39,16 @@ function getDataArquivo() {
   return dataFormatada.replace(",", "");
 }
 
+function converteDataIsoToString(data) {
+  var date = new Date(data);
+  var dia = date.getDate().toString().padStart(2, "0");
+  var mes = (date.getMonth() + 1).toString().padStart(2, "0");
+  var ano = date.getFullYear().toString();
+  return "".concat(dia, "/").concat(mes, "/").concat(ano);
+}
+
 module.exports = {
   getDateFormated: getDateFormated,
-  getDataArquivo: getDataArquivo
+  getDataArquivo: getDataArquivo,
+  converteDataIsoToString: converteDataIsoToString
 };

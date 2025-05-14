@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório mensal CVM Turismo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 10pt;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 25px;
+    }
+
+    h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2{
+      font-size: 13pt;
+    }
+
+    ul {
+      margin-left: 30px;
+    }
+
+    .container {
+      /* padding: 20px 70px 20px 70px; */
+      position: relative;
+    }
+
+    .center{
+      text-align: center;
+      padding-left: 0px;
+    }
+
+    table{
+      width: 100%;
+    }
+
+    table, th, td{
+      border-collapse: collapse;
+      border: none;
+    }
+
+    th{
+      background-color: rgb(41, 41, 41);
+      color: white;
+    }
+
+    td{
+      padding-left: 5px;
+    }
+
+    tr:nth-child(odd){
+      background-color: rgb(240, 240, 240);
+    }
+
+    tr:nth-child(even){
+      background-color: rgb(209, 209, 209);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <strong>
+      <h1>Relatório de entradas e saídas da CVM Turismo</h1>
+    </strong>
+    <strong>
+      <h1>Período de referência: {{mesAno}}</h1>
+    </strong>
+    <div>
+      <table>
+        <tr>
+          <th>Saldo anterior</th>
+          <th>Entradas</th>
+          <th>Saídas</th>
+          <th>Saldo Restante</th>
+        </tr>
+        <tr>
+          <th>{{saldoAnterior}}</th>
+          <th>{{entradas}}</th>
+          <th>{{saidas}}</th>
+          <th>{{saldoRestante}}</th>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Movimentação</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Forma de pagamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#fluxos}}
+          <tr>
+            <td>{{data}}</td>
+            <td>{{tipo}}</td>
+            <td>{{descricao}}</td>
+            <td>{{valor}}</td>
+            <td class="center">{{formaPagamento}}</td>
+          </tr>
+          {{/fluxos}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

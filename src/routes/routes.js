@@ -5,6 +5,7 @@ const pdfReciboController = require("../controllers/reciboController");
 const pdfFichaExcursaoController = require("../controllers/fichaExcursaoController");
 const pdflistaPassageirosController = require("../controllers/listaPassageirosController");
 const pdfNotaAgradecimentoController = require("../controllers/notaAgradecimentoController");
+const pdfGerarRelatorioController = require('../controllers/gerarRelatorioController');
 const enviarEmailController = require('../controllers/enviarEmailController');
 
 router.post("/orcamento", pdfOrcamentoController.generatePDF);
@@ -14,5 +15,6 @@ router.post("/lista-passageiros", pdflistaPassageirosController.generatePDF);
 router.post("/nota-agradecimento", pdfNotaAgradecimentoController.generatePDF);
 router.post("/enviar-nota-agradecimento", enviarEmailController.enviarEmailNotaAgradecimento);
 router.post("/feliz-aniversario", enviarEmailController.enviarEmailAniversario);
+router.post("/gerar-relatorio", pdfGerarRelatorioController.generatePDF);
 
 module.exports = router;

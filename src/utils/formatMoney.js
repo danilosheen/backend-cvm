@@ -8,7 +8,15 @@ function upperCase(string){
   return string.toUpperCase();
 }
 
+function formatarParaBrl(valor) {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(valor);
+}
+
 module.exports = {
   formatServices,
-  upperCase
+  upperCase,
+  formatarParaBrl
 }

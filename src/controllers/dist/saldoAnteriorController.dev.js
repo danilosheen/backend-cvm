@@ -103,7 +103,9 @@ exports.read = function _callee2(req, res) {
             break;
           }
 
-          return _context2.abrupt("return", res.status(404).json("Saldo não encontrado para o mês e ano informados"));
+          return _context2.abrupt("return", res.status(200).json({
+            saldoAnterior: 0
+          }));
 
         case 7:
           res.status(200).json(saldoAnterior);

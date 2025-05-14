@@ -51,7 +51,7 @@ exports.read = async (req, res) => {
     });
 
     if (!saldoAnterior) {
-      return res.status(404).json("Saldo não encontrado para o mês e ano informados");
+      return res.status(200).json({saldoAnterior: 0});
     }
 
     res.status(200).json(saldoAnterior);

@@ -14,6 +14,8 @@ var pdflistaPassageirosController = require("../controllers/listaPassageirosCont
 
 var pdfNotaAgradecimentoController = require("../controllers/notaAgradecimentoController");
 
+var pdfGerarRelatorioController = require('../controllers/gerarRelatorioController');
+
 var enviarEmailController = require('../controllers/enviarEmailController');
 
 router.post("/orcamento", pdfOrcamentoController.generatePDF);
@@ -23,4 +25,5 @@ router.post("/lista-passageiros", pdflistaPassageirosController.generatePDF);
 router.post("/nota-agradecimento", pdfNotaAgradecimentoController.generatePDF);
 router.post("/enviar-nota-agradecimento", enviarEmailController.enviarEmailNotaAgradecimento);
 router.post("/feliz-aniversario", enviarEmailController.enviarEmailAniversario);
+router.post("/gerar-relatorio", pdfGerarRelatorioController.generatePDF);
 module.exports = router;

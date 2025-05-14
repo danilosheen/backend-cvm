@@ -16,7 +16,16 @@ function getDataArquivo(){
   return dataFormatada.replace(",", "");
 }
 
+function converteDataIsoToString(data){
+  const date = new Date(data);
+  const dia = date.getDate().toString().padStart(2, "0");
+  const mes = (date.getMonth() + 1).toString().padStart(2, "0");
+  const ano = date.getFullYear().toString()
+  return `${dia}/${mes}/${ano}`
+}
+
 module.exports = {
   getDateFormated,
-  getDataArquivo
+  getDataArquivo,
+  converteDataIsoToString
 }
