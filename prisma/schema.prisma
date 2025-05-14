@@ -14,7 +14,7 @@ model Cliente {
   nome                 String
   dataNascimento       String?
   contato              String?
-  email                String?      @unique
+  email                String?
   typeDocumentSelected String?
   documento            String?      @unique
   cidade               String?
