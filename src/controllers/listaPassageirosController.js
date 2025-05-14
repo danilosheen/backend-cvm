@@ -54,6 +54,12 @@ exports.generatePDF = async (req, res) => {
       }
     }
 
+    // transformar nomes em caixa alta
+    passageiros.map(passageiro => {
+      passageiro.nome = passageiro.nome.toUpperCase();
+    });
+
+
     const pdfBuffer = await pdfListaPassageirosService.createPDF(
       numeroCarroP1,
       numeroCarroP2,

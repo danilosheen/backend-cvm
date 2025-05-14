@@ -116,10 +116,14 @@ exports.generatePDF = function _callee(req, res) {
           return _context.finish(33);
 
         case 41:
-          _context.next = 43;
+          // transformar nomes em caixa alta
+          passageiros.map(function (passageiro) {
+            passageiro.nome = passageiro.nome.toUpperCase();
+          });
+          _context.next = 44;
           return regeneratorRuntime.awrap(pdfListaPassageirosService.createPDF(numeroCarroP1, numeroCarroP2, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, qtdPassageiros, passageiros, dataGeracao));
 
-        case 43:
+        case 44:
           pdfBuffer = _context.sent;
           // Configura os headers para o navegador reconhecer o arquivo como PDF
           res.setHeader("Content-Type", "application/pdf");
@@ -135,21 +139,21 @@ exports.generatePDF = function _callee(req, res) {
           emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da lista de passageiros gerada', pdfName); // Envia o PDF para o cliente (frontend)
 
           res.end(pdfBuffer);
-          _context.next = 57;
+          _context.next = 58;
           break;
 
-        case 53:
-          _context.prev = 53;
+        case 54:
+          _context.prev = 54;
           _context.t1 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t1);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 57:
+        case 58:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 53], [11, 29, 33, 41], [34,, 36, 40]]);
+  }, null, null, [[0, 54], [11, 29, 33, 41], [34,, 36, 40]]);
 };
