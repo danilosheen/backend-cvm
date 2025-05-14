@@ -32,6 +32,8 @@ exports.generatePDF = async (req, res) => {
      res.setHeader("Access-Control-Allow-Origin", origin);
     }
 
+    await emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup de relatório gerado', pdfName);
+
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);
   } catch (error) {

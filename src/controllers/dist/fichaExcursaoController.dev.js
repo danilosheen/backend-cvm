@@ -34,24 +34,27 @@ exports.generatePDF = function _callee(req, res) {
             res.setHeader("Access-Control-Allow-Origin", origin);
           }
 
-          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da ficha de excursão gerada', pdfName); // Envia o PDF para o cliente (frontend)
+          _context.next = 14;
+          return regeneratorRuntime.awrap(emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da ficha de excursão gerada', pdfName));
 
+        case 14:
+          // Envia o PDF para o cliente (frontend)
           res.end(pdfBuffer);
-          _context.next = 20;
+          _context.next = 21;
           break;
 
-        case 16:
-          _context.prev = 16;
+        case 17:
+          _context.prev = 17;
           _context.t0 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t0);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 20:
+        case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 16]]);
+  }, null, null, [[0, 17]]);
 };
