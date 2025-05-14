@@ -10,14 +10,14 @@ var handlebars = require("handlebars");
 
 var puppeteerCore = require("puppeteer-core");
 
-var chromium = require("@sparticuz/chromium-min");
+var chromium = require("@sparticuz/chromium");
 
 var _require = require("../utils/formatMoney"),
     formatServices = _require.formatServices,
     upperCase = _require.upperCase;
 
 function createPDF(excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, cliente, servicos, tipoDeHospedagem, valorIntegralExcursao, entradaParcelamento, valorParcelas, qtdParcelas, dataPagamentoParcela, dependentes, dataGeracao) {
-  var servicosFormatado, tipoDeHospedagemFormatado, data, templateHtml, template, html, browser, executablePath, page, pdfBuffer;
+  var servicosFormatado, tipoDeHospedagemFormatado, data, templateHtml, template, html, browser, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -48,76 +48,83 @@ function createPDF(excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, 
           html = template(data);
 
           if (!(process.env.AWS_LAMBDA_FUNCTION_VERSION || process.env.VERCEL || process.env.RENDER)) {
-            _context.next = 16;
+            _context.next = 23;
             break;
           }
 
-          _context.next = 10;
-          return regeneratorRuntime.awrap(chromium.executablePath('https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar'));
+          _context.t0 = regeneratorRuntime;
+          _context.t1 = puppeteerCore;
+          _context.next = 12;
+          return regeneratorRuntime.awrap(chromium.executablePath());
 
-        case 10:
-          executablePath = _context.sent;
-          _context.next = 13;
-          return regeneratorRuntime.awrap(puppeteerCore.launch({
-            executablePath: executablePath,
-            args: chromium.args,
-            headless: chromium.headless,
-            defaultViewport: chromium.defaultViewport
-          }));
+        case 12:
+          _context.t2 = _context.sent;
+          _context.t3 = chromium.args;
+          _context.t4 = chromium.headless;
+          _context.t5 = chromium.defaultViewport;
+          _context.t6 = {
+            executablePath: _context.t2,
+            args: _context.t3,
+            headless: _context.t4,
+            defaultViewport: _context.t5
+          };
+          _context.t7 = _context.t1.launch.call(_context.t1, _context.t6);
+          _context.next = 20;
+          return _context.t0.awrap.call(_context.t0, _context.t7);
 
-        case 13:
+        case 20:
           browser = _context.sent;
-          _context.next = 19;
+          _context.next = 26;
           break;
 
-        case 16:
-          _context.next = 18;
+        case 23:
+          _context.next = 25;
           return regeneratorRuntime.awrap(puppeteer.launch({
             args: ["--no-sandbox"],
             headless: true
           }));
 
-        case 18:
+        case 25:
           browser = _context.sent;
 
-        case 19:
-          _context.next = 21;
+        case 26:
+          _context.next = 28;
           return regeneratorRuntime.awrap(browser.newPage());
 
-        case 21:
+        case 28:
           page = _context.sent;
-          _context.next = 24;
+          _context.next = 31;
           return regeneratorRuntime.awrap(page.setContent(html, {
             waitUntil: "networkidle0"
           }));
 
-        case 24:
-          _context.next = 26;
+        case 31:
+          _context.next = 33;
           return regeneratorRuntime.awrap(page.pdf({
             format: "A4",
             printBackground: true
           }));
 
-        case 26:
+        case 33:
           pdfBuffer = _context.sent;
-          _context.next = 29;
+          _context.next = 36;
           return regeneratorRuntime.awrap(browser.close());
 
-        case 29:
+        case 36:
           return _context.abrupt("return", pdfBuffer);
 
-        case 32:
-          _context.prev = 32;
-          _context.t0 = _context["catch"](0);
-          console.error("Erro ao gerar PDF:", _context.t0);
-          throw _context.t0;
+        case 39:
+          _context.prev = 39;
+          _context.t8 = _context["catch"](0);
+          console.error("Erro ao gerar PDF:", _context.t8);
+          throw _context.t8;
 
-        case 36:
+        case 43:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 32]]);
+  }, null, null, [[0, 39]]);
 }
 
 module.exports = {

@@ -3,7 +3,7 @@ const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core")
-const chromium  = require("@sparticuz/chromium-min");
+const chromium  = require("@sparticuz/chromium");
 
 async function createPDF(
   nomeCliente,
@@ -22,9 +22,8 @@ async function createPDF(
 
     let browser;
     if (process.env.AWS_LAMBDA_FUNCTION_VERSION || process.env.VERCEL || process.env.RENDER) {
-      const executablePath = await chromium.executablePath('https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar')
             browser = await puppeteerCore.launch({
-                executablePath,
+                executablePath: await chromium.executablePath(),
                 args: chromium.args,
                 headless: chromium.headless,
                 defaultViewport: chromium.defaultViewport
