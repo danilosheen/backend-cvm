@@ -8,10 +8,10 @@ const formatarNome = require("../utils/formatNomeCliente")
 // Configurar o transporte
 const transporter = nodemailer.createTransport({
   service: 'gmail',
-  auth: { user: process.env.EMAIL, pass: process.env.PASS },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
+  auth: { 
+    user: process.env.EMAIL, 
+    pass: process.env.PASS 
+  },
 });
 
 // Função para enviar e-mail

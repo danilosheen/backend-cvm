@@ -44,24 +44,27 @@ exports.generatePDF = function _callee(req, res) {
             res.setHeader("Access-Control-Allow-Origin", origin);
           }
 
-          emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup do recibo gerado', pdfName); // Envia o PDF para o cliente (frontend)
+          _context.next = 15;
+          return regeneratorRuntime.awrap(emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup do recibo gerado', pdfName));
 
+        case 15:
+          // Envia o PDF para o cliente (frontend)
           res.end(pdfBuffer);
-          _context.next = 21;
+          _context.next = 22;
           break;
 
-        case 17:
-          _context.prev = 17;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](0);
           console.error("Erro ao gerar PDF:", _context.t0);
           res.status(500).json({
             error: "Erro ao gerar PDF"
           });
 
-        case 21:
+        case 22:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 18]]);
 };

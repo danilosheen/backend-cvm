@@ -18,10 +18,7 @@ var transporter = nodemailer.createTransport({
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000
+  }
 }); // Função para enviar e-mail
 
 function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) {
