@@ -2,6 +2,8 @@
 
 var pdfGerarRelatorioService = require("../services/gerarRelatorioService");
 
+var emailService = require("../services/emailService");
+
 exports.generatePDF = function _callee(req, res) {
   var _req$body, fluxos, saldoAnterior, entradas, saidas, saldoRestante, mesAno, pdfName, pdfBuffer, allowedOrigins, origin;
 
