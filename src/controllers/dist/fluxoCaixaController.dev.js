@@ -265,7 +265,7 @@ exports.buscarFluxoPorId = function _callee5(req, res) {
 };
 
 exports.atualizarFluxo = function _callee6(req, res) {
-  var id, _req$body2, tipo, valor, data, formaPagamento, descricao, _data$split$map, _data$split$map2, dia, mes, ano, dateIso, fluxo;
+  var id, _req$body2, tipo, valor, data, formaPagamento, descricao, fluxo;
 
   return regeneratorRuntime.async(function _callee6$(_context6) {
     while (1) {
@@ -274,9 +274,7 @@ exports.atualizarFluxo = function _callee6(req, res) {
           _context6.prev = 0;
           id = req.params.id;
           _req$body2 = req.body, tipo = _req$body2.tipo, valor = _req$body2.valor, data = _req$body2.data, formaPagamento = _req$body2.formaPagamento, descricao = _req$body2.descricao;
-          _data$split$map = data.split("/").map(Number), _data$split$map2 = _slicedToArray(_data$split$map, 3), dia = _data$split$map2[0], mes = _data$split$map2[1], ano = _data$split$map2[2];
-          dateIso = new Date(ano, mes - 1, dia);
-          _context6.next = 7;
+          _context6.next = 5;
           return regeneratorRuntime.awrap(prisma.fluxoCaixa.update({
             where: {
               id: id
@@ -284,31 +282,31 @@ exports.atualizarFluxo = function _callee6(req, res) {
             data: {
               tipo: tipo,
               valor: valor,
-              data: dateIso,
+              data: data,
               formaPagamento: formaPagamento,
               descricao: descricao
             }
           }));
 
-        case 7:
+        case 5:
           fluxo = _context6.sent;
           res.json(fluxo);
-          _context6.next = 14;
+          _context6.next = 12;
           break;
 
-        case 11:
-          _context6.prev = 11;
+        case 9:
+          _context6.prev = 9;
           _context6.t0 = _context6["catch"](0);
           res.status(500).json({
             error: 'Erro ao atualizar fluxo de caixa.'
           });
 
-        case 14:
+        case 12:
         case "end":
           return _context6.stop();
       }
     }
-  }, null, null, [[0, 11]]);
+  }, null, null, [[0, 9]]);
 };
 
 exports.deletarFluxo = function _callee7(req, res) {

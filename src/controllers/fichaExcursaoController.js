@@ -1,6 +1,7 @@
 const { getDateFormated } = require("../utils/dateFormated");
 const pdfFichaExcursaoService = require("../services/fichaExcursaoService");
 const emailService = require("../services/emailService");
+require('dotenv').config();
 
 exports.generatePDF = async (req, res) => {
   try {
@@ -55,7 +56,7 @@ exports.generatePDF = async (req, res) => {
      res.setHeader("Access-Control-Allow-Origin", origin);
     }
 
-    await emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da ficha de excursão gerada', pdfName);
+    await emailService.enviarDocumentoGerado(pdfBuffer, `${process.env.EMAIL}`, 'Backup da ficha de excursão gerada', pdfName);
 
     // Envia o PDF para o cliente (frontend)
     res.end(pdfBuffer);

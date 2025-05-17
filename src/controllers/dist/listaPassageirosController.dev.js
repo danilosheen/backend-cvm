@@ -137,7 +137,7 @@ exports.generatePDF = function _callee(req, res) {
           }
 
           _context.next = 52;
-          return regeneratorRuntime.awrap(emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da lista de passageiros gerada', pdfName));
+          return regeneratorRuntime.awrap(emailService.enviarDocumentoGerado(pdfBuffer, "".concat(process.env.EMAIL), 'Backup da lista de passageiros gerada', pdfName));
 
         case 52:
           // Envia o PDF para o cliente (frontend)

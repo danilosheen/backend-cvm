@@ -131,16 +131,13 @@ exports.atualizarFluxo = async (req, res) => {
   try {
     const { id } = req.params;
     const { tipo, valor, data, formaPagamento, descricao } = req.body;
-    
-    const [dia, mes, ano] = data.split("/").map(Number);
-    const dateIso = new Date(ano, mes - 1, dia);
 
     const fluxo = await prisma.fluxoCaixa.update({
       where: { id },
       data: {
         tipo,
         valor,
-        data: dateIso,
+        data,
         formaPagamento,
         descricao
       }

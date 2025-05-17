@@ -7,6 +7,8 @@ var pdfFichaExcursaoService = require("../services/fichaExcursaoService");
 
 var emailService = require("../services/emailService");
 
+require('dotenv').config();
+
 exports.generatePDF = function _callee(req, res) {
   var _req$body$pdfData, excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, cliente, servicos, tipoDeHospedagem, valorIntegralExcursao, entradaParcelamento, valorParcelas, qtdParcelas, dataPagamentoParcela, dependentes, pdfName, dataGeracao, pdfBuffer, allowedOrigins, origin;
 
@@ -35,7 +37,7 @@ exports.generatePDF = function _callee(req, res) {
           }
 
           _context.next = 14;
-          return regeneratorRuntime.awrap(emailService.enviarDocumentoGerado(pdfBuffer, 'c.danilo.f.silva@gmail.com', 'Backup da ficha de excursão gerada', pdfName));
+          return regeneratorRuntime.awrap(emailService.enviarDocumentoGerado(pdfBuffer, "".concat(process.env.EMAIL), 'Backup da ficha de excursão gerada', pdfName));
 
         case 14:
           // Envia o PDF para o cliente (frontend)
