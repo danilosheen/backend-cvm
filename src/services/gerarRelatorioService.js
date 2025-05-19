@@ -2,10 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core")
+const puppeteerCore = require("puppeteer-core");
 const chromium  = require("@sparticuz/chromium");
 const { converteDataIsoToString } = require("../utils/dateFormated");
-const { formatarParaBrl } = require("../utils/formatMoney")
+const { formatarParaBrl } = require("../utils/formatMoney");
 
 async function createPDF(
   fluxos,

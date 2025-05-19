@@ -12,6 +12,9 @@ var puppeteerCore = require("puppeteer-core");
 
 var chromium = require("@sparticuz/chromium");
 
+var _require = require("../utils/dateFormated"),
+    converteDataIsoToString = _require.converteDataIsoToString;
+
 function createPDF(numeroCarroP1, numeroCarroP2, placa, motorista, origem, destino, dataSaida, horaSaida, dataRetorno, horaRetorno, extensaoRoteiroKm, qtdPassageiros, passageiros, dataGeracao) {
   var data, templateHtml, template, html, browser, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
@@ -29,9 +32,9 @@ function createPDF(numeroCarroP1, numeroCarroP2, placa, motorista, origem, desti
             motorista: motorista,
             origem: origem,
             destino: destino,
-            dataSaida: dataSaida,
+            dataSaida: converteDataIsoToString(dataSaida),
             horaSaida: horaSaida,
-            dataRetorno: dataRetorno,
+            dataRetorno: converteDataIsoToString(dataRetorno),
             horaRetorno: horaRetorno,
             extensaoRoteiroKm: extensaoRoteiroKm,
             qtdPassageiros: qtdPassageiros,

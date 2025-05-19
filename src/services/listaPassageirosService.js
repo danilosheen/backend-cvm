@@ -2,8 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core")
+const puppeteerCore = require("puppeteer-core");
 const chromium  = require("@sparticuz/chromium");
+const { converteDataIsoToString } = require("../utils/dateFormated");
 
 async function createPDF(
   numeroCarroP1,
@@ -34,9 +35,9 @@ async function createPDF(
       motorista,
       origem,
       destino,
-      dataSaida,
+      dataSaida: converteDataIsoToString(dataSaida),
       horaSaida,
-      dataRetorno,
+      dataRetorno: converteDataIsoToString(dataRetorno),
       horaRetorno,
       extensaoRoteiroKm,
       qtdPassageiros,

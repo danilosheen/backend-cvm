@@ -2,9 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core")
+const puppeteerCore = require("puppeteer-core");
 const chromium  = require("@sparticuz/chromium");
 const { formatServices, upperCase } = require("../utils/formatMoney");
+const { converteDataIsoToString } = require("../utils/dateFormated");
+const { formatarParaBrl } = require("../utils/formatMoney");
 
 async function createPDF(
   excursaoPara,
@@ -27,19 +29,20 @@ async function createPDF(
   try {
     const servicosFormatado = formatServices(servicos);
     const tipoDeHospedagemFormatado = upperCase(tipoDeHospedagem);
+
     const data = {
       excursaoPara,
       localSaida,
-      dataSaida,
+      dataSaida: converteDataIsoToString(dataSaida),
       horaSaida,
-      dataRetorno,
+      dataRetorno: converteDataIsoToString(dataRetorno),
       horaRetorno,
       cliente,
       servicosFormatado,
       tipoDeHospedagemFormatado,
-      valorIntegralExcursao,
-      entradaParcelamento,
-      valorParcelas,
+      valorIntegralExcursao: formatarParaBrl(valorIntegralExcursao),
+      entradaParcelamento: formatarParaBrl(entradaParcelamento),
+      valorParcelas: formatarParaBrl(valorParcelas),
       qtdParcelas,
       dataPagamentoParcela,
       dependentes,

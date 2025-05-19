@@ -16,6 +16,12 @@ var _require = require("../utils/formatMoney"),
     formatServices = _require.formatServices,
     upperCase = _require.upperCase;
 
+var _require2 = require("../utils/dateFormated"),
+    converteDataIsoToString = _require2.converteDataIsoToString;
+
+var _require3 = require("../utils/formatMoney"),
+    formatarParaBrl = _require3.formatarParaBrl;
+
 function createPDF(excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, horaRetorno, cliente, servicos, tipoDeHospedagem, valorIntegralExcursao, entradaParcelamento, valorParcelas, qtdParcelas, dataPagamentoParcela, dependentes, dataGeracao) {
   var servicosFormatado, tipoDeHospedagemFormatado, data, templateHtml, template, html, browser, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
@@ -28,16 +34,16 @@ function createPDF(excursaoPara, localSaida, dataSaida, horaSaida, dataRetorno, 
           data = {
             excursaoPara: excursaoPara,
             localSaida: localSaida,
-            dataSaida: dataSaida,
+            dataSaida: converteDataIsoToString(dataSaida),
             horaSaida: horaSaida,
-            dataRetorno: dataRetorno,
+            dataRetorno: converteDataIsoToString(dataRetorno),
             horaRetorno: horaRetorno,
             cliente: cliente,
             servicosFormatado: servicosFormatado,
             tipoDeHospedagemFormatado: tipoDeHospedagemFormatado,
-            valorIntegralExcursao: valorIntegralExcursao,
-            entradaParcelamento: entradaParcelamento,
-            valorParcelas: valorParcelas,
+            valorIntegralExcursao: formatarParaBrl(valorIntegralExcursao),
+            entradaParcelamento: formatarParaBrl(entradaParcelamento),
+            valorParcelas: formatarParaBrl(valorParcelas),
             qtdParcelas: qtdParcelas,
             dataPagamentoParcela: dataPagamentoParcela,
             dependentes: dependentes,

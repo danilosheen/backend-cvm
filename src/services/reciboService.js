@@ -2,8 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core")
-const chromium = require("@sparticuz/chromium")
+const puppeteerCore = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
+const { formatarParaBrl } = require("../utils/formatMoney");
 
 async function createPDF(
   nomeCliente,
@@ -23,7 +24,7 @@ async function createPDF(
     }
     const data = {
       nomeCliente,
-      valor,
+      valor: formatarParaBrl(valor),
       valorPorExtenso,
       pacoteViagem,
       formaPagamento,

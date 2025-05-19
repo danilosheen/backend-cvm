@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core")
+const puppeteerCore = require("puppeteer-core");
 const chromium  = require("@sparticuz/chromium");
 
 async function createPDF(

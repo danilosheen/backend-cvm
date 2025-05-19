@@ -5,6 +5,8 @@ const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core")
 const chromium  = require("@sparticuz/chromium");
 const { converteStringToFloat, converteFloatToString } = require("../utils/converteStringToFloat");
+const { converteDataIsoToString } = require("../utils/dateFormated");
+const { formatarParaBrl } = require("../utils/formatMoney");
 
 async function createPDF(
   nomeCliente,
@@ -26,21 +28,23 @@ async function createPDF(
 ) {
   try {
     const taxaPixNumber = parseFloat(taxaPix);
-    const valorComDespesaPix = converteFloatToString(converteStringToFloat(valorComDespesa) * (1+(taxaPixNumber/100)));
-    const valorSemDespesaPix = converteFloatToString(converteStringToFloat(valorSemDespesa) * (1+(taxaPixNumber/100)));
-    const valorComNotaPix = converteFloatToString(converteStringToFloat(valorComNota) * (1+(taxaPixNumber/100)));
+    
+    const valorComDespesaPix = formatarParaBrl(valorComDespesa * (1+(taxaPixNumber/100)))
+    const valorSemDespesaPix = formatarParaBrl(valorSemDespesa * (1+(taxaPixNumber/100)))
+    const valorComNotaPix = formatarParaBrl( valorComNota * (1+(taxaPixNumber/100)))
+  
     const data = {
       nomeCliente,
       telefoneContato,
       localSaida,
       destinoViagem,
-      dataSaida,
+      dataSaida: converteDataIsoToString(dataSaida),
       horaSaida,
-      dataRetorno,
+      dataRetorno : converteDataIsoToString(dataRetorno),
       horaRetorno,
-      valorComDespesa,
-      valorSemDespesa,
-      valorComNota,
+      valorComDespesa: formatarParaBrl(valorComDespesa),
+      valorSemDespesa: formatarParaBrl(valorSemDespesa),
+      valorComNota: formatarParaBrl(valorComNota),
       valorComDespesaPix,
       valorSemDespesaPix,
       valorComNotaPix,

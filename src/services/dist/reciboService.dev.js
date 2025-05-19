@@ -12,6 +12,9 @@ var puppeteerCore = require("puppeteer-core");
 
 var chromium = require("@sparticuz/chromium");
 
+var _require = require("../utils/formatMoney"),
+    formatarParaBrl = _require.formatarParaBrl;
+
 function createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, formaPagamento, dataGeracao) {
   var data, templateHtml, template, html, browser, page, pdfBuffer;
   return regeneratorRuntime.async(function createPDF$(_context) {
@@ -39,7 +42,7 @@ function createPDF(nomeCliente, valor, valorPorExtenso, pacoteViagem, formaPagam
 
           data = {
             nomeCliente: nomeCliente,
-            valor: valor,
+            valor: formatarParaBrl(valor),
             valorPorExtenso: valorPorExtenso,
             pacoteViagem: pacoteViagem,
             formaPagamento: formaPagamento,
