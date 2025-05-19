@@ -5,22 +5,11 @@ exports.criarFluxo = async (req, res) => {
   try {
     const { tipo, valor, data, formaPagamento, descricao } = req.body;
 
-    const dataString = data;
-
-    // Quebra a string em partes: [dia, mês, ano]
-    const [dia, mes, ano] = dataString.split('/');
-
-    // Cria um objeto Date
-    const dataOrdenada = new Date(ano, mes - 1, dia);
-
-    // Converte para ISO 8601
-    const isoString = dataOrdenada.toISOString();
-
     const fluxo = await prisma.fluxoCaixa.create({
       data: {
         tipo,
         valor,
-        data: isoString,
+        data,
         formaPagamento,
         descricao
       }
