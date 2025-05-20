@@ -48,6 +48,7 @@ async function createPDF(
       valorComDespesaPix,
       valorSemDespesaPix,
       valorComNotaPix,
+      taxaPix: taxaPixNumber,
       modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
       cortesiaKm: cortesiaKm || "30",
       valorAcrescimoKm: valorAcrescimoKm || "4,50",

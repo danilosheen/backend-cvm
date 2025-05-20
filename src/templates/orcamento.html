@@ -39,10 +39,10 @@
     }
 
     .qr-code {
-      width: 140px;
+      width: 120px;
       position: absolute;
       right: 40px;
-      top: 10px;
+      top: 5px;
     }
 
     .info {
@@ -78,22 +78,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     .rodape p{
-      font-size: 18px;
+      font-size: 12px;
       font-weight: bold;
     }
 
     .rodape img{
-      width: 150px;
+      width: 110px;
     }
 
     .data-geracao{
       text-align: end;
       margin-right: 40px;
+      font-size: 12px;
     }
 
     .text-red{
@@ -167,19 +167,19 @@
         <li>
           <p>
             Valor da viagem com despesas do motorista por conta do <strong>CLIENTE</strong>: <br>
-            &nbsp;<strong>{{valorComDespesa}}</strong> (em Dinheiro) e <strong>{{valorComDespesaPix}}</strong> (no PIX).
+            &nbsp;<strong>{{valorComDespesaPix}}</strong> (no PIX) e <strong>{{valorComDespesa}}</strong> (desconto de {{taxaPix}}% em dinheiro).
           </p>
         </li>
         <li>
           <p>
             Valor da viagem com despesas do motorista por conta da <strong>CVM</strong>: <br>
-            &nbsp;<strong>{{valorSemDespesa}}</strong> (em Dinheiro) e <strong>{{valorSemDespesaPix}}</strong> (no PIX).
+            &nbsp;<strong>{{valorSemDespesaPix}}</strong> (no PIX) e <strong>{{valorSemDespesa}}</strong> (desconto de {{taxaPix}}% em dinheiro).
         </p>
         </li>
         <li>
           <p>
             Valor da viagem com emissão de nota fiscal de serviço: <br>
-            &nbsp;<strong>{{valorComNota}}</strong> (em Dinheiro) e <strong>{{valorComNotaPix}}</strong> (no PIX).
+            &nbsp;<strong>{{valorComNotaPix}}</strong> (no PIX) e <strong>{{valorComNota}}</strong> (desconto de {{taxaPix}}% em dinheiro).
           </p>
         </li>
         <li>
