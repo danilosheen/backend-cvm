@@ -6,8 +6,9 @@ const passageiroRoutes = require("./routes/passageiroRoutes");
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const authRoutes = require("./routes/authRoutes");
 const fluxoRoutes = require("./routes/fluxoCaixaRouter");
-const dependenteRoutes = require("./routes/dependenteRoutes")
-const saldoAnteriorRoutes = require("./routes/saldoAnteriorRoutes")
+const dependenteRoutes = require("./routes/dependenteRoutes");
+const saldoAnteriorRoutes = require("./routes/saldoAnteriorRoutes");
+const orcamentoHistoryRoutes = require("./routes/historyDocsRoutes/orcamentoHistoryRoutes")
 
 const app = express();
 app.use(cors({
@@ -23,6 +24,7 @@ app.use("/api", authRoutes);
 app.use('/api/fluxo-caixa', fluxoRoutes);
 app.use('/api', dependenteRoutes);
 app.use('/api', saldoAnteriorRoutes);
+app.use('/api', orcamentoHistoryRoutes);
 
 module.exports = app;
 

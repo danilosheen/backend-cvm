@@ -1,5 +1,6 @@
 const { getDateFormated } = require("../utils/dateFormated");
 const pdfOrcamentoService = require("../services/orcamentoService");
+const orcamentoHistoryService = require("../services/historyDocs/orcamentoHistoryService");
 const emailService = require("../services/emailService");
 
 exports.generatePDF = async (req, res) => {
@@ -21,6 +22,9 @@ exports.generatePDF = async (req, res) => {
       cortesiaKm,
       valorAcrescimoKm,
     } = req.body.pdfData;
+
+    // Chama o service que cria um orcamentoHistory
+    await orcamentoHistoryService.create(req.body.pdfData);
 
     const pdfName = req.body.pdfName;
 
