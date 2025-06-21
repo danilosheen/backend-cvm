@@ -23,9 +23,6 @@ exports.generatePDF = async (req, res) => {
       valorAcrescimoKm,
     } = req.body.pdfData;
 
-    // Chama o service que cria um orcamentoHistory
-    await orcamentoHistoryService.create(req.body.pdfData);
-
     const pdfName = req.body.pdfName;
 
     const dataGeracao = getDateFormated();
