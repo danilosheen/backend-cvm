@@ -6,7 +6,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model Cliente {
@@ -26,6 +26,8 @@ model Cliente {
   updatedAt            DateTime     @updatedAt
   dependentes          Dependente[] @relation("DependentesDoCliente")
   passageiro           Passageiro?  @relation("PassageiroDoCliente")
+
+  FichaExcursaoHistory FichaExcursaoHistory[]
 }
 
 model Dependente {
@@ -56,6 +58,7 @@ model Passageiro {
 model FluxoCaixa {
   id             String         @id @default(uuid())
   tipo           TipoOperacao
+  tipoDocumento  String         @default("")
   valor          Float
   data           DateTime
   formaPagamento FormaPagamento
@@ -106,6 +109,55 @@ model OrcamentoHistory {
   valorAcrescimoKm Int?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model ListaPassageirosHistory {
+  id                String   @id @default(uuid())
+  numeroCarro       String
+  placa             String
+  motorista         String
+  origem            String
+  destino           String
+  dataSaida         DateTime
+  horaSaida         String
+  dataRetorno       DateTime
+  horaRetorno       String
+  extensaoRoteiroKm String
+  passageiros       Json
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model RecibosHistory {
+  id             String   @id @default(uuid())
+  nomeCliente    String
+  pacoteViagem   String
+  valor          String
+  formaPagamento String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model FichaExcursaoHistory {
+  id                    String   @id @default(uuid())
+  excursaoPara          String
+  localSaida            String
+  dataSaida             DateTime
+  horaSaida             String
+  dataRetorno           DateTime
+  horaRetorno           String
+  clienteid             String
+  tipoDeHospedagem      String
+  valorIntegralExcursao String
+  entradaParcelamento   String
+  valorParcelas         String
+  qtdParcelas           String
+  dataPagamentoParcelas String
+  dependentes           Json
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  cliente Cliente @relation(fields: [clienteid], references: [id])
 }
 
 model Usuario {
