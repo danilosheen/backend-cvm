@@ -6,18 +6,19 @@ var _require = require('../generated/prisma/client'),
 var prisma = new PrismaClient();
 
 exports.criarFluxo = function _callee(req, res) {
-  var _req$body, tipo, valor, data, formaPagamento, descricao, fluxo;
+  var _req$body, tipo, tipoDocumento, valor, data, formaPagamento, descricao, fluxo;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _req$body = req.body, tipo = _req$body.tipo, valor = _req$body.valor, data = _req$body.data, formaPagamento = _req$body.formaPagamento, descricao = _req$body.descricao;
+          _req$body = req.body, tipo = _req$body.tipo, tipoDocumento = _req$body.tipoDocumento, valor = _req$body.valor, data = _req$body.data, formaPagamento = _req$body.formaPagamento, descricao = _req$body.descricao;
           _context.next = 4;
           return regeneratorRuntime.awrap(prisma.fluxoCaixa.create({
             data: {
               tipo: tipo,
+              tipoDocumento: tipoDocumento,
               valor: valor,
               data: data,
               formaPagamento: formaPagamento,
@@ -250,7 +251,7 @@ exports.buscarFluxoPorId = function _callee5(req, res) {
 };
 
 exports.atualizarFluxo = function _callee6(req, res) {
-  var id, _req$body2, tipo, valor, data, formaPagamento, descricao, fluxo;
+  var id, _req$body2, tipo, tipoDocumento, valor, data, formaPagamento, descricao, fluxo;
 
   return regeneratorRuntime.async(function _callee6$(_context6) {
     while (1) {
@@ -258,7 +259,7 @@ exports.atualizarFluxo = function _callee6(req, res) {
         case 0:
           _context6.prev = 0;
           id = req.params.id;
-          _req$body2 = req.body, tipo = _req$body2.tipo, valor = _req$body2.valor, data = _req$body2.data, formaPagamento = _req$body2.formaPagamento, descricao = _req$body2.descricao;
+          _req$body2 = req.body, tipo = _req$body2.tipo, tipoDocumento = _req$body2.tipoDocumento, valor = _req$body2.valor, data = _req$body2.data, formaPagamento = _req$body2.formaPagamento, descricao = _req$body2.descricao;
           _context6.next = 5;
           return regeneratorRuntime.awrap(prisma.fluxoCaixa.update({
             where: {
@@ -266,6 +267,7 @@ exports.atualizarFluxo = function _callee6(req, res) {
             },
             data: {
               tipo: tipo,
+              tipoDocumento: tipoDocumento,
               valor: valor,
               data: data,
               formaPagamento: formaPagamento,

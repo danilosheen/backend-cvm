@@ -3,11 +3,12 @@ const prisma = new PrismaClient();
 
 exports.criarFluxo = async (req, res) => {
   try {
-    const { tipo, valor, data, formaPagamento, descricao } = req.body;
+    const { tipo, tipoDocumento, valor, data, formaPagamento, descricao } = req.body;
 
     const fluxo = await prisma.fluxoCaixa.create({
       data: {
         tipo,
+        tipoDocumento,
         valor,
         data,
         formaPagamento,
@@ -119,12 +120,13 @@ exports.buscarFluxoPorId = async (req, res) => {
 exports.atualizarFluxo = async (req, res) => {
   try {
     const { id } = req.params;
-    const { tipo, valor, data, formaPagamento, descricao } = req.body;
+    const { tipo, tipoDocumento, valor, data, formaPagamento, descricao } = req.body;
 
     const fluxo = await prisma.fluxoCaixa.update({
       where: { id },
       data: {
         tipo,
+        tipoDocumento,
         valor,
         data,
         formaPagamento,
