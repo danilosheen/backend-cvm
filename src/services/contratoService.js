@@ -55,8 +55,6 @@ async function createPDF(
 
   const numeroContrato = await gerarNumeroContrato();
 
-  console.log(detalhesLocacao)
-
   try {
     const data = {
       numeroContrato: String(numeroContrato).padStart(6, '0'),
