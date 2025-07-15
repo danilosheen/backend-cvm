@@ -30,16 +30,26 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
           tipoPessoa = tipoContrato == "CPF" ? 'física' : 'jurídica';
 
           if (detalhesLocacao) {
+            detalhesLocacao.kmTotal = new Intl.NumberFormat('pt-BR').format(detalhesLocacao.kmTotal);
+
             if (detalhesLocacao.valorTotal) {
               detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal);
-            }
-
-            if (detalhesLocacao.valorPorKm) {
-              detalhesLocacao.valorPorKm = formatarParaBrl(detalhesLocacao.valorPorKm);
+            } else {
+              detalhesLocacao.valorTotal = formatarParaBrl(0);
             }
 
             if (detalhesLocacao.valorKmExcedido) {
               detalhesLocacao.valorKmExcedido = formatarParaBrl(detalhesLocacao.valorKmExcedido);
+            } else {
+              detalhesLocacao.valorKmExcedido = formatarParaBrl(0);
+            }
+
+            if (!detalhesLocacao.kmCortesia) {
+              detalhesLocacao.kmCortesia = 0;
+            }
+
+            if (detalhesLocacao.tipoContratoLocacao != "NORMAL") {
+              detalhesLocacao.valorTotal = "".concat(detalhesLocacao.valorTotal, " por Km percorrido.");
             }
           }
 
@@ -48,7 +58,8 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
 
         case 4:
           numeroContrato = _context.sent;
-          _context.prev = 5;
+          console.log(detalhesLocacao);
+          _context.prev = 6;
           data = {
             numeroContrato: String(numeroContrato).padStart(6, '0'),
             tipoContrato: tipoContrato,
@@ -72,16 +83,16 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
           html = template(data);
 
           if (!(process.env.AWS_LAMBDA_FUNCTION_VERSION || process.env.VERCEL || process.env.RENDER)) {
-            _context.next = 27;
+            _context.next = 28;
             break;
           }
 
           _context.t0 = regeneratorRuntime;
           _context.t1 = puppeteerCore;
-          _context.next = 15;
+          _context.next = 16;
           return regeneratorRuntime.awrap(chromium.executablePath());
 
-        case 15:
+        case 16:
           _context.t2 = _context.sent;
           _context.t3 = chromium.args;
           _context.t4 = chromium.headless;
@@ -95,47 +106,47 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
             ignoreDefaultArgs: _context.t6
           };
           _context.t8 = _context.t1.launch.call(_context.t1, _context.t7);
-          _context.next = 24;
+          _context.next = 25;
           return _context.t0.awrap.call(_context.t0, _context.t8);
 
-        case 24:
+        case 25:
           browser = _context.sent;
-          _context.next = 30;
+          _context.next = 31;
           break;
 
-        case 27:
-          _context.next = 29;
+        case 28:
+          _context.next = 30;
           return regeneratorRuntime.awrap(puppeteer.launch({
             args: ["--no-sandbox"],
             headless: true
           }));
 
-        case 29:
+        case 30:
           browser = _context.sent;
 
-        case 30:
-          _context.next = 32;
+        case 31:
+          _context.next = 33;
           return regeneratorRuntime.awrap(browser.newPage());
 
-        case 32:
+        case 33:
           page = _context.sent;
-          _context.next = 35;
+          _context.next = 36;
           return regeneratorRuntime.awrap(page.setContent(html, {
             waitUntil: "networkidle0"
           }));
 
-        case 35:
-          _context.next = 37;
+        case 36:
+          _context.next = 38;
           return regeneratorRuntime.awrap(urlToBase64('https://i.ibb.co/gFrYDkdZ/logo-word.png'));
 
-        case 37:
+        case 38:
           logoWordBase64 = _context.sent;
-          _context.next = 40;
+          _context.next = 41;
           return regeneratorRuntime.awrap(urlToBase64('https://i.ibb.co/R42NPJTN/link179.png'));
 
-        case 40:
+        case 41:
           logoPrefeituraBase64 = _context.sent;
-          _context.next = 43;
+          _context.next = 44;
           return regeneratorRuntime.awrap(page.pdf({
             format: "A4",
             printBackground: true,
@@ -150,26 +161,26 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
             footerTemplate: "\n        <div style=\"width: 100%; padding: 5px 20px; text-align: center;\">\n          <img style=\"width: 100px\" src=\"".concat(logoPrefeituraBase64, "\">\n        </div>\n      ")
           }));
 
-        case 43:
+        case 44:
           pdfBuffer = _context.sent;
-          _context.next = 46;
+          _context.next = 47;
           return regeneratorRuntime.awrap(browser.close());
 
-        case 46:
+        case 47:
           return _context.abrupt("return", pdfBuffer);
 
-        case 49:
-          _context.prev = 49;
-          _context.t9 = _context["catch"](5);
+        case 50:
+          _context.prev = 50;
+          _context.t9 = _context["catch"](6);
           console.error("Erro ao gerar PDF:", _context.t9);
           throw _context.t9;
 
-        case 53:
+        case 54:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[5, 49]]);
+  }, null, null, [[6, 50]]);
 }
 
 module.exports = {

@@ -28,23 +28,34 @@ async function createPDF(
   const tipoPessoa = tipoContrato == "CPF" ? 'física' : 'jurídica';
 
 
-  if (detalhesLocacao){
-    if(detalhesLocacao.valorTotal){
+  if (detalhesLocacao) {
+
+    detalhesLocacao.kmTotal = new Intl.NumberFormat('pt-BR').format(detalhesLocacao.kmTotal);
+    
+    if (detalhesLocacao.valorTotal) {
       detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal);
+    } else {
+      detalhesLocacao.valorTotal = formatarParaBrl(0);
     }
-
-    if(detalhesLocacao.valorPorKm){
-      detalhesLocacao.valorPorKm = formatarParaBrl(detalhesLocacao.valorPorKm);
-    }
-
-    if(detalhesLocacao.valorKmExcedido){
+    
+    if (detalhesLocacao.valorKmExcedido) {
       detalhesLocacao.valorKmExcedido = formatarParaBrl(detalhesLocacao.valorKmExcedido);
+    } else {
+      detalhesLocacao.valorKmExcedido = formatarParaBrl(0);
+    }
+
+    if(!detalhesLocacao.kmCortesia) {
+      detalhesLocacao.kmCortesia = 0;
+    }
+
+    if(detalhesLocacao.tipoContratoLocacao != "NORMAL"){
+      detalhesLocacao.valorTotal = `${detalhesLocacao.valorTotal} por Km percorrido.`
     }
   }
 
   const numeroContrato = await gerarNumeroContrato();
 
-  
+  console.log(detalhesLocacao)
 
   try {
     const data = {
@@ -107,7 +118,7 @@ async function createPDF(
           <img style="width: 100%" src="${logoWordBase64}" alt="img-info">
         </div>
       `,
-  footerTemplate: `
+      footerTemplate: `
         <div style="width: 100%; padding: 5px 20px; text-align: center;">
           <img style="width: 100px" src="${logoPrefeituraBase64}">
         </div>
