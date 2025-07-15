@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recibo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 11pt;
+      text-align: justify;
+      line-height: 20px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 25px;
+    }
+
+    h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 30px;
+    }
+
+    .container {
+      padding: 0px 70px;
+      position: relative;
+    }
+
+    .marca-dagua {
+      position: absolute;
+      opacity: 10%;
+      width: 85%;
+      top: 300px;
+    }
+
+    .logo-topo {
+      width: 100%;
+    }
+
+    .texto-partes {
+      text-align: justify;
+      line-height: 18px;
+      font-size: 11pt;
+    }
+
+    .line {
+      background-color: black;
+      height: 1px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .text-representante {
+      font-size: 12pt;
+      text-align: center;
+    }
+
+    .assinaturas {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    .assinatura-cvm{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .assinatura-cliente{
+      display: flex;
+      width: 300px;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .assinatura-cvm img {
+      width: 300px;
+    }
+
+    .data-geracao{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img class="marca-dagua" src="https://i.ibb.co/JjR3kjLR/logo.png" alt="marca-dagua">
+    <strong>
+      <h1>CONTRATO Nº {{numeroContrato}}</h1>
+    </strong>
+
+    <p class="texto-partes">
+      Pelo presente instrumento particular, e na melhor forma de direito, a empresa <strong>CVM TURISMO</strong>, com
+      sede na Rua Elias
+      Pereira de Brito, nº 899, na cidade de Juazeiro do Norte, Estado do Ceará, inscrita no CNPJ sob o nº
+      24.512.420/0001-15, neste ato representada por seu responsável legal, o Sr. <strong>CRAIRTON DE MATOS
+        LEITE</strong>, doravante
+      denominada simplesmente <strong>CONTRATADO</strong>, e <strong>{{nomeCliente}}</strong>, pessoa {{tipoPessoa}},
+      inscrita no
+      {{tipoContrato}} sob o nº {{documento}}, com sede na {{endereco.rua}}, nº {{endereco.numero}}, bairro
+      {{endereco.bairro}}, na
+      cidade de {{endereco.cidade}}, Estado: {{endereco.estado}}, doravante denominada simplesmente
+      <strong>CONTRATANTE</strong>, têm entre si, justo
+      e contratado, o que segue:
+    </p>
+    <br>
+    <strong>CLÁUSULA PRIMEIRA</strong>
+    <p>
+      A empresa é proprietária do veículo de placa {{placaVeiculo}}, marca/modelo {{descricaoVeiculo}}, e assim
+      resolve locar o veículo com data a iniciar em {{dataInicial}} às {{horaInicial}} horas com término em {{dataFinal}} às
+      {{horaFinal}} para deslocamento entre as cidades de {{origem}} e {{destino}}
+    </p>
+    <ol type="A" style="margin-left: 40px;">
+      <li>Valor total acertado entre o contratante e o locatário: {{valorTotal}}</li>
+      <li>O valor de viagem é referente à quilometragem total percorrida aproximada de: {{kmTotal}}</li>
+      <li>Valor de quilometragem excedente: {{valorKmExcedente}}</li>
+      <li>De cortesia a <strong>CVM TURISMO</strong> oferece {{kmCortesia}} livre.</li>
+      <li>Para agendamento, o contratante deve dispor de um adiantamento no valor de 30% do total, o restante sendo pago no local de saída. </li>
+    </ol>
+    <br>
+    <strong>CLÁUSULA SEGUNDA</strong>
+    <p>
+      O(a) locatário(a) obriga-se à:
+    </p>
+    <ol type="I" style="margin-left: 40px;">
+      <li>Se responsabilizar pela conservação, manutenção e perfeito funcionamento do veículo locado.</li>
+      <li>Manter o veículo sempre limpo e organizado.</li>
+      <li>Resguardar o locatário dos embaraços de terceiros que tenham ou pretendem ter direitos sobre o veículo locado.</li>
+      <li>Aceito o veículo, bem como os termos e cláusulas citadas neste contrato o qual assino em concordância.</li>
+      <li>Fica eleito o foro de Juazeiro do Norte – CE para dirimir quaisquer dúvidas ou litígio oriundo do presente contrato.</li>
+    </ol>
+
+    <p style="margin-left: 40px;">
+      Estando as partes cientes e de acordo com todas as cláusulas.
+    </p>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="assinaturas">
+      <div class="assinatura-cvm">
+        <img src="https://i.ibb.co/cch8XTPX/assinatura.png">
+        <div class="line"></div>
+        <p class="text-representante">
+          CVM TURISMO
+        </p>
+      </div>
+
+      <div class="assinatura-cliente">
+        <div class="line"></div>
+        <p class="text-representante">
+          CLIENTE
+        </p>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="data-geracao">
+      <strong >Juazeiro do Norte - CE, &nbsp; {{dataGeracao}}</strong>
+    </div>
+
+  </div>
+</body>
+
+</html>
