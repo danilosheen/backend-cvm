@@ -22,6 +22,8 @@ var saldoAnteriorRoutes = require("./routes/saldoAnteriorRoutes");
 
 var orcamentoHistoryRoutes = require("./routes/historyDocsRoutes/orcamentoHistoryRoutes");
 
+var contratoHistoryRoutes = require("./routes/historyDocsRoutes/contratoHistoryRoutes");
+
 var listaPassageirosHistoryRoutes = require("./routes/historyDocsRoutes/listaPassageirosHistoryRoutes");
 
 var app = express();
@@ -40,4 +42,5 @@ app.use('/api', saldoAnteriorRoutes); // history
 
 app.use('/api', orcamentoHistoryRoutes);
 app.use('/api', listaPassageirosHistoryRoutes);
+app.use('/api', contratoHistoryRoutes);
 module.exports = app; // npx vercel dev

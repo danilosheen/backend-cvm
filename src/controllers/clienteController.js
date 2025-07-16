@@ -14,6 +14,7 @@ exports.create = async (req, res) => {
         email: clientData.email,
         typeDocumentSelected: clientData.typeDocumentSelected,
         documento: clientData.documento,
+        estado: clientData.estado,
         cidade: clientData.cidade,
         bairro: clientData.bairro,
         rua: clientData.rua,

@@ -9,6 +9,7 @@ const fluxoRoutes = require("./routes/fluxoCaixaRouter");
 const dependenteRoutes = require("./routes/dependenteRoutes");
 const saldoAnteriorRoutes = require("./routes/saldoAnteriorRoutes");
 const orcamentoHistoryRoutes = require("./routes/historyDocsRoutes/orcamentoHistoryRoutes");
+const contratoHistoryRoutes = require("./routes/historyDocsRoutes/contratoHistoryRoutes");
 const listaPassageirosHistoryRoutes = require("./routes/historyDocsRoutes/listaPassageirosHistoryRoutes");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api', saldoAnteriorRoutes);
 // history
 app.use('/api', orcamentoHistoryRoutes);
 app.use('/api', listaPassageirosHistoryRoutes);
+app.use('/api', contratoHistoryRoutes);
 
 module.exports = app;
 

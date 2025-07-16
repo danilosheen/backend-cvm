@@ -17,6 +17,7 @@ model Cliente {
   email                String?
   typeDocumentSelected String?
   documento            String?      @unique
+  estado               String?      @default("")
   cidade               String?
   bairro               String?
   rua                  String?
@@ -131,6 +132,25 @@ model ListaPassageirosHistory {
   passageiros       Json
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+}
+
+model ContratoHistory {
+  id               String   @id @default(uuid())
+  tipoContrato     String
+  nomeCliente      String
+  documento        String
+  endereco         Json
+  placaVeiculo     String
+  descricaoVeiculo String
+  dataInicial      DateTime
+  horaInicial      String
+  dataFinal        DateTime
+  horaFinal        String
+  origem           String
+  destino          String
+  detalhesLocacao  Json
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model RecibosHistory {
