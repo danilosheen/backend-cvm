@@ -31,30 +31,17 @@ async function createPDF(
   return await mutex.runExclusive(async () => {
 
     const tipoPessoa = (tipoContrato == "CPF" || tipoContrato == 'RG') ? 'física' : 'jurídica';
-
-
+   
+    let valorSinal;
+    
     if (detalhesLocacao) {
-
-      detalhesLocacao.kmTotal = new Intl.NumberFormat('pt-BR').format(detalhesLocacao.kmTotal);
-
-      if (detalhesLocacao.valorTotal) {
-        detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal);
-      } else {
-        detalhesLocacao.valorTotal = formatarParaBrl(0);
-      }
-
-      if (detalhesLocacao.valorKmExcedido) {
-        detalhesLocacao.valorKmExcedido = formatarParaBrl(detalhesLocacao.valorKmExcedido);
-      } else {
-        detalhesLocacao.valorKmExcedido = formatarParaBrl(0);
-      }
-
-      if (!detalhesLocacao.kmCortesia) {
-        detalhesLocacao.kmCortesia = 0;
-      }
-
       if (detalhesLocacao.tipoContratoLocacao != "NORMAL") {
-        detalhesLocacao.valorTotal = `${detalhesLocacao.valorTotal} por Km percorrido.`
+        valorSinal = formatarParaBrl((detalhesLocacao.valorTotal * detalhesLocacao.kmTotal) * 0.3);
+        detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal);
+        detalhesLocacao.valorTotal = `${detalhesLocacao.valorTotal} por Km percorrido.`;
+      } else {
+        valorSinal = formatarParaBrl(detalhesLocacao.valorTotal * 0.3);
+        detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal) || '0,00'
       }
     }
 
@@ -76,9 +63,18 @@ async function createPDF(
         horaFinal,
         origem,
         destino,
-        detalhesLocacao,
-        dataGeracao
+        detalhesLocacao:{
+          tipoContratoLocacao: detalhesLocacao.tipoContratoLocacao,
+          valorTotal: detalhesLocacao.valorTotal,
+          kmTotal: new Intl.NumberFormat('pt-BR').format(detalhesLocacao.kmTotal),
+          valorKmExcedido: formatarParaBrl(detalhesLocacao.valorKmExcedido) || '0,00',
+          kmCortesia: detalhesLocacao.kmCortesia || 0
+        },
+        dataGeracao,
+        valorSinal
       };
+
+      console.log(data);
 
       const templateHtml = fs.readFileSync(
         path.join(__dirname, "../templates/contrato.html"),
