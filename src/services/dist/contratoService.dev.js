@@ -85,22 +85,21 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
                       dataGeracao: dataGeracao,
                       valorSinal: valorSinal
                     };
-                    console.log(data);
                     templateHtml = fs.readFileSync(path.join(__dirname, "../templates/contrato.html"), "utf8");
                     template = handlebars.compile(templateHtml);
                     html = template(data);
 
                     if (!(process.env.AWS_LAMBDA_FUNCTION_VERSION || process.env.VERCEL || process.env.RENDER)) {
-                      _context.next = 28;
+                      _context.next = 27;
                       break;
                     }
 
                     _context.t0 = regeneratorRuntime;
                     _context.t1 = puppeteerCore;
-                    _context.next = 16;
+                    _context.next = 15;
                     return regeneratorRuntime.awrap(chromium.executablePath());
 
-                  case 16:
+                  case 15:
                     _context.t2 = _context.sent;
                     _context.t3 = chromium.args;
                     _context.t4 = chromium.headless;
@@ -114,47 +113,47 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
                       ignoreDefaultArgs: _context.t6
                     };
                     _context.t8 = _context.t1.launch.call(_context.t1, _context.t7);
-                    _context.next = 25;
+                    _context.next = 24;
                     return _context.t0.awrap.call(_context.t0, _context.t8);
 
-                  case 25:
+                  case 24:
                     browser = _context.sent;
-                    _context.next = 31;
+                    _context.next = 30;
                     break;
 
-                  case 28:
-                    _context.next = 30;
+                  case 27:
+                    _context.next = 29;
                     return regeneratorRuntime.awrap(puppeteer.launch({
                       args: ["--no-sandbox"],
                       headless: true
                     }));
 
-                  case 30:
+                  case 29:
                     browser = _context.sent;
 
-                  case 31:
-                    _context.next = 33;
+                  case 30:
+                    _context.next = 32;
                     return regeneratorRuntime.awrap(browser.newPage());
 
-                  case 33:
+                  case 32:
                     page = _context.sent;
-                    _context.next = 36;
+                    _context.next = 35;
                     return regeneratorRuntime.awrap(page.setContent(html, {
                       waitUntil: "networkidle0"
                     }));
 
-                  case 36:
-                    _context.next = 38;
+                  case 35:
+                    _context.next = 37;
                     return regeneratorRuntime.awrap(urlToBase64('https://i.ibb.co/gFrYDkdZ/logo-word.png'));
 
-                  case 38:
+                  case 37:
                     logoWordBase64 = _context.sent;
-                    _context.next = 41;
+                    _context.next = 40;
                     return regeneratorRuntime.awrap(urlToBase64('https://i.ibb.co/R42NPJTN/link179.png'));
 
-                  case 41:
+                  case 40:
                     logoPrefeituraBase64 = _context.sent;
-                    _context.next = 44;
+                    _context.next = 43;
                     return regeneratorRuntime.awrap(page.pdf({
                       format: "A4",
                       printBackground: true,
@@ -169,26 +168,26 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
                       footerTemplate: "\n        <div style=\"width: 100%; padding: 5px 20px; text-align: center;\">\n          <img style=\"width: 100px\" src=\"".concat(logoPrefeituraBase64, "\">\n        </div>\n      ")
                     }));
 
-                  case 44:
+                  case 43:
                     pdfBuffer = _context.sent;
-                    _context.next = 47;
+                    _context.next = 46;
                     return regeneratorRuntime.awrap(browser.close());
 
-                  case 47:
+                  case 46:
                     return _context.abrupt("return", pdfBuffer);
 
-                  case 50:
-                    _context.prev = 50;
+                  case 49:
+                    _context.prev = 49;
                     _context.t9 = _context["catch"](5);
                     console.error("Erro ao gerar PDF:", _context.t9);
                     throw _context.t9;
 
-                  case 54:
+                  case 53:
                   case "end":
                     return _context.stop();
                 }
               }
-            }, null, null, [[5, 50]]);
+            }, null, null, [[5, 49]]);
           }));
 
         case 2:

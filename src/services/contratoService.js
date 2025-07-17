@@ -74,8 +74,6 @@ async function createPDF(
         valorSinal
       };
 
-      console.log(data);
-
       const templateHtml = fs.readFileSync(
         path.join(__dirname, "../templates/contrato.html"),
         "utf8"
