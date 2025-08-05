@@ -110,6 +110,7 @@ model OrcamentoHistory {
   valorSemDespesa  Int
   valorComNota     Int
   taxaPix          Int
+  sinal            Int      @default(30)
   modeloVan        String?
   cortesiaKm       Int?
   valorAcrescimoKm Int?

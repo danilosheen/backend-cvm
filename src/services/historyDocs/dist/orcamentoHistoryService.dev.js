@@ -27,6 +27,7 @@ exports.create = function _callee(orcamentoData) {
               valorSemDespesa: orcamentoData.valorSemDespesa,
               valorComNota: orcamentoData.valorComNota,
               taxaPix: orcamentoData.taxaPix,
+              sinal: orcamentoData.sinal,
               modeloVan: orcamentoData.modeloVan,
               cortesiaKm: orcamentoData.cortesiaKm,
               valorAcrescimoKm: orcamentoData.valorAcrescimoKm

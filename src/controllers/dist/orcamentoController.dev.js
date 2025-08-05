@@ -10,18 +10,18 @@ var orcamentoHistoryService = require("../services/historyDocs/orcamentoHistoryS
 var emailService = require("../services/emailService");
 
 exports.generatePDF = function _callee(req, res) {
-  var _req$body$pdfData, nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, modeloVan, cortesiaKm, valorAcrescimoKm, pdfName, dataGeracao, pdfBuffer, allowedOrigins, origin;
+  var _req$body$pdfData, nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, sinal, modeloVan, cortesiaKm, valorAcrescimoKm, pdfName, dataGeracao, pdfBuffer, allowedOrigins, origin;
 
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _req$body$pdfData = req.body.pdfData, nomeCliente = _req$body$pdfData.nomeCliente, telefoneContato = _req$body$pdfData.telefoneContato, localSaida = _req$body$pdfData.localSaida, destinoViagem = _req$body$pdfData.destinoViagem, dataSaida = _req$body$pdfData.dataSaida, horaSaida = _req$body$pdfData.horaSaida, dataRetorno = _req$body$pdfData.dataRetorno, horaRetorno = _req$body$pdfData.horaRetorno, valorComDespesa = _req$body$pdfData.valorComDespesa, valorSemDespesa = _req$body$pdfData.valorSemDespesa, valorComNota = _req$body$pdfData.valorComNota, taxaPix = _req$body$pdfData.taxaPix, modeloVan = _req$body$pdfData.modeloVan, cortesiaKm = _req$body$pdfData.cortesiaKm, valorAcrescimoKm = _req$body$pdfData.valorAcrescimoKm;
+          _req$body$pdfData = req.body.pdfData, nomeCliente = _req$body$pdfData.nomeCliente, telefoneContato = _req$body$pdfData.telefoneContato, localSaida = _req$body$pdfData.localSaida, destinoViagem = _req$body$pdfData.destinoViagem, dataSaida = _req$body$pdfData.dataSaida, horaSaida = _req$body$pdfData.horaSaida, dataRetorno = _req$body$pdfData.dataRetorno, horaRetorno = _req$body$pdfData.horaRetorno, valorComDespesa = _req$body$pdfData.valorComDespesa, valorSemDespesa = _req$body$pdfData.valorSemDespesa, valorComNota = _req$body$pdfData.valorComNota, taxaPix = _req$body$pdfData.taxaPix, sinal = _req$body$pdfData.sinal, modeloVan = _req$body$pdfData.modeloVan, cortesiaKm = _req$body$pdfData.cortesiaKm, valorAcrescimoKm = _req$body$pdfData.valorAcrescimoKm;
           pdfName = req.body.pdfName;
           dataGeracao = getDateFormated();
           _context.next = 6;
-          return regeneratorRuntime.awrap(pdfOrcamentoService.createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao));
+          return regeneratorRuntime.awrap(pdfOrcamentoService.createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, sinal, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao));
 
         case 6:
           pdfBuffer = _context.sent;

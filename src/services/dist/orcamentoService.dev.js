@@ -23,7 +23,7 @@ var _require3 = require('async-mutex'),
 
 var mutex = new Mutex();
 
-function createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao) {
+function createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, sinal, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao) {
   return regeneratorRuntime.async(function createPDF$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -56,8 +56,9 @@ function createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, data
                       valorSemDespesaPix: valorSemDespesaPix,
                       valorComNotaPix: valorComNotaPix,
                       taxaPix: taxaPixNumber,
+                      sinal: sinal,
                       modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
-                      cortesiaKm: cortesiaKm === 0 ? "0" : cortesiaKm || "30",
+                      cortesiaKm: cortesiaKm === 0 ? "0" : cortesiaKm || "0",
                       valorAcrescimoKm: valorAcrescimoKm === 0 ? "0,00" : formatarParaBrl(valorAcrescimoKm) || "5,00",
                       dataGeracao: dataGeracao
                     };

@@ -22,6 +22,7 @@ async function createPDF(
   valorSemDespesa,
   valorComNota,
   taxaPix,
+  sinal,
   modeloVan,
   cortesiaKm,
   valorAcrescimoKm,
@@ -51,8 +52,9 @@ async function createPDF(
         valorSemDespesaPix,
         valorComNotaPix,
         taxaPix: taxaPixNumber,
+        sinal,
         modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
-        cortesiaKm: cortesiaKm === 0 ? "0" : cortesiaKm || "30",
+        cortesiaKm: cortesiaKm === 0 ? "0" : cortesiaKm || "0",
         valorAcrescimoKm: valorAcrescimoKm === 0 ? "0,00" : formatarParaBrl(valorAcrescimoKm) || "5,00",
         dataGeracao
       };
