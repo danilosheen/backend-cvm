@@ -23,22 +23,22 @@ var _require3 = require('async-mutex'),
 
 var mutex = new Mutex();
 
-function createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorComDespesa, valorSemDespesa, valorComNota, taxaPix, sinal, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao) {
+function createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, dataSaida, horaSaida, dataRetorno, horaRetorno, valorSemDespesa, valorComDespesa, valorComNota, taxaPix, sinal, modeloVan, cortesiaKm, valorAcrescimoKm, dataGeracao) {
   return regeneratorRuntime.async(function createPDF$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
           return regeneratorRuntime.awrap(mutex.runExclusive(function _callee() {
-            var taxaPixNumber, valorComDespesaPix, valorSemDespesaPix, valorComNotaPix, data, templateHtml, template, html, browser, page, pdfBuffer;
+            var taxaPixNumber, valorSemDespesaPix, valorComDespesaPix, valorComNotaPix, data, templateHtml, template, html, browser, page, pdfBuffer;
             return regeneratorRuntime.async(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
                     _context.prev = 0;
                     taxaPixNumber = parseFloat(taxaPix);
-                    valorComDespesaPix = formatarParaBrl(valorComDespesa * (1 + taxaPixNumber / 100));
                     valorSemDespesaPix = formatarParaBrl(valorSemDespesa * (1 + taxaPixNumber / 100));
+                    valorComDespesaPix = formatarParaBrl(valorComDespesa * (1 + taxaPixNumber / 100));
                     valorComNotaPix = formatarParaBrl(valorComNota * (1 + taxaPixNumber / 100));
                     data = {
                       nomeCliente: nomeCliente,
@@ -49,8 +49,8 @@ function createPDF(nomeCliente, telefoneContato, localSaida, destinoViagem, data
                       horaSaida: horaSaida,
                       dataRetorno: converteDataIsoToString(dataRetorno),
                       horaRetorno: horaRetorno,
-                      valorComDespesa: formatarParaBrl(valorComDespesa),
                       valorSemDespesa: formatarParaBrl(valorSemDespesa),
+                      valorComDespesa: formatarParaBrl(valorComDespesa),
                       valorComNota: formatarParaBrl(valorComNota),
                       valorComDespesaPix: valorComDespesaPix,
                       valorSemDespesaPix: valorSemDespesaPix,

@@ -18,8 +18,8 @@ async function createPDF(
   horaSaida,
   dataRetorno,
   horaRetorno,
-  valorComDespesa,
   valorSemDespesa,
+  valorComDespesa,
   valorComNota,
   taxaPix,
   sinal,
@@ -32,8 +32,8 @@ async function createPDF(
     try {
       const taxaPixNumber = parseFloat(taxaPix);
       
-      const valorComDespesaPix = formatarParaBrl(valorComDespesa * (1+(taxaPixNumber/100)))
       const valorSemDespesaPix = formatarParaBrl(valorSemDespesa * (1+(taxaPixNumber/100)))
+      const valorComDespesaPix = formatarParaBrl(valorComDespesa * (1+(taxaPixNumber/100)))
       const valorComNotaPix = formatarParaBrl( valorComNota * (1+(taxaPixNumber/100)))
     
       const data = {
@@ -45,8 +45,8 @@ async function createPDF(
         horaSaida,
         dataRetorno : converteDataIsoToString(dataRetorno),
         horaRetorno,
-        valorComDespesa: formatarParaBrl(valorComDespesa),
         valorSemDespesa: formatarParaBrl(valorSemDespesa),
+        valorComDespesa: formatarParaBrl(valorComDespesa),
         valorComNota: formatarParaBrl(valorComNota),
         valorComDespesaPix,
         valorSemDespesaPix,
