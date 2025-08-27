@@ -35,8 +35,8 @@ exports.create = async (contratoData) => {
 
     const qtdContratos = await prisma.contratoHistory.count();
 
-    // Se houver mais de 10, remove o mais antigo
-    if (qtdContratos > 10) {
+    // Se houver mais de 50, remove o mais antigo
+    if (qtdContratos > 50) {
       const maisAntigo = await prisma.contratoHistory.findFirst({
         orderBy: {
           createdAt: 'asc',

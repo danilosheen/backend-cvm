@@ -21,8 +21,8 @@ exports.create = async (listaPassageirosData) => {
 
     const qtdListaPassageiros = await prisma.listaPassageirosHistory.count();
 
-    // Se houver mais de 10, remove o mais antigo
-    if (qtdListaPassageiros > 10) {
+    // Se houver mais de 50, remove o mais antigo
+    if (qtdListaPassageiros > 50) {
       const maisAntigo = await prisma.listaPassageirosHistory.findFirst({
         orderBy: {
           createdAt: 'asc',

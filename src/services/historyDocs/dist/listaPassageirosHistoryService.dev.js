@@ -37,7 +37,7 @@ exports.create = function _callee(listaPassageirosData) {
         case 6:
           qtdListaPassageiros = _context.sent;
 
-          if (!(qtdListaPassageiros > 10)) {
+          if (!(qtdListaPassageiros > 50)) {
             _context.next = 15;
             break;
           }

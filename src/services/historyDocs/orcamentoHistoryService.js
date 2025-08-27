@@ -26,8 +26,8 @@ exports.create = async (orcamentoData) => {
 
     const qtdOrcamentos = await prisma.orcamentoHistory.count();
 
-    // Se houver mais de 10, remove o mais antigo
-    if (qtdOrcamentos > 10) {
+    // Se houver mais de 50, remove o mais antigo
+    if (qtdOrcamentos > 50) {
       const maisAntigo = await prisma.orcamentoHistory.findFirst({
         orderBy: {
           createdAt: 'asc',

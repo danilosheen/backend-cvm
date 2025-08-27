@@ -42,7 +42,7 @@ exports.create = function _callee(orcamentoData) {
         case 6:
           qtdOrcamentos = _context.sent;
 
-          if (!(qtdOrcamentos > 10)) {
+          if (!(qtdOrcamentos > 50)) {
             _context.next = 15;
             break;
           }

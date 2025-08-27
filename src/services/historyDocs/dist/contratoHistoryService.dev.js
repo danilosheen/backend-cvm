@@ -51,7 +51,7 @@ exports.create = function _callee(contratoData) {
         case 6:
           qtdContratos = _context.sent;
 
-          if (!(qtdContratos > 10)) {
+          if (!(qtdContratos > 50)) {
             _context.next = 15;
             break;
           }
