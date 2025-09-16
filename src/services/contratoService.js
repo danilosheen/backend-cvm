@@ -25,6 +25,7 @@ async function createPDF(
   origem,
   destino,
   detalhesLocacao,
+  porcentagemSinal,
   dataGeracao
 ) {
 
@@ -36,11 +37,11 @@ async function createPDF(
     
     if (detalhesLocacao) {
       if (detalhesLocacao.tipoContratoLocacao != "NORMAL") {
-        valorSinal = formatarParaBrl((detalhesLocacao.valorTotal * detalhesLocacao.kmTotal) * 0.3);
+        valorSinal = formatarParaBrl((detalhesLocacao.valorTotal * detalhesLocacao.kmTotal) * (parseInt(porcentagemSinal)/100));
         detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal);
         detalhesLocacao.valorTotal = `${detalhesLocacao.valorTotal} por Km percorrido.`;
       } else {
-        valorSinal = formatarParaBrl(detalhesLocacao.valorTotal * 0.3);
+        valorSinal = formatarParaBrl(detalhesLocacao.valorTotal * (parseInt(porcentagemSinal)/100));
         detalhesLocacao.valorTotal = formatarParaBrl(detalhesLocacao.valorTotal) || '0,00'
       }
     }
@@ -70,6 +71,7 @@ async function createPDF(
           valorKmExcedido: formatarParaBrl(detalhesLocacao.valorKmExcedido) || '0,00',
           kmCortesia: detalhesLocacao.kmCortesia || 0
         },
+        porcentagemSinal,
         dataGeracao,
         valorSinal
       };
