@@ -6,7 +6,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model Cliente {
@@ -187,8 +187,23 @@ model FichaExcursaoHistory {
 }
 
 model Usuario {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  senha String
-  nome  String
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  senha    String
+  nome     String
+  role     String    @default("guest") // 'admin' ou 'guest'
+  permissoes Permissao[]
 }
+
+model Permissao {
+  id         Int      @id @default(autoincrement())
+  usuarioId  Int
+  modulo     String   // Ex: 'orcamento', 'clientes', etc.
+  permitido  Boolean  @default(false)
+
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+
+  @@unique([usuarioId, modulo])
+}
+
+

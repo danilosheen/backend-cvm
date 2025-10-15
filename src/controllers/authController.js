@@ -11,18 +11,28 @@ exports.login = async (req, res) => {
   try {
     const user = await prisma.usuario.findUnique({
       where: { email },
-    });    
+      include: { permissoes: true },
+    });
 
-    if (!user) {
-      return res.status(401).json({ error: "Usuário não encontrado" });
-    }
+    if (!user) return res.status(401).json({ error: "Usuário não encontrado" });
 
     const senhaValida = await bcrypt.compare(senha, user.senha);
-    if (!senhaValida) {
-      return res.status(401).json({ error: "Senha inválida" });
-    }
+    if (!senhaValida) return res.status(401).json({ error: "Senha inválida" });
 
-    const token = jwt.sign({ userId: user.id }, SECRET, { expiresIn: "31d" });
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        nome: user.nome,
+        email: user.email,
+        role: user.role,
+        permissoes: user.permissoes.map((p) => ({
+          modulo: p.modulo,
+          permitido: p.permitido,
+        })),
+      },
+      SECRET,
+      { expiresIn: "31d" }
+    );
 
     res.json({ token });
   } catch (error) {
