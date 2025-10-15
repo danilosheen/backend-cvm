@@ -1,16 +1,20 @@
 const contratoService = require('../services/historyDocs/contratoHistoryService')
+const { Mutex } = require('async-mutex');
+const mutex = new Mutex();
 
 exports.criarContratoHistory = async (req, res) => {
-  try {
-    const contratoData = req.body
-
-    const contrato = await contratoService.create(contratoData);
-    res.status(200).json(contrato);
-
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({error: "Erro ao salvar Contrato no histórico"})
-  }
+  await mutex.runExclusive(async () => {
+    try {
+      const contratoData = req.body
+  
+      const contrato = await contratoService.create(contratoData);
+      res.status(200).json(contrato);
+  
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({error: "Erro ao salvar Contrato no histórico"})
+    }
+  });
 }
 
 exports.listarContratos = async (req, res) => {

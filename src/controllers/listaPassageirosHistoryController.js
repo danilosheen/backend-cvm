@@ -1,16 +1,22 @@
 const listaPassageirosService = require('../services/historyDocs/listaPassageirosHistoryService');
+const { Mutex } = require('async-mutex');
+const mutex = new Mutex();
 
 exports.criarListaPassageirosHistory = async (req, res) => {
-  try {
-    const orcamentoData = req.body
 
-    const orcamento = await listaPassageirosService.create(orcamentoData);
-    res.status(200).json(orcamento);
+  await mutex.runExclusive(async () => {
+    try {
+      const orcamentoData = req.body
+  
+      const orcamento = await listaPassageirosService.create(orcamentoData);
+      res.status(200).json(orcamento);
+  
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({error: "Erro ao salvar Lista de passageiros no histórico"});
+    }
+  });
 
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({error: "Erro ao salvar Lista de passageiros no histórico"});
-  }
 }
 
 exports.listarListaPassageiros = async (req, res) => {
