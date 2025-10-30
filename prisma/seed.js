@@ -1,8 +1,14 @@
 const { PrismaClient } = require('../src/generated/prisma/client');
+const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
 async function main() {
-  const emailAdmin = 'cvmturismojn@gmail.com';
+  const nomeAdmin = process.env.NOME_ADMIN;
+  const emailAdmin = process.env.EMAIL_ADMIN;
+  const senhaAdmin = process.env.SENHA_ADMIN;
+  const roleAdmin = process.env.ROLE_ADMIN;
+
+  const hash = await bcrypt.hash(senhaAdmin, 10);
 
   // Busca o admin existente
   const admin = await prisma.usuario.findUnique({
@@ -10,8 +16,9 @@ async function main() {
   });
 
   if (!admin) {
-    console.log(`❌ Usuário com e-mail ${emailAdmin} não encontrado.`);
-    return;
+    await prisma.usuario.create({
+      data: { nome: nomeAdmin, email: emailAdmin, senha: hash, role: roleAdmin},
+    });
   }
 
   console.log(`✅ Usuário encontrado: ${admin.nome} (${admin.email})`);
@@ -19,6 +26,7 @@ async function main() {
   // Lista de módulos do sistema
   const modulos = [
     'home',
+    'gerenciar-usuarios',
     'ficha-excursao',
     'contrato',
     'contrato-history',
@@ -51,6 +59,7 @@ async function main() {
   await prisma.permissao.createMany({ data: permissoes });
 
   console.log(`✅ ${modulos.length} permissões atualizadas para ${admin.email}`);
+
 }
 
 main()

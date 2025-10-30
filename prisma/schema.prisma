@@ -187,23 +187,21 @@ model FichaExcursaoHistory {
 }
 
 model Usuario {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
-  senha    String
-  nome     String
-  role     String    @default("guest") // 'admin' ou 'guest'
+  id         String      @id @default(uuid())
+  email      String      @unique
+  senha      String
+  nome       String
+  role       String      @default("guest") // 'admin' ou 'guest'
   permissoes Permissao[]
 }
 
 model Permissao {
-  id         Int      @id @default(autoincrement())
-  usuarioId  Int
-  modulo     String   // Ex: 'orcamento', 'clientes', etc.
-  permitido  Boolean  @default(false)
+  id        String     @id @default(uuid())
+  usuarioId String
+  modulo    String // Ex: 'orcamento', 'clientes', etc.
+  permitido Boolean @default(false)
 
-  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@unique([usuarioId, modulo])
 }
-
-
