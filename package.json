@@ -6,11 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "vercel-build": "npx prisma generate && npx prisma migrate deploy && npx prisma db seed",
-    "seed": "node prisma/seed.js"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
+    "vercel-build": "npx prisma generate && npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +31,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10",
-    "prisma": "^6.6.0"
+    "prisma": "^6.18.0"
   }
 }
