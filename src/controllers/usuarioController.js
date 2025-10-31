@@ -40,7 +40,13 @@ exports.criarUsuario = async (req, res) => {
       )
     );
 
-    res.json(novoUsuario);
+    const usuarioComPermissoes = await prisma.usuario.findUnique({
+      where: { id: novoUsuario.id },
+      include: { permissoes: true },
+    });
+
+    res.json(usuarioComPermissoes);
+
   } catch (error) {
     res.status(500).json({ error: "Erro ao criar usuário", details: error.message });
   }
