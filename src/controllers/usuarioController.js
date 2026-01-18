@@ -7,6 +7,17 @@ exports.criarUsuario = async (req, res) => {
 
   try {
     const hash = await bcrypt.hash(senha, 10);
+
+    const usuarioExistente = await prisma.usuario.findFirst({
+      where:{
+        email: email
+      }
+    });
+
+    if(usuarioExistente){
+      return res.status(409).json({msg: 'Usuário existente com o email informado!'})
+    }
+
     const novoUsuario = await prisma.usuario.create({
       data: { nome, email, senha: hash },
     });
@@ -56,6 +67,7 @@ exports.listarUsuarios = async (req, res) => {
   try {
     const usuarios = await prisma.usuario.findMany({
       where: { role: 'guest' },
+      orderBy: { nome: 'asc' },
       include: {
         permissoes: {
           orderBy: { modulo: 'asc' }
@@ -123,10 +135,10 @@ exports.removerUsuarioPeloId = async (req, res) => {
 
 
 exports.alterarSenha = async (req, res) => {
-  const { email, novaSenha } = req.body;
+  const { id, novaSenha } = req.body;
 
   try {
-    const usuario = await prisma.usuario.findUnique({ where: { email } });
+    const usuario = await prisma.usuario.findUnique({ where: { id } });
     if (!usuario) {
       return res.status(404).json({ error: "Usuário não encontrado" });
     }
@@ -134,7 +146,7 @@ exports.alterarSenha = async (req, res) => {
     const senhaHash = await bcrypt.hash(novaSenha, 10);
 
     await prisma.usuario.update({
-      where: { email },
+      where: { id },
       data: {
         senha: senhaHash,
       },
