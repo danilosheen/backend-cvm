@@ -144,7 +144,7 @@ function createPDF(tipoContrato, nomeCliente, documento, endereco, placaVeiculo,
 
                   case 35:
                     _context.next = 37;
-                    return regeneratorRuntime.awrap(urlToBase64('https://i.ibb.co/gFrYDkdZ/logo-word.png'));
+                    return regeneratorRuntime.awrap(urlToBase64('https://i.ibb.co/YFjk2hwy/logo-word.png'));
 
                   case 37:
                     logoWordBase64 = _context.sent;
