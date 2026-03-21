@@ -101,7 +101,7 @@ async function createPDF(
 
       const page = await browser.newPage();
       await page.setContent(html, { waitUntil: "networkidle0" });
-      const logoWordBase64 = await urlToBase64('https://i.ibb.co/gFrYDkdZ/logo-word.png');
+      const logoWordBase64 = await urlToBase64('https://i.ibb.co/YFjk2hwy/logo-word.png');
       const logoPrefeituraBase64 = await urlToBase64('https://i.ibb.co/R42NPJTN/link179.png');
 
       const pdfBuffer = await page.pdf({
