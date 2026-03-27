@@ -5,6 +5,7 @@ const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core");
 const chromium = require("@sparticuz/chromium");
 const { formatarParaBrl } = require("../utils/formatMoney");
+const { logo_word, logo_cvm, assinatura, icon_jesus } = require("../constantes/url.images");
 
 async function createPDF(
   nomeCliente,
@@ -28,7 +29,13 @@ async function createPDF(
       valorPorExtenso,
       pacoteViagem,
       formaPagamento,
-      dataGeracao
+      dataGeracao,
+
+      // Imagens
+      logo_word,
+      logo_cvm,
+      assinatura,
+      icon_jesus
     };
 
     const templateHtml = fs.readFileSync(

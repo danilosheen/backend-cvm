@@ -10,6 +10,7 @@ const { urlToBase64 } = require("../utils/converteUrlToBase64");
 const { gerarNumeroContrato } = require("../utils/gerarNumeroContrato");
 const { Mutex } = require('async-mutex');
 const mutex = new Mutex();
+const { logo_word, logo_prefeitura } = require("../constantes/url.images");
 
 async function createPDF(
   tipoContrato,
@@ -101,7 +102,7 @@ async function createPDF(
 
       const page = await browser.newPage();
       await page.setContent(html, { waitUntil: "networkidle0" });
-      const logoWordBase64 = await urlToBase64('https://i.ibb.co/YFjk2hwy/logo-word.png');
+      const logoWordBase64 = await urlToBase64(logo_word);
       const logoPrefeituraBase64 = await urlToBase64('https://i.ibb.co/R42NPJTN/link179.png');
 
       const pdfBuffer = await page.pdf({

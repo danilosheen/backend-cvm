@@ -7,6 +7,15 @@ const chromium  = require("@sparticuz/chromium");
 const { formatServices, upperCase } = require("../utils/formatMoney");
 const { converteDataIsoToString } = require("../utils/dateFormated");
 const { formatarParaBrl } = require("../utils/formatMoney");
+const { 
+    logo_word, 
+    icon_calendar, 
+    icon_clock, 
+    icon_person, 
+    icon_phone, 
+    icon_locale, 
+    icon_jesus 
+  } = require("../constantes/url.images");
 
 async function createPDF(
   excursaoPara,
@@ -46,7 +55,15 @@ async function createPDF(
       qtdParcelas,
       dataPagamentoParcela,
       dependentes,
-      dataGeracao
+      dataGeracao,
+      //Imagens
+      logo_word,
+      icon_calendar,
+      icon_clock,
+      icon_person,
+      icon_phone,
+      icon_locale,
+      icon_jesus
     };
 
     const templateHtml = fs.readFileSync(

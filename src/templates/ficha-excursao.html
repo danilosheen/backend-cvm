@@ -196,72 +196,69 @@
 
 <body>
   <img class="logo-topo"
-    src="https://i.ibb.co/YFjk2hwy/logo-word.png" alt="img-info">
+    src={{logo_word}} alt="img-info">
   <div class="container">
     <img class="qr-code"
-      src="https://i.ibb.co/QvN1Ct7w/qr-code-2.png"
+      src={{qr_code}}
       alt="qr-code">
     <strong>
       <h1>EXCURSÃO PARA: {{excursaoPara}}</h1>
     </strong>
     <p class="info">
       <img class="icon"
-        src="https://i.ibb.co/Q3ghyNXc/locale.png" alt="locale">
+        src={{icon_locale}} alt="locale">
       Local de Saída: &nbsp;<strong> {{localSaida}}</strong>
     </p>
     <div class="flex-50">
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/Nd2s3b9G/calendar.png"
-          alt="calendar">
+          src={{icon_calendar}} alt="calendar">
         Data de saída: &nbsp;<strong> {{dataSaida}}</strong>
       </p>
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/zHSCNs96/clock.png" alt="clock">
+          src={{icon_clock}} alt="clock">
         Hora de saída: &nbsp;<strong> {{horaSaida}}</strong>
       </p>
     </div>
     <div class="flex-50">
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/Nd2s3b9G/calendar.png"
-          alt="calendar">
+          src={{icon_calendar}} alt="calendar">
         Data de retorno: &nbsp;<strong> {{dataRetorno}}</strong>
       </p>
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/zHSCNs96/clock.png" alt="clock">
+          src={{icon_clock}} alt="clock">
         Hora de retorno: &nbsp;<strong> {{horaRetorno}}</strong>
       </p>
     </div>
     <p class="info">
       <img class="icon"
-        src="https://i.ibb.co/9k1Xg5Yt/person.png" alt="person">
+        src={{icon_person}} alt="person">
       Nome do Cliente: &nbsp;<strong>{{cliente.nome}}</strong>
     </p>
     <div class="flex-50">
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/Nd2s3b9G/calendar.png"
-          alt="calendar">
+          src={{icon_calendar}} alt="calendar">
         Data de Nascimento: &nbsp;<strong>{{cliente.dataNascimento}}</strong>
       </p>
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/9k1Xg5Yt/person.png" alt="person">
+          src={{icon_person}} alt="person">
         RG/CPF: &nbsp;<strong>{{cliente.documento}}</strong>
       </p>
     </div>
     <p class="info">
-      <img class="icon" src="https://i.ibb.co/vCmwzqBZ/phone.png"
+      <img class="icon" src={{icon_phone}}
         alt="phone">
       Telefone: &nbsp;<strong>{{cliente.contato}}</strong>
     </p>
     <div class="flex-50">
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/Q3ghyNXc/locale.png"
+          src={{icon_locale}} 
           alt="locale">
         Rua: &nbsp;<strong> {{cliente.endereco.rua}}</strong>
       </p>
@@ -272,7 +269,7 @@
     <div class="flex-50">
       <p class="info">
         <img class="icon"
-          src="https://i.ibb.co/Q3ghyNXc/locale.png"
+          src={{icon_locale}} 
           alt="locale">
         Bairro: &nbsp;<strong> {{cliente.endereco.bairro}}</strong>
       </p>
@@ -353,7 +350,7 @@
       </div>
     </div>
     <div class="rodape">
-      <img src="https://i.ibb.co/Fb0DPhxX/jesus.png" alt="jesus">
+      <img src={{icon_jesus}} alt="jesus">
       <p>Juazeiro do Norte - CE</p>
     </div>
     <p class="data-geracao">Ficha de excursão gerada em:&nbsp;<span style="font-size: 8pt; font-weight: bold;">{{dataGeracao}}</span></p>

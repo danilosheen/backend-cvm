@@ -6,6 +6,8 @@ const icon_locale = "https://raw.githubusercontent.com/danilosheen/backend-cvm/r
 const icon_calendar = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/calendar.png";
 const icon_clock = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/clock.png";
 const icon_jesus = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/jesus.png";  
+const assinatura = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/assinatura.png"
+const logo_cvm = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo.png"
 
 module.exports = {
   logo_word,
@@ -15,5 +17,7 @@ module.exports = {
   icon_locale,
   icon_calendar,
   icon_clock,
-  icon_jesus
+  icon_jesus,
+  assinatura,
+  logo_cvm
 }

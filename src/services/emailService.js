@@ -3,7 +3,16 @@ const fs = require("fs");
 const path = require("path");
 const handlebars = require("handlebars");
 require('dotenv').config();
-const formatarNome = require("../utils/formatNomeCliente")
+const formatarNome = require("../utils/formatNomeCliente");
+const {
+  img_aniversario,
+  icon_instagram,
+  icon_youtube,
+  icon_facebook,
+  icon_whatsapp,
+  icon_envelope,
+  icon_phone
+} = require("../constantes/url.images");
 
 // Configurar o transporte
 const transporter = nodemailer.createTransport({
@@ -20,7 +29,15 @@ async function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) 
     const data = {
       nomeCliente,
       destinatario, 
-      assunto, 
+      assunto,
+      // Imagens
+      img_aniversario,
+      icon_instagram,
+      icon_youtube,
+      icon_facebook,
+      icon_whatsapp,
+      icon_envelope,
+      icon_phone
     };
 
     const templateHtml = fs.readFileSync(

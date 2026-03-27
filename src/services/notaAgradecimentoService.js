@@ -4,6 +4,7 @@ const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
 const puppeteerCore = require("puppeteer-core");
 const chromium  = require("@sparticuz/chromium");
+const { logo_word, logo_cvm } = require("../constantes/url.images");
 
 async function createPDF(
   nomeCliente,
@@ -11,6 +12,10 @@ async function createPDF(
   try {
     const data = {
       nomeCliente,
+      
+      // Imagens
+      logo_word,
+      logo_cvm
     };
 
     const templateHtml = fs.readFileSync(

@@ -7,6 +7,7 @@ const chromium = require("@sparticuz/chromium");
 const { converteDataIsoToString } = require("../utils/dateFormated");
 const { Mutex } = require('async-mutex');
 const mutex = new Mutex();
+const { logo_word, icon_jesus } = require("../constantes/url.images");
 
 async function createPDF(
   numeroCarroP1,
@@ -45,7 +46,10 @@ async function createPDF(
         extensaoRoteiroKm,
         qtdPassageiros,
         passageiros,
-        dataGeracao
+        dataGeracao,
+        // Imagens
+        logo_word,
+        icon_jesus
       };
 
       const templateHtml = fs.readFileSync(
