@@ -11,7 +11,9 @@ const {
   icon_facebook,
   icon_whatsapp,
   icon_envelope,
-  icon_phone
+  icon_phone,
+  logo_word,
+  logo_cvm
 } = require("../constantes/url.images");
 
 // Configurar o transporte
@@ -31,13 +33,8 @@ async function enviarEmailNotaAgradecimento(nomeCliente, destinatario, assunto) 
       destinatario, 
       assunto,
       // Imagens
-      img_aniversario,
-      icon_instagram,
-      icon_youtube,
-      icon_facebook,
-      icon_whatsapp,
-      icon_envelope,
-      icon_phone
+      logo_word,
+      logo_cvm
     };
 
     const templateHtml = fs.readFileSync(
@@ -88,7 +85,16 @@ async function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
     const data = {
       nomeClienteFormatado,
       destinatario, 
-      assunto, 
+      assunto,
+      // Imagens
+      img_aniversario,
+      icon_instagram,
+      icon_youtube,
+      icon_facebook,
+      icon_whatsapp,
+      icon_envelope,
+      icon_phone,
+      logo_cvm
     };
 
     const templateHtml = fs.readFileSync(

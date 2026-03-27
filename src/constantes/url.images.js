@@ -8,6 +8,12 @@ const icon_clock = "https://raw.githubusercontent.com/danilosheen/backend-cvm/re
 const icon_jesus = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/jesus.png";  
 const assinatura = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/assinatura.png"
 const logo_cvm = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo.png"
+const img_aniversario = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/aniversario.png";
+const icon_instagram = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/instagram.png";
+const icon_youtube = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/youtube.png";
+const icon_facebook = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/facebook.png";
+const icon_whatsapp = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/whatsapp.png";
+const icon_envelope = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/envelope.png";
 
 module.exports = {
   logo_word,
@@ -19,5 +25,12 @@ module.exports = {
   icon_clock,
   icon_jesus,
   assinatura,
-  logo_cvm
+  logo_cvm,
+  img_aniversario,
+  icon_instagram,
+  icon_youtube,
+  icon_facebook,
+  icon_whatsapp,
+  icon_envelope
+
 }
