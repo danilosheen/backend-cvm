@@ -1,5 +1,5 @@
 const logo_word = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/logo-word.png"
-const qr_code = "https://i.ibb.co/hF3hRpk6/qr-code-3.png";
+const qr_code = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/qr-code-3.png";
 const icon_person = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/person.png";
 const icon_phone = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/phone.png";
 const icon_locale = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/locale.png";
