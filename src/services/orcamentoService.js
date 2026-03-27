@@ -8,6 +8,16 @@ const { converteDataIsoToString } = require("../utils/dateFormated");
 const { formatarParaBrl } = require("../utils/formatMoney");
 const { Mutex } = require('async-mutex');
 const mutex = new Mutex();
+const { 
+    logo_word,
+    qr_code, 
+    icon_person, 
+    icon_calendar, 
+    icon_phone, 
+    icon_locale, 
+    icon_clock, 
+    icon_jesus
+  } = require("../constantes/url.images");
 
 async function createPDF(
   nomeCliente,
@@ -56,7 +66,17 @@ async function createPDF(
         modeloVan: modeloVan || "Van Mercedes minibus com 20 lugares, ar-condicionado, bancos reclinaveis e som",
         cortesiaKm: cortesiaKm === 0 ? "0" : cortesiaKm || "0",
         valorAcrescimoKm: valorAcrescimoKm === 0 ? "0,00" : formatarParaBrl(valorAcrescimoKm) || "5,00",
-        dataGeracao
+        dataGeracao,
+        
+        // imagens
+        logo_word: logo_word,
+        qr_code: qr_code,
+        icon_person: icon_person,
+        icon_phone: icon_phone,
+        icon_locale: icon_locale,
+        icon_calendar: icon_calendar,
+        icon_clock: icon_clock,
+        icon_jesus: icon_jesus
       };
   
       const templateHtml = fs.readFileSync(
