@@ -27,12 +27,14 @@ async function createPDF(
   destino,
   detalhesLocacao,
   porcentagemSinal,
+  responsavelDespesaMotorista,
   dataGeracao
 ) {
 
   return await mutex.runExclusive(async () => {
 
     const tipoPessoa = (tipoContrato == "CPF" || tipoContrato == 'RG') ? 'física' : 'jurídica';
+    const responsavelDespesaMotoristaFormatado = (responsavelDespesaMotorista == "CLIENTE" ? "do Locatário (cliente)" : " da Locadora (CVM)")
    
     let valorSinal;
     
@@ -73,6 +75,7 @@ async function createPDF(
           kmCortesia: detalhesLocacao.kmCortesia || 0
         },
         porcentagemSinal,
+        responsavelDespesaMotoristaFormatado,
         dataGeracao,
         valorSinal
       };

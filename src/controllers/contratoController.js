@@ -18,7 +18,8 @@ exports.generatePDF = async (req, res) => {
       origem,
       destino,
       detalhesLocacao,
-      porcentagemSinal
+      porcentagemSinal,
+      responsavelDespesaMotorista
     } = req.body.pdfData;
 
     const pdfName = req.body.pdfName;
@@ -39,6 +40,7 @@ exports.generatePDF = async (req, res) => {
       destino,
       detalhesLocacao,
       porcentagemSinal,
+      responsavelDespesaMotorista,
       dataGeracao
     );
 
