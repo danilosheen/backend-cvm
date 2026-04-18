@@ -17,6 +17,7 @@ async function createPDF(
   nomeCliente,
   documento,
   endereco,
+  situacaoVeiculo,
   placaVeiculo,
   descricaoVeiculo,
   dataInicial,
@@ -34,8 +35,9 @@ async function createPDF(
   return await mutex.runExclusive(async () => {
 
     const tipoPessoa = (tipoContrato == "CPF" || tipoContrato == 'RG') ? 'física' : 'jurídica';
-    const responsavelDespesaMotoristaFormatado = (responsavelDespesaMotorista == "CLIENTE" ? "do Locatário (cliente)" : " da Locadora (CVM)")
-   
+    const responsavelDespesaMotoristaFormatado = (responsavelDespesaMotorista == "CLIENTE" ? "CONTRATANTE" : "CONTRATADA")
+    const situacaoVeiculoFormatada = (situacaoVeiculo == "ALUGADO" ? "locado" : "próprio");
+
     let valorSinal;
     
     if (detalhesLocacao) {
@@ -59,6 +61,7 @@ async function createPDF(
         nomeCliente: String(nomeCliente).toUpperCase(),
         documento,
         endereco,
+        situacaoVeiculoFormatada,
         placaVeiculo,
         descricaoVeiculo,
         dataInicial: converteDataIsoToString(dataInicial),
