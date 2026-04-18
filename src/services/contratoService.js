@@ -10,7 +10,7 @@ const { urlToBase64 } = require("../utils/converteUrlToBase64");
 const { gerarNumeroContrato } = require("../utils/gerarNumeroContrato");
 const { Mutex } = require('async-mutex');
 const mutex = new Mutex();
-const { logo_word, logo_prefeitura } = require("../constantes/url.images");
+const { logo_word, logo_prefeitura, assinatura } = require("../constantes/url.images");
 
 async function createPDF(
   tipoContrato,
@@ -80,7 +80,8 @@ async function createPDF(
         porcentagemSinal,
         responsavelDespesaMotoristaFormatado,
         dataGeracao,
-        valorSinal
+        valorSinal,
+        assinatura
       };
 
       const templateHtml = fs.readFileSync(
