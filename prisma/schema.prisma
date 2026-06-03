@@ -16,7 +16,7 @@ model Cliente {
   contato              String?
   email                String?
   typeDocumentSelected String?
-  documento            String?      @unique
+  documento            String?      
   estado               String?      @default("")
   cidade               String?
   bairro               String?
@@ -35,7 +35,7 @@ model Dependente {
   id                   String      @id @default(uuid())
   nome                 String
   typeDocumentSelected String?
-  documento            String?     @unique
+  documento            String?     
   clienteId            String
   createdAt            DateTime    @default(now())
   updatedAt            DateTime    @updatedAt
@@ -47,7 +47,7 @@ model Passageiro {
   id                   String      @id @default(uuid())
   nome                 String
   typeDocumentSelected String
-  documento            String      @unique
+  documento            String      
   clienteId            String?     @unique
   dependenteId         String?     @unique
   createdAt            DateTime    @default(now())
@@ -141,6 +141,7 @@ model ContratoHistory {
   nomeCliente                 String
   documento                   String
   endereco                    Json
+  situacaoVeiculo             String   @default("")
   placaVeiculo                String
   porcentagemSinal            Int      @default(30)
   responsavelDespesaMotorista String   @default("CLIENTE")

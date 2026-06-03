@@ -15,6 +15,7 @@ exports.create = async (contratoData) => {
           cidade: contratoData.endereco.cidade,
           estado: contratoData.endereco.estado
         },
+        situacaoVeiculo: contratoData.situacaoVeiculo,
         placaVeiculo: contratoData.placaVeiculo,
         porcentagemSinal: contratoData.porcentagemSinal,
         responsavelDespesaMotorista: contratoData.responsavelDespesaMotorista,
