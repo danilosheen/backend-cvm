@@ -35,7 +35,7 @@ async function createPDF(
   return await mutex.runExclusive(async () => {
 
     const tipoPessoa = (tipoContrato == "CPF" || tipoContrato == 'RG') ? 'física' : 'jurídica';
-    const responsavelDespesaMotoristaFormatado = (responsavelDespesaMotorista == "CLIENTE" ? "CONTRATANTE" : "CONTRATADA")
+    const responsavelDespesaMotoristaFormatado = (responsavelDespesaMotorista == "CLIENTE" ? "do CLIENTE CONTRATANTE" : "da EMPRESA CONTRATADA")
     const situacaoVeiculoFormatada = (situacaoVeiculo == "ALUGADO" ? "locado" : "próprio");
 
     let valorSinal;
