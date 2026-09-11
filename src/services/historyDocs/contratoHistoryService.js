@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 exports.create = async (contratoData) => {
   try {
     const contrato = await prisma.contratoHistory.create({
-      data:{
+      data: {
         tipoContrato: contratoData.tipoContrato,
         nomeCliente: contratoData.nomeCliente,
         documento: contratoData.documento,
@@ -52,25 +52,25 @@ exports.create = async (contratoData) => {
             id: maisAntigo.id,
           },
         });
-        return {contrato: contrato, msg: "Contrato mais antigo removido com sucesso"}
+        return { contrato: contrato, msg: "Contrato mais antigo removido com sucesso" }
       }
     }
 
     return contrato;
 
   } catch (error) {
-    return error;
+    throw error;
   }
 }
 
 exports.findMany = async () => {
   try {
     const contratos = await prisma.contratoHistory.findMany({
-      orderBy:{
+      orderBy: {
         createdAt: 'desc'
       }
     })
-  
+
     return contratos
 
   } catch (error) {
@@ -80,7 +80,7 @@ exports.findMany = async () => {
 
 exports.delete = async (id) => {
   await prisma.contratoHistory.delete({
-    where:{
+    where: {
       id: id
     }
   });
