@@ -1,11 +1,14 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { PrismaClient } = require("../generated/prisma/client");
-const prisma = new PrismaClient();
+// const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken"
+// const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
+// const { PrismaClient } = require("../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
 const SECRET = process.env.JWT_SECRET;
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, senha } = req.body;
 
   try {

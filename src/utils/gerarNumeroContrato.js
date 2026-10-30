@@ -1,5 +1,6 @@
-const { PrismaClient } = require('../generated/prisma/client');
-const prisma = new PrismaClient();
+// const { PrismaClient } = require('../generated/prisma/client');
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
 async function gerarNumeroContrato() {
   const registro = await prisma.numeroContrato.findFirst();
@@ -21,6 +22,6 @@ async function gerarNumeroContrato() {
   return result[0].numeroAtual;
 }
 
-module.exports = {
+export {
   gerarNumeroContrato
 };

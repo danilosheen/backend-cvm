@@ -15,7 +15,7 @@ function formatarParaBrl(valor) {
   }).format(valor);
 }
 
-module.exports = {
+export {
   formatServices,
   upperCase,
   formatarParaBrl

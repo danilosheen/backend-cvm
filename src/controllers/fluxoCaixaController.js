@@ -1,7 +1,8 @@
-const { PrismaClient } = require('../generated/prisma/client');
-const prisma = new PrismaClient();
+// const { PrismaClient } = require('../generated/prisma/client');
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-exports.criarFluxo = async (req, res) => {
+export const criarFluxo = async (req, res) => {
   try {
     const { tipo, tipoDocumento, valor, data, formaPagamento, descricao } = req.body;
 
@@ -23,7 +24,7 @@ exports.criarFluxo = async (req, res) => {
   }
 };
 
-exports.listarFluxos = async (req, res) => {
+export const listarFluxos = async (req, res) => {
   try {
     const fluxos = await prisma.fluxoCaixa.findMany({
       orderBy: { createdAt: 'desc' }
@@ -34,7 +35,7 @@ exports.listarFluxos = async (req, res) => {
   }
 };
 
-exports.listarFluxosPorMes = async (req, res) => {
+export const listarFluxosPorMes = async (req, res) => {
   try {
     const { mes, ano } = req.query;
 
@@ -69,7 +70,7 @@ exports.listarFluxosPorMes = async (req, res) => {
 };
 
 
-exports.listarFluxosPorIntervalo = async (req, res) => {
+export const listarFluxosPorIntervalo = async (req, res) => {
   try {
     const { dataInicio, dataFim } = req.query;
 
@@ -102,7 +103,7 @@ exports.listarFluxosPorIntervalo = async (req, res) => {
 
 
 
-exports.buscarFluxoPorId = async (req, res) => {
+export const buscarFluxoPorId = async (req, res) => {
   try {
     const { id } = req.params;
     const fluxo = await prisma.fluxoCaixa.findUnique({ where: { id } });
@@ -117,7 +118,7 @@ exports.buscarFluxoPorId = async (req, res) => {
   }
 };
 
-exports.atualizarFluxo = async (req, res) => {
+export const atualizarFluxo = async (req, res) => {
   try {
     const { id } = req.params;
     const { tipo, tipoDocumento, valor, data, formaPagamento, descricao } = req.body;
@@ -140,7 +141,7 @@ exports.atualizarFluxo = async (req, res) => {
   }
 };
 
-exports.deletarFluxo = async (req, res) => {
+export const deletarFluxo = async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.fluxoCaixa.delete({ where: { id } });

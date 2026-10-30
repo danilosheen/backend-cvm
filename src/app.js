@@ -1,17 +1,21 @@
-const express = require("express");
-const cors = require("cors");
-const pdfRoutes = require("./routes/routes");
-const clienteRoutes = require("./routes/clienteRoutes");
-const passageiroRoutes = require("./routes/passageiroRoutes");
-const usuarioRoutes = require("./routes/usuarioRoutes");
-const authRoutes = require("./routes/authRoutes");
-const fluxoRoutes = require("./routes/fluxoCaixaRouter");
-const dependenteRoutes = require("./routes/dependenteRoutes");
-const saldoAnteriorRoutes = require("./routes/saldoAnteriorRoutes");
-const permissaoRoutes = require("./routes/permissaoRoutes");
-const orcamentoHistoryRoutes = require("./routes/historyDocsRoutes/orcamentoHistoryRoutes");
-const contratoHistoryRoutes = require("./routes/historyDocsRoutes/contratoHistoryRoutes");
-const listaPassageirosHistoryRoutes = require("./routes/historyDocsRoutes/listaPassageirosHistoryRoutes");
+
+import express from "express";
+import cors from "cors";
+
+import pdfRoutes from "./routes/routes.js";
+import clienteRoutes from "./routes/clienteRoutes.js";
+import passageiroRoutes from "./routes/passageiroRoutes.js";
+import usuarioRoutes from "./routes/usuarioRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import fluxoRoutes from "./routes/fluxoCaixaRouter.js";
+import dependenteRoutes from "./routes/dependenteRoutes.js";
+import saldoAnteriorRoutes from "./routes/saldoAnteriorRoutes.js";
+import permissaoRoutes from "./routes/permissaoRoutes.js";
+
+import orcamentoHistoryRoutes from "./routes/historyDocsRoutes/orcamentoHistoryRoutes.js";
+import contratoHistoryRoutes from "./routes/historyDocsRoutes/contratoHistoryRoutes.js";
+import listaPassageirosHistoryRoutes from "./routes/historyDocsRoutes/listaPassageirosHistoryRoutes.js";
+
 
 const app = express();
 app.use(cors({
@@ -33,7 +37,7 @@ app.use('/api', orcamentoHistoryRoutes);
 app.use('/api', listaPassageirosHistoryRoutes);
 app.use('/api', contratoHistoryRoutes);
 
-module.exports = app;
+export default app;
 
 // npx vercel dev
 

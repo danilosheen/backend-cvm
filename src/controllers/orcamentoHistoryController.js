@@ -1,8 +1,10 @@
-const orcamentoService = require('../services/historyDocs/orcamentoHistoryService');
-const { Mutex } = require('async-mutex');
+// const orcamentoService = require('../services/historyDocs/orcamentoHistoryService');
+import { orcamentoService } from "../services/historyDocs/orcamentoHistoryService.js";
+// const { Mutex } = require('async-mutex');
+import { Mutex } from "async-mutex";
 const mutex = new Mutex();
 
-exports.criarOrcamentoHistory = async (req, res) => {
+export const criarOrcamentoHistory = async (req, res) => {
 
   await mutex.runExclusive(async () => {
     try {
@@ -19,7 +21,7 @@ exports.criarOrcamentoHistory = async (req, res) => {
 
 }
 
-exports.listarOrcamentos = async (req, res) => {
+export const listarOrcamentos = async (req, res) => {
   try {
     const orcamentos = await orcamentoService.findMany();
     res.status(200).json({orcamentos})
@@ -28,7 +30,7 @@ exports.listarOrcamentos = async (req, res) => {
   }
 }
 
-exports.removerOrcamentoHistory = async (req, res) => {
+export const removerOrcamentoHistory = async (req, res) => {
   try {
     const { id } = req.params
     await orcamentoService.delete(id);
@@ -36,4 +38,11 @@ exports.removerOrcamentoHistory = async (req, res) => {
   } catch (error) {
     res.status(500).json({msg: "Erro ao remover orçamento do histórico"})
   }
+}
+
+export const orcamentoHistoryController = {
+  criarOrcamentoHistory,
+  listarOrcamentos,
+  removerOrcamentoHistory
+
 }

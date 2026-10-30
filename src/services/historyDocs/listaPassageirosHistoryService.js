@@ -1,7 +1,8 @@
-const { PrismaClient } = require("../../generated/prisma/client");
-const prisma = new PrismaClient();
+// const { PrismaClient } = require("../../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../../lib/prisma.js";
 
-exports.create = async (listaPassageirosData) => {
+export const create = async (listaPassageirosData) => {
   try {
     const listaPassageiros = await prisma.listaPassageirosHistory.create({
       data:{
@@ -46,7 +47,7 @@ exports.create = async (listaPassageirosData) => {
   }
 }
 
-exports.findMany = async () => {
+export const findMany = async () => {
   try {
     const listasPassageiros = await prisma.listaPassageirosHistory.findMany({
       orderBy:{
@@ -61,10 +62,16 @@ exports.findMany = async () => {
   }
 }
 
-exports.delete = async (id) => {
+export const remove = async (id) => {
   await prisma.listaPassageirosHistory.delete({
     where:{
       id: id
     }
   });
 };
+
+export const listaPassageirosService = {
+  create,
+  findMany,
+  remove
+}

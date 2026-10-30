@@ -1,7 +1,9 @@
-const bcrypt = require('bcryptjs');
-const userRepository = require('../repositories/usuario.repository');
+// const bcrypt = require('bcryptjs');
+import bcrypt from "bcryptjs";
+// const userRepository = require('../repositories/usuario.repository');
+import userRepository from "../repositories/usuario.repository.js";
 
-exports.createUser = async ({ nome, email, senha }) => {
+export const criarUsuario = async ({ nome, email, senha }) => {
   const usuarioExistente = await userRepository.findByEmail(email);
 
   if (usuarioExistente) {
@@ -23,7 +25,7 @@ exports.createUser = async ({ nome, email, senha }) => {
   return userRepository.findByIdWithPermissoes(usuario.id);
 };
 
-exports.listUsers = async () => {
+export const listarUsuarios = async () => {
   const users = await userRepository.getAllUsers();
   
   if(!users){
@@ -35,7 +37,7 @@ exports.listUsers = async () => {
   return users;
 };
 
-exports.listUserById = async (userId) => {
+export const listarUsuarioPeloId = async (userId) => {
   const user = await userRepository.findById(userId);
 
   if(!user){
@@ -46,7 +48,7 @@ exports.listUserById = async (userId) => {
 
 };
 
-exports.deleteUserById = async (userId) => {
+export const deleteUserById = async (userId) => {
 
   const usuario = await userRepository.findById(userId);
 
@@ -60,6 +62,14 @@ exports.deleteUserById = async (userId) => {
 
 };
   
-exports.changePassword = async (userId, newPass) => {
+export const changePassword = async (userId, newPass) => {
   return userRepository.changePassword(userId, newPass);
+};
+
+export default {
+  criarUsuario,
+  listarUsuarios,
+  listarUsuarioPeloId,
+  deleteUserById,
+  changePassword
 };

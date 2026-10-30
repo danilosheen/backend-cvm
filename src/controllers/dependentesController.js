@@ -1,7 +1,8 @@
-const { PrismaClient } = require("../generated/prisma/client");
-const prisma = new PrismaClient();
+// const { PrismaClient } = require("../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-exports.create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const { nome, typeDocumentSelected, documento, clienteId } = req.body;
 
@@ -71,7 +72,7 @@ exports.create = async (req, res) => {
 };
 
 
-exports.getAll = async (req, res) => {
+export const getAll = async (req, res) => {
   try {
     const { clienteId } = req.params;
 
@@ -92,7 +93,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
-exports.getOne = async (req, res) => {
+export const getOne = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -111,7 +112,7 @@ exports.getOne = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+export const update = async (req, res) => {
   try {
     const { id } = req.params;
     const { nome, typeDocumentSelected, documento, clienteId } = req.body;
@@ -147,7 +148,7 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+export const remove = async (req, res) => {
   try {
     const { id } = req.params;
 

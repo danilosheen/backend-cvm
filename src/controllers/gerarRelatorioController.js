@@ -1,7 +1,9 @@
-const pdfGerarRelatorioService = require("../services/gerarRelatorioService");
-const emailService = require("../services/emailService");
+// const pdfGerarRelatorioService = require("../services/gerarRelatorioService");
+import pdfGerarRelatorioService from "../services/gerarRelatorioService.js";
+// const emailService = require("../services/emailService");
+import emailService from "../services/emailService.js";
 
-exports.generatePDF = async (req, res) => {
+export const generatePDF = async (req, res) => {
   try {
     const {
       fluxos,

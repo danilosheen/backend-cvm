@@ -15,7 +15,7 @@ const icon_facebook = "https://raw.githubusercontent.com/danilosheen/backend-cvm
 const icon_whatsapp = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/whatsapp.png";
 const icon_envelope = "https://raw.githubusercontent.com/danilosheen/backend-cvm/refs/heads/main/assets/envelope.png";
 
-module.exports = {
+export {
   logo_word,
   qr_code,
   icon_person,
@@ -32,5 +32,4 @@ module.exports = {
   icon_facebook,
   icon_whatsapp,
   icon_envelope
-
 }

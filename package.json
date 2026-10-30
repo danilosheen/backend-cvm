@@ -11,9 +11,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "@prisma/client": "^6.18.0",
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
     "@sparticuz/chromium": "^133.0.0",
     "@sparticuz/chromium-min": "^131.0.1",
     "async-mutex": "^0.5.0",
@@ -25,12 +26,13 @@
     "extenso": "^2.1.0",
     "handlebars": "^4.7.8",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^6.10.1",
-    "puppeteer": "^23.10.4",
-    "puppeteer-core": "^23.10.4"
+    "nodemailer": "^10.2.1",
+    "pg": "^8.23.1",
+    "puppeteer": "^25.16.0",
+    "puppeteer-core": "^25.16.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
-    "prisma": "^6.19.3"
+    "prisma": "^7.10.1"
   }
 }

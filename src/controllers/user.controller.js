@@ -1,6 +1,7 @@
-const userService = require('../services/user.service');
+// const userService = require('../services/user.service');
+import userService from "../services/user.service.js";
 
-exports.createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const usuario = await userService.criarUsuario(req.body);
     res.status(201).json(usuario);
@@ -9,7 +10,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.listUsers = async (req, res) => {
+export const listUsers = async (req, res) => {
   try {
     const usuarios = await userService.listarUsuarios();  
     res.status(200).json(usuarios);
@@ -18,7 +19,7 @@ exports.listUsers = async (req, res) => {
   }
 };
 
-exports.listUserById = async (req, res) => {
+export const listUserById = async (req, res) => {
 
   try {
     const usuario = await userService.listarUsuarioPeloId(req.body);
@@ -28,6 +29,6 @@ exports.listUserById = async (req, res) => {
   }
 };
 
-exports.deleteUserById = async (req, res) => {}
+export const deleteUserById = async (req, res) => {}
 
-exports.changePassword = async (req, res) => {}
+export const changePassword = async (req, res) => {}

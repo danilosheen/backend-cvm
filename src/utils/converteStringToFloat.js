@@ -8,7 +8,7 @@ function converteFloatToString(number){
   return number.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-module.exports = {
+export {
   converteFloatToString,
   converteStringToFloat
 }

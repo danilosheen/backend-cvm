@@ -1,8 +1,8 @@
-const { PrismaClient } = require('../generated/prisma/client');
-const prisma = new PrismaClient();
-const bcrypt = require("bcryptjs");
+import { prisma } from "../lib/prisma.js";
+// const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 
-exports.getAllUsers = () => {
+export const getAllUsers = () => {
   return prisma.usuario.findMany({
     where: { role: 'guest' },
     orderBy: { nome: 'asc' },
@@ -14,26 +14,26 @@ exports.getAllUsers = () => {
   });
 };
 
-exports.findByEmail = (email) => {
+export const findByEmail = (email) => {
   return prisma.usuario.findFirst({ where: { email } });
 };
 
-exports.findById = (userId) => {
+export const findById = (userId) => {
   return prisma.usuario.findFirst({ where: { id: userId } });
 }
 
-exports.create = (data) => {
+export const create = (data) => {
   return prisma.usuario.create({ data });
 };
 
-exports.findByIdWithPermissoes = (id) => {
+export const findByIdWithPermissoes = (id) => {
   return prisma.usuario.findUnique({
     where: { id },
     include: { permissoes: true },
   });
 };
 
-exports.changePassword = async (userId, newPass) => {
+export const changePassword = async (userId, newPass) => {
 
   const passHash = await bcrypt.hash(newPass, 10);
 
@@ -45,11 +45,11 @@ exports.changePassword = async (userId, newPass) => {
   })
 };
 
-exports.deleteById = (userId) => {
+export const deleteById = (userId) => {
   return prisma.usuario.delete({ where: { id: userId } });
 }
 
-exports.criarPermissoesPadrao = (usuarioId) => {
+export const criarPermissoesPadrao = (usuarioId) => {
   const modulos = [
     'calculadora',
     'orcamento',

@@ -1,23 +1,36 @@
-const fs = require("fs");
-const path = require("path");
-const puppeteer = require("puppeteer");
-const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core")
-const chromium  = require("@sparticuz/chromium");
-const { converteDataIsoToString } = require("../utils/dateFormated");
-const { formatarParaBrl } = require("../utils/formatMoney");
-const { Mutex } = require('async-mutex');
+// const fs = require("fs");
+import fs from "fs";
+// const path = require("path");
+import path from "path";
+// const puppeteer = require("puppeteer");
+import puppeteer from "puppeteer";
+// const handlebars = require("handlebars");
+import handlebars from "handlebars";
+// const puppeteerCore = require("puppeteer-core")
+import puppeteerCore from "puppeteer-core";
+// const chromium  = require("@sparticuz/chromium");
+import chromium from "@sparticuz/chromium";
+// const { converteDataIsoToString } = require("../utils/dateFormated");
+import { converteDataIsoToString } from "../utils/dateFormated.js";
+// const { formatarParaBrl } = require("../utils/formatMoney");
+import { formatarParaBrl } from "../utils/formatMoney.js";
+// const { Mutex } = require('async-mutex');
+import { Mutex } from "async-mutex";
 const mutex = new Mutex();
-const { 
-    logo_word,
-    qr_code, 
-    icon_person, 
-    icon_calendar, 
-    icon_phone, 
-    icon_locale, 
-    icon_clock, 
-    icon_jesus
-  } = require("../constantes/url.images");
+import {
+  logo_word,
+  qr_code,
+  icon_person,
+  icon_calendar,
+  icon_phone,
+  icon_locale,
+  icon_clock,
+  icon_jesus
+} from "../constantes/url.images.js";
+
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function createPDF(
   nomeCliente,
@@ -119,4 +132,4 @@ async function createPDF(
   });
 }
 
-module.exports = { createPDF };
+export default { createPDF };

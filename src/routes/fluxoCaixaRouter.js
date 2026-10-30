@@ -1,14 +1,17 @@
-const express = require("express");
+// const express = require("express");
+import express from "express";
 const router = express.Router();
-const fluxoCaixaController = require("../controllers/fluxoCaixaController");
-const authMiddleware = require("../middleware/authMiddleware");
+// const fluxoCaixaController = require("../controllers/fluxoCaixaController");
+import { criarFluxo, listarFluxos, listarFluxosPorMes, listarFluxosPorIntervalo, buscarFluxoPorId, atualizarFluxo, deletarFluxo } from "../controllers/fluxoCaixaController.js";
+// const authMiddleware = require("../middleware/authMiddleware");
+import authMiddleware from "../middleware/authMiddleware.js";
 
-router.post("/fluxo", authMiddleware, fluxoCaixaController.criarFluxo);
-router.get("/fluxos", authMiddleware, fluxoCaixaController.listarFluxos);
-router.get("/fluxos-mes", authMiddleware, fluxoCaixaController.listarFluxosPorMes);
-router.get("/fluxos-interval", authMiddleware, fluxoCaixaController.listarFluxosPorIntervalo);
-router.get("/fluxo/:id", authMiddleware, fluxoCaixaController.buscarFluxoPorId);
-router.put("/fluxo/:id", authMiddleware, fluxoCaixaController.atualizarFluxo);
-router.delete("/fluxo/:id", authMiddleware, fluxoCaixaController.deletarFluxo);
+router.post("/fluxo", authMiddleware, criarFluxo);
+router.get("/fluxos", authMiddleware, listarFluxos);
+router.get("/fluxos-mes", authMiddleware, listarFluxosPorMes);
+router.get("/fluxos-interval", authMiddleware, listarFluxosPorIntervalo);
+router.get("/fluxo/:id", authMiddleware, buscarFluxoPorId);
+router.put("/fluxo/:id", authMiddleware, atualizarFluxo);
+router.delete("/fluxo/:id", authMiddleware, deletarFluxo);
 
-module.exports = router;
+export default router;

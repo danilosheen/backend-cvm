@@ -1,6 +1,10 @@
-const { PrismaClient } = require('../src/generated/prisma/client');
-const bcrypt = require("bcryptjs");
-const prisma = new PrismaClient();
+// import { PrismaClient } from "../src/generated/prisma/client";
+// import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcryptjs"
+// const bcrypt = require("bcryptjs");
+// const { PrismaClient } = require('../src/generated/prisma/client');
+// const prisma = new PrismaClient();
+import { prisma } from "../src/lib/prisma";
 
 async function main() {
   const nomeAdmin = process.env.NOME_ADMIN;

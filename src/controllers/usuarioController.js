@@ -1,8 +1,10 @@
-const bcrypt = require("bcryptjs");
-const { PrismaClient } = require("../generated/prisma/client");
-const prisma = new PrismaClient();
+// const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
+// const { PrismaClient } = require("../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-exports.criarUsuario = async (req, res) => {
+export const criarUsuario = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
@@ -63,7 +65,7 @@ exports.criarUsuario = async (req, res) => {
   }
 };
 
-exports.listarUsuarios = async (req, res) => {
+export const listarUsuarios = async (req, res) => {
   try {
     const usuarios = await prisma.usuario.findMany({
       where: { role: 'guest' },
@@ -85,7 +87,7 @@ exports.listarUsuarios = async (req, res) => {
   }
 }
 
-exports.listarUsuarioPeloId = async (req, res) => {
+export const listarUsuarioPeloId = async (req, res) => {
 
   try {
     const usuario = await prisma.usuario.findFirst({
@@ -104,7 +106,7 @@ exports.listarUsuarioPeloId = async (req, res) => {
   }
 }
 
-exports.removerUsuarioPeloId = async (req, res) => {
+export const removerUsuarioPeloId = async (req, res) => {
 
   try {
     const usuario = await prisma.usuario.findFirst({
@@ -134,7 +136,7 @@ exports.removerUsuarioPeloId = async (req, res) => {
 }
 
 
-exports.alterarSenha = async (req, res) => {
+export const alterarSenha = async (req, res) => {
   const { id, novaSenha } = req.body;
 
   try {

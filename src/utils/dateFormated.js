@@ -24,7 +24,7 @@ function converteDataIsoToString(data){
   return `${dia}/${mes}/${ano}`
 }
 
-module.exports = {
+export {
   getDateFormated,
   getDataArquivo,
   converteDataIsoToString

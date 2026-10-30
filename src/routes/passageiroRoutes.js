@@ -1,14 +1,17 @@
-const express = require("express");
+// const express = require("express");
+import express from "express";
 const router = express.Router();
-const passageiroController = require("../controllers/passageiroController");
-const authMiddleware = require("../middleware/authMiddleware");
+// const passageiroController = require("../controllers/passageiroController");
+import { create, findAll, findById, update, remove } from "../controllers/passageiroController.js";
+// const authMiddleware = require("../middleware/authMiddleware");
+import authMiddleware from "../middleware/authMiddleware.js";
 
 // router.use(authMiddleware);
 
-router.post("/passageiro", authMiddleware, passageiroController.create);
-router.get("/passageiros", authMiddleware, passageiroController.findAll);
-router.get("/passageiro/:id", authMiddleware, passageiroController.findById);
-router.put("/passageiro/:id", authMiddleware, passageiroController.update);
-router.delete("/passageiro/:id", authMiddleware, passageiroController.remove);
+router.post("/passageiro", authMiddleware, create);
+router.get("/passageiros", authMiddleware, findAll);
+router.get("/passageiro/:id", authMiddleware, findById);
+router.put("/passageiro/:id", authMiddleware, update);
+router.delete("/passageiro/:id", authMiddleware, remove);
 
-module.exports = router;
+export default router;

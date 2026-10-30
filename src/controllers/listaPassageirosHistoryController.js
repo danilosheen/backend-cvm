@@ -1,8 +1,10 @@
-const listaPassageirosService = require('../services/historyDocs/listaPassageirosHistoryService');
-const { Mutex } = require('async-mutex');
+// const listaPassageirosService = require('../services/historyDocs/listaPassageirosHistoryService');
+import { listaPassageirosService } from "../services/historyDocs/listaPassageirosHistoryService.js";
+// const { Mutex } = require('async-mutex');
+import { Mutex } from "async-mutex";
 const mutex = new Mutex();
 
-exports.criarListaPassageirosHistory = async (req, res) => {
+export const criarListaPassageirosHistory = async (req, res) => {
 
   await mutex.runExclusive(async () => {
     try {
@@ -19,7 +21,7 @@ exports.criarListaPassageirosHistory = async (req, res) => {
 
 }
 
-exports.listarListaPassageiros = async (req, res) => {
+export const listarListaPassageiros = async (req, res) => {
   try {
     const listasPassageiros = await listaPassageirosService.findMany();
     res.status(200).json({listasPassageiros})
@@ -28,7 +30,7 @@ exports.listarListaPassageiros = async (req, res) => {
   }
 }
 
-exports.removerListaPassageirosHistory = async (req, res) => {
+export const removerListaPassageirosHistory = async (req, res) => {
   try {
     const { id } = req.params
     await listaPassageirosService.delete(id);
@@ -36,4 +38,10 @@ exports.removerListaPassageirosHistory = async (req, res) => {
   } catch (error) {
     res.status(500).json({msg: "Erro ao remover Lista de passageiros do histórico"})
   }
+}
+
+export const listaPassageirosHistoryController = {
+  criarListaPassageirosHistory,
+  listarListaPassageiros,
+  removerListaPassageirosHistory
 }

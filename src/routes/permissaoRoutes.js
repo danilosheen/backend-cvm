@@ -1,10 +1,13 @@
-const express = require("express");
+// const express = require("express");
+import express from "express";
 const router = express.Router();
-const permissaoController = require("../controllers/permissaoController");
-const autenticarToken = require("../middleware/authMiddleware");
+// const permissaoController = require("../controllers/permissaoController");
+import { buscarPermissoes, buscarPermissoesById, atualizarPermissaoIndividual } from "../controllers/permissaoController.js";
+// const autenticarToken = require("../middleware/authMiddleware");
+import autenticarToken from "../middleware/authMiddleware.js";
 
-router.get("/permissoes", autenticarToken, permissaoController.buscarPermissoes);
-router.get("/permissoesById", autenticarToken, permissaoController.buscarPermissoesById);
-router.put("/permissoes/:id", autenticarToken, permissaoController.atualizarPermissaoIndividual);
+router.get("/permissoes", autenticarToken, buscarPermissoes);
+router.get("/permissoesById", autenticarToken, buscarPermissoesById);
+router.put("/permissoes/:id", autenticarToken, atualizarPermissaoIndividual);
 
-module.exports = router;
+export default router;

@@ -1,10 +1,16 @@
-const nodemailer = require('nodemailer');
-const fs = require("fs");
-const path = require("path");
-const handlebars = require("handlebars");
-require('dotenv').config();
-const formatarNome = require("../utils/formatNomeCliente");
-const {
+// const nodemailer = require('nodemailer');
+import nodemailer from "nodemailer";
+// const fs = require("fs");
+import fs from "fs";
+// const path = require("path");
+import path from "path";
+// const handlebars = require("handlebars");
+import handlebars from "handlebars";
+// require('dotenv').config();
+import "dotenv/config";
+// const formatarNome = require("../utils/formatNomeCliente");
+import { formatarNome } from "../utils/formatNomeCliente.js";
+import {
   img_aniversario,
   icon_instagram,
   icon_youtube,
@@ -14,7 +20,11 @@ const {
   icon_phone,
   logo_word,
   logo_cvm
-} = require("../constantes/url.images");
+} from "../constantes/url.images.js";
+
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configurar o transporte
 const transporter = nodemailer.createTransport({
@@ -116,8 +126,8 @@ async function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
   }
 }
 
-module.exports = {
+export default {
   enviarEmailNotaAgradecimento,
   enviarDocumentoGerado,
   enviarFelizAniversario
-}
+};

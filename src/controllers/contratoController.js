@@ -1,8 +1,12 @@
-const { getDateFormated } = require("../utils/dateFormated");
-const pdfContratoService = require("../services/contratoService");
-const emailService = require("../services/emailService")
+// const { getDateFormated } = require("../utils/dateFormated");
+import { getDateFormated } from "../utils/dateFormated.js";
+// const pdfContratoService = require("../services/contratoService");
+import pdfContratoService from "../services/contratoService.js";
 
-exports.generatePDF = async (req, res) => {
+// const emailService = require("../services/emailService")
+import emailService from "../services/emailService.js";
+
+export const generatePDF = async (req, res) => {
   try {
     const {
       tipoContrato,

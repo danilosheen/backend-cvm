@@ -1,10 +1,15 @@
-const { getDateFormated } = require("../utils/dateFormated");
-const porExtensoFormatado = require("../utils/porExtenso");
-const pdfReciboService = require("../services/reciboService");
-const emailService = require("../services/emailService")
-const extenso = require('extenso');
+// const { getDateFormated } = require("../utils/dateFormated");
+import { getDateFormated } from "../utils/dateFormated.js";
+// const porExtensoFormatado = require("../utils/porExtenso");
+import porExtensoFormatado from "../utils/porExtenso.js";
+// const pdfReciboService = require("../services/reciboService");
+import pdfReciboService from "../services/reciboService.js";
+// const emailService = require("../services/emailService")
+import emailService from "../services/emailService.js";
+// const extenso = require('extenso');
+import extenso from "extenso";
 
-exports.generatePDF = async (req, res) => {
+export const generatePDF = async (req, res) => {
   try {
     const {
       nomeCliente,

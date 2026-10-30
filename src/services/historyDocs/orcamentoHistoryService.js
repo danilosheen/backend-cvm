@@ -1,7 +1,8 @@
-const { PrismaClient } = require("../../generated/prisma/client");
-const prisma = new PrismaClient();
+// const { PrismaClient } = require("../../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../../lib/prisma.js";
 
-exports.create = async (orcamentoData) => {
+export const create = async (orcamentoData) => {
   try {
     const orcamento = await prisma.orcamentoHistory.create({
       data:{
@@ -51,7 +52,7 @@ exports.create = async (orcamentoData) => {
   }
 }
 
-exports.findMany = async () => {
+export const findMany = async () => {
   try {
     const orcamentos = await prisma.orcamentoHistory.findMany({
       orderBy:{
@@ -66,10 +67,16 @@ exports.findMany = async () => {
   }
 }
 
-exports.delete = async (id) => {
+export const remove = async (id) => {
   await prisma.orcamentoHistory.delete({
     where:{
       id: id
     }
   });
+};
+
+export const orcamentoService = {
+  create,
+  findMany,
+  remove,
 };

@@ -1,7 +1,8 @@
-const { PrismaClient } = require("../../generated/prisma/client");
-const prisma = new PrismaClient();
+// const { PrismaClient } = require("../../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../../lib/prisma.js";
 
-exports.create = async (contratoData) => {
+export const create = async (contratoData) => {
   try {
     const contrato = await prisma.contratoHistory.create({
       data: {
@@ -63,7 +64,7 @@ exports.create = async (contratoData) => {
   }
 }
 
-exports.findMany = async () => {
+export const findMany = async () => {
   try {
     const contratos = await prisma.contratoHistory.findMany({
       orderBy: {
@@ -78,10 +79,16 @@ exports.findMany = async () => {
   }
 }
 
-exports.delete = async (id) => {
+export const remove = async (id) => {
   await prisma.contratoHistory.delete({
     where: {
       id: id
     }
   });
 };
+
+export const contratoService = {
+  create,
+  findMany,
+  remove
+}

@@ -1,7 +1,9 @@
-const { PrismaClient } = require("../generated/prisma/client");
-const prisma = new PrismaClient();
+// const { PrismaClient } = require("../generated/prisma/client");
+// const prisma = new PrismaClient();
 
-exports.create = async (req, res) => {
+import { prisma } from "../lib/prisma.js";
+
+export const create = async (req, res) => {
   try {
     const passageiro = await prisma.passageiro.create({
       data: req.body,
@@ -12,7 +14,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.findAll = async (req, res) => {
+export const findAll = async (req, res) => {
   try {
     const passageiros = await prisma.passageiro.findMany({
       orderBy: {
@@ -25,7 +27,7 @@ exports.findAll = async (req, res) => {
   }
 };
 
-exports.findById = async (req, res) => {
+export const findById = async (req, res) => {
   try {
     const passageiro = await prisma.passageiro.findUnique({
       where: { id: req.params.id },
@@ -41,7 +43,7 @@ exports.findById = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+export const update = async (req, res) => {
   try {
     const passageiro = await prisma.passageiro.update({
       where: { id: req.params.id },
@@ -78,7 +80,7 @@ exports.update = async (req, res) => {
 };
 
 
-exports.remove = async (req, res) => {
+export const remove = async (req, res) => {
   try {
     const passageiro = await prisma.passageiro.findUnique({
       where: { id: req.params.id },

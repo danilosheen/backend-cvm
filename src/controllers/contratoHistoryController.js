@@ -1,8 +1,10 @@
-const contratoService = require('../services/historyDocs/contratoHistoryService')
-const { Mutex } = require('async-mutex');
+// const contratoService = require('../services/historyDocs/contratoHistoryService')
+import { contratoService } from "../services/historyDocs/contratoHistoryService.js";
+// const { Mutex } = require('async-mutex');
+import { Mutex } from "async-mutex";
 const mutex = new Mutex();
 
-exports.criarContratoHistory = async (req, res) => {
+export const criarContratoHistory = async (req, res) => {
   await mutex.runExclusive(async () => {
     try {
       const contratoData = req.body
@@ -17,7 +19,7 @@ exports.criarContratoHistory = async (req, res) => {
   });
 }
 
-exports.listarContratos = async (req, res) => {
+export const listarContratos = async (req, res) => {
   try {
     const contratos = await contratoService.findMany();
     res.status(200).json({contratos})
@@ -26,7 +28,7 @@ exports.listarContratos = async (req, res) => {
   }
 }
 
-exports.removerContratoHistory = async (req, res) => {
+export const removerContratoHistory = async (req, res) => {
   try {
     const { id } = req.params
     await contratoService.delete(id);
@@ -34,4 +36,10 @@ exports.removerContratoHistory = async (req, res) => {
   } catch (error) {
     res.status(500).json({msg: "Erro ao remover contrato do histórico"})
   }
+}
+
+export const contratoHistoryController = {
+  criarContratoHistory,
+  listarContratos,
+  removerContratoHistory
 }

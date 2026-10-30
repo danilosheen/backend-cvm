@@ -11,4 +11,4 @@ function porExtensoFormatado(string){
   return stringPorExtensoFormatada
 }
 
-module.exports = porExtensoFormatado;
+export default porExtensoFormatado;

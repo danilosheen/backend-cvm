@@ -1,11 +1,15 @@
-const { getDateFormated } = require("../utils/dateFormated");
-const pdfListaPassageirosService = require("../services/listaPassageirosService");
-const emailService = require("../services/emailService");
+// const { getDateFormated } = require("../utils/dateFormated");
+import { getDateFormated } from "../utils/dateFormated.js";
+// const pdfListaPassageirosService = require("../services/listaPassageirosService");
+import pdfListaPassageirosService from "../services/listaPassageirosService.js";
+// const emailService = require("../services/emailService");
+import emailService from "../services/emailService.js";
 
-const { PrismaClient } = require("../generated/prisma/client");
-const prisma = new PrismaClient();
+// const { PrismaClient } = require("../generated/prisma/client");
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-exports.generatePDF = async (req, res) => {
+export const generatePDF = async (req, res) => {
   try {
     const {
       numeroCarro,

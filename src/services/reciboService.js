@@ -1,11 +1,23 @@
-const fs = require("fs");
-const path = require("path");
-const puppeteer = require("puppeteer");
-const handlebars = require("handlebars");
-const puppeteerCore = require("puppeteer-core");
-const chromium = require("@sparticuz/chromium");
-const { formatarParaBrl } = require("../utils/formatMoney");
-const { logo_word, logo_cvm, assinatura, icon_jesus } = require("../constantes/url.images");
+// const fs = require("fs");
+import fs from "fs";
+// const path = require("path");
+import path from "path";
+// const puppeteer = require("puppeteer");
+import puppeteer from "puppeteer";
+// const handlebars = require("handlebars");
+import handlebars from "handlebars";
+// const puppeteerCore = require("puppeteer-core");
+import puppeteerCore from "puppeteer-core";
+// const chromium = require("@sparticuz/chromium");
+import chromium from "@sparticuz/chromium";
+// const { formatarParaBrl } = require("../utils/formatMoney");
+import { formatarParaBrl } from "../utils/formatMoney.js";
+// const { logo_word, logo_cvm, assinatura, icon_jesus } = require("../constantes/url.images");
+import { logo_word, logo_cvm, assinatura, icon_jesus } from "../constantes/url.images.js";
+
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function createPDF(
   nomeCliente,
@@ -77,4 +89,4 @@ async function createPDF(
   }
 }
 
-module.exports = { createPDF };
+export default { createPDF };

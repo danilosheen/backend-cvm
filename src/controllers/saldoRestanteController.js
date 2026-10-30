@@ -1,4 +1,4 @@
-exports.buscarSaldoRestante = async (req, res) => {
+export const buscarSaldoRestante = async (req, res) => {
   try {
     const mesAno = req.body
 

@@ -1,12 +1,15 @@
-const express = require('express');
+// const express = require('express');
+import express from "express";
 const router = express.Router();
-const dependenteController = require('../controllers/dependentesController');
-const authMiddleware = require("../middleware/authMiddleware");
+// const dependenteController = require('../controllers/dependentesController');
+import { create, getAll, getOne, update, remove } from "../controllers/dependentesController.js";
+// const authMiddleware = require("../middleware/authMiddleware");
+import authMiddleware from "../middleware/authMiddleware.js";
 
-router.get('/dependentes/:clienteId', authMiddleware, dependenteController.getAll);
-router.post('/dependente', authMiddleware, dependenteController.create);
-router.get('/dependente/:id', authMiddleware, dependenteController.getOne);
-router.put('/dependente/:id', authMiddleware, dependenteController.update);
-router.delete('/dependente/:id', authMiddleware, dependenteController.remove);
+router.get('/dependentes/:clienteId', authMiddleware, getAll);
+router.post('/dependente', authMiddleware, create);
+router.get('/dependente/:id', authMiddleware, getOne);
+router.put('/dependente/:id', authMiddleware, update);
+router.delete('/dependente/:id', authMiddleware, remove);
 
-module.exports = router;
+export default router;

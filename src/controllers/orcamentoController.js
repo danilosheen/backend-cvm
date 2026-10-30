@@ -1,9 +1,12 @@
-const { getDateFormated } = require("../utils/dateFormated");
-const pdfOrcamentoService = require("../services/orcamentoService");
-const orcamentoHistoryService = require("../services/historyDocs/orcamentoHistoryService");
-const emailService = require("../services/emailService");
+// const { getDateFormated } = require("../utils/dateFormated");
+import { getDateFormated } from "../utils/dateFormated.js";
+// const pdfOrcamentoService = require("../services/orcamentoService");
+import pdfOrcamentoService from "../services/orcamentoService.js";
 
-exports.generatePDF = async (req, res) => {
+// const emailService = require("../services/emailService")
+import emailService from "../services/emailService.js";
+
+export const generatePDF = async (req, res) => {
   try {
     const {
       nomeCliente,

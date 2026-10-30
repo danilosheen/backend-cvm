@@ -1,11 +1,14 @@
-const express = require("express");
+// const express = require("express");
+import express from "express";
 const router = express.Router();
-const authMiddleware = require("../middleware/authMiddleware");
-const saldoAnteriorController = require("../controllers/saldoAnteriorController");
+// const authMiddleware = require("../middleware/authMiddleware");
+import authMiddleware from "../middleware/authMiddleware.js";
+// const saldoAnteriorController = require("../controllers/saldoAnteriorController");
+import { create, read, update, deleteItem } from "../controllers/saldoAnteriorController.js";
 
-router.post("/saldo-anterior", authMiddleware, saldoAnteriorController.create);
-router.get("/saldo-anterior", authMiddleware, saldoAnteriorController.read);
-router.put("/saldo-anterior/:id", authMiddleware, saldoAnteriorController.update);
-router.delete("/saldo-anterior/:id", authMiddleware, saldoAnteriorController.delete);
+router.post("/saldo-anterior", authMiddleware, create);
+router.get("/saldo-anterior", authMiddleware, read);
+router.put("/saldo-anterior/:id", authMiddleware, update);
+router.delete("/saldo-anterior/:id", authMiddleware, deleteItem);
 
-module.exports = router;
+export default router;

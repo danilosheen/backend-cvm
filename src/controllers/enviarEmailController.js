@@ -1,6 +1,7 @@
-const enviarEmailService = require('../services/emailService');
+// const enviarEmailService = require('../services/emailService');
+import enviarEmailService from "../services/emailService.js";
 
-exports.enviarEmailNotaAgradecimento = async (req, res) => {
+export const enviarEmailNotaAgradecimento = async (req, res) => {
   const { nomeCliente, destinatario, assunto } = req.body;
 
   try {
@@ -11,7 +12,7 @@ exports.enviarEmailNotaAgradecimento = async (req, res) => {
   }
 }
 
-exports.enviarEmailAniversario = async (req, res) => {
+export const enviarEmailAniversario = async (req, res) => {
   const { nomeCliente, destinatario, assunto } = req.body;
 
   try {

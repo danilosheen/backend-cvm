@@ -1,12 +1,14 @@
-const express = require("express");
+// const express = require("express");
+import express from "express";
 const router = express.Router();
-const usuarioController = require("../controllers/usuarioController");
+// const usuarioController = require("../controllers/usuarioController");
+import { criarUsuario, listarUsuarios, listarUsuarioPeloId, removerUsuarioPeloId, alterarSenha } from "../controllers/usuarioController.js";
 
-router.post("/usuario", usuarioController.criarUsuario);
-router.get("/usuarios", usuarioController.listarUsuarios);
-router.get("/usuario/:id", usuarioController.listarUsuarioPeloId);
-router.delete("/usuario/:id", usuarioController.removerUsuarioPeloId);
+router.post("/usuario", criarUsuario);
+router.get("/usuarios", listarUsuarios);
+router.get("/usuario/:id", listarUsuarioPeloId);
+router.delete("/usuario/:id", removerUsuarioPeloId);
 
-router.put("/alterar-senha", usuarioController.alterarSenha);
+router.put("/alterar-senha", alterarSenha);
 
-module.exports = router;
+export default router;

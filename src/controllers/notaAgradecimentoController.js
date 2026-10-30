@@ -1,6 +1,7 @@
-const pdfNotaAgradecimentoService = require("../services/notaAgradecimentoService");
+// const pdfNotaAgradecimentoService = require("../services/notaAgradecimentoService");
+import pdfNotaAgradecimentoService from "../services/notaAgradecimentoService.js";
 
-exports.generatePDF = async (req, res) => {
+export const generatePDF = async (req, res) => {
   try {
     const {
       nomeCliente,

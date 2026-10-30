@@ -1,9 +1,13 @@
-const { getDateFormated } = require("../utils/dateFormated");
-const pdfFichaExcursaoService = require("../services/fichaExcursaoService");
-const emailService = require("../services/emailService");
-require('dotenv').config();
+// const { getDateFormated } = require("../utils/dateFormated");
+import { getDateFormated } from "../utils/dateFormated.js";
+// const pdfFichaExcursaoService = require("../services/fichaExcursaoService");
+import pdfFichaExcursaoService from "../services/fichaExcursaoService.js";
+// const emailService = require("../services/emailService");
+import emailService from "../services/emailService.js";
+// require('dotenv').config();
+import "dotenv/config";
 
-exports.generatePDF = async (req, res) => {
+export const generatePDF = async (req, res) => {
   try {
     const {
       excursaoPara,

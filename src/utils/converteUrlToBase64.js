@@ -1,4 +1,5 @@
-const axios = require('axios');
+// const axios = require('axios');
+import axios from "axios";
 
 async function urlToBase64(url) {
   const response = await axios.get(url, {
@@ -11,6 +12,6 @@ async function urlToBase64(url) {
   return `data:${contentType};base64,${base64}`;
 }
 
-module.exports = {
+export {
   urlToBase64
 }

@@ -1,7 +1,8 @@
-const { PrismaClient } = require('../generated/prisma/client');
-const prisma = new PrismaClient();
+// const { PrismaClient } = require('../generated/prisma/client');
+// const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-exports.create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const {
       saldoAnterior,
@@ -42,7 +43,7 @@ exports.create = async (req, res) => {
   }
 }
 
-exports.read = async (req, res) => {
+export const read = async (req, res) => {
   try {
     const { mes, ano } = req.query;
 
@@ -62,7 +63,7 @@ exports.read = async (req, res) => {
 };
 
 
-exports.update = async (req, res) => {
+export const update = async (req, res) => {
   try {
     const {mes, ano, saldoAnterior} = req.body;
     const novoSaldo = await prisma.saldoAnterior.update({
@@ -76,7 +77,7 @@ exports.update = async (req, res) => {
   }
 }
 
-exports.delete = async(req, res) => {
+export const deleteItem = async(req, res) => {
   try {
     await prisma.saldoAnterior.delete({
       where:{id: req.params.id}
