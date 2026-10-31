@@ -90,7 +90,7 @@ async function enviarDocumentoGerado(documentoBuffer, destinatario, assunto, tip
 async function enviarFelizAniversario(nomeCliente, destinatario, assunto) {
   try {
 
-    const nomeClienteFormatado = formatarNome.formatarNome(nomeCliente);
+    const nomeClienteFormatado = formatarNome(nomeCliente);
 
     const data = {
       nomeClienteFormatado,
