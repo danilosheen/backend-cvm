@@ -33,7 +33,7 @@ export const listarListaPassageiros = async (req, res) => {
 export const removerListaPassageirosHistory = async (req, res) => {
   try {
     const { id } = req.params
-    await listaPassageirosService.delete(id);
+    await listaPassageirosService.remove(id);
     res.status(200).json({msg: "Lista de passageiros removida do histórico com sucesso"});
   } catch (error) {
     res.status(500).json({msg: "Erro ao remover Lista de passageiros do histórico"})

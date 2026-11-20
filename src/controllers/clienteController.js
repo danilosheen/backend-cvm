@@ -24,7 +24,7 @@ export const create = async (req, res) => {
     });
 
     // Verifica se já existe passageiro com o mesmo documento
-    const existingPassageiro = await prisma.passageiro.findUnique({
+    const existingPassageiro = await prisma.passageiro.findFirst({
       where: { documento: clientData.documento },
     });
 
