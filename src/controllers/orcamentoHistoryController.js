@@ -33,7 +33,7 @@ export const listarOrcamentos = async (req, res) => {
 export const removerOrcamentoHistory = async (req, res) => {
   try {
     const { id } = req.params
-    await orcamentoService.delete(id);
+    await orcamentoService.remove(id);
     res.status(200).json({msg: "Orçamento removido do histórico com sucesso"});
   } catch (error) {
     res.status(500).json({msg: "Erro ao remover orçamento do histórico"})

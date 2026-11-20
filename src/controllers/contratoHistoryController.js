@@ -31,7 +31,7 @@ export const listarContratos = async (req, res) => {
 export const removerContratoHistory = async (req, res) => {
   try {
     const { id } = req.params
-    await contratoService.delete(id);
+    await contratoService.remove(id);
     res.status(200).json({msg: "Contrato removido do histórico com sucesso"});
   } catch (error) {
     res.status(500).json({msg: "Erro ao remover contrato do histórico"})
